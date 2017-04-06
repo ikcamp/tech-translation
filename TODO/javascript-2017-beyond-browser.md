@@ -1,6 +1,6 @@
 * 原文地址：[javascript-2017-beyond-browser](http://developer.telerik.com/topics/web-development/javascript-2017-beyond-browser/)
 * 原文作者：[TJ VanToll](http://developer.telerik.com/author/tvantoll/)
-* 译者：[?](#)
+* 译者：[赵安冬](#)
 * 校对者：[?](#)
 
 # JavaScript在2017年 - 超越浏览器
