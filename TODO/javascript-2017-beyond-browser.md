@@ -15,14 +15,14 @@ Node.js是一个开源运行时库，用于构建服务器端应用程序的，�
 
 Node的包管理器npm已经从服务器端应用程序的托管实用程序模块转换到规范的地方来，用来存储可分发的JavaScript代码。也许节点上升的最佳指标是存储在npm上的绝对数量。在去年的预测中，我们列出了以下图表，显示了npm在替代语言中的优势。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/module-counts-2016.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/module-counts-2016.jpg) </center>
 
 
 截至2015年12月，modulecounts.com的模块数量
 
 快速前进一年，npm的增长没有放缓的迹象。事实上，npm从大约20万到35万包的移动迫使“模块计数”站点重新配置其图表的y轴。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/module-counts-2017.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/module-counts-2017.jpg)</center>
 
 截至2016年12月，modulecounts.com的模块数量
 
@@ -41,7 +41,7 @@ Node的包管理器npm已经从服务器端应用程序的托管实用程序模�
 在本文中，我们讨论的每个框架和技术都使用npm来存储和分发他的源代码。
 用npm搜索“jquery”，“polymer”，“react”，“cordova”或“nativescript”可以让您了解npm现在的规模。随着JavaScript的普及，npm越来越受欢迎。随着npm的普及，Node.js也越来越多。我们相信这个趋势不会很快结束。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/angular-npm-downloads.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/angular-npm-downloads.jpg)</center>
 
 在npmjs.com搜索“angular”返回近10,000个结果。Angular是通过npm分发的许多库之一。
 
@@ -64,7 +64,7 @@ PWAs为网络世界带来了许多类似原生的功能，例如推送通知，�
 
 PWAs与我们的讨论相关，因为它们开始蚕食Cordova应用--需要一些原生功能的Web应用程序。如果您有一个需要离线访问或推送通知的网络应用程序，那么用PWA来构建基于Cordova的本机应用程序是一个非常好的方案。尽管很难衡量有多少人在混合应用程序中选择了PWA，但大多数数据表明Cordova的使用已经缩减。例如，在过去两年里，Cordova每周下载的次数。正如你所看到的，尽管Cordova的数字仍然很健康，但趋势线不再像往年那样向上。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/cordova-downloads-per-week.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/cordova-downloads-per-week.jpg)</center>
 
 从2014年12月至2016年12月，每周下载“cordova”的npm软件包。（数据来自npm-stat.com）
 
@@ -76,20 +76,20 @@ PWAs与我们的讨论相关，因为它们开始蚕食Cordova应用--需要一�
 
 在去年的讨论中，我们预计2016年将是这些框架成熟的一年，并开始广泛使用，预测似乎是准确的。例如，您可以看到在过去两年里，React Native的每周下载次数持续增加。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/react-native-downloads.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/react-native-downloads.jpg)</center>
 
 从2014年12月到2016年12月，每周下载“react-native”的npm软件包。（数据来自npm-stat.com）
 
 NativeScript也有同样的趋势曲线。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/nativescript-downloads.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/nativescript-downloads.jpg)</center>
 
 
 从2014年12月至2016年12月，每周下载“nativescript”npm软件包。（数据来自npm-stat.com）
 
 而不仅仅是下载这些JavaScript驱动的本机框架的数字。最近的JavaScript 2016调查显示，JavaScript开发人员对React Native和NativeScript都很感兴趣。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/state-of-js-mobile-results.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/state-of-js-mobile-results.jpg)</center>
 
  State of JavaScript 2016调查的对移动开发方法的兴趣
 
@@ -110,7 +110,7 @@ NativeScript也有同样的趋势曲线。
 
 例如，如果您比较“electon”和“nw”JavaScript软件包的下载次数，您将看到“electon”（红线）现在以与“React Native”竞争的规模运行，而NW.js下载量相对平坦。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/electron-vs-nw-downloads.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/electron-vs-nw-downloads.jpg)</center>
 
 
 从“electon”和“NW”NPM包，从2016年9月至十一月2016年数据的周下载量npm-stat.com。
@@ -133,7 +133,7 @@ electon还开始在主流桌面应用程序中获得牵引力。该框架现在�
 
 重用JavaScript同样为许多流行的IoT库（如Losant和zetta）以及Leap Motion等设备提供了Node API。以Chrome浏览器团队和A-Frame框架团队为代表，还有不少团队在虚拟现实中使用JavaScript。
 
-![](http://ofyfg9y7t.bkt.clouddn.com/chrome-vr.jpg)
+<center>![](http://ofyfg9y7t.bkt.clouddn.com/chrome-vr.jpg)</center>
 
 Google Chrome小组拥有一系列令人印象深刻的JavaScript构建的虚拟现实实验，您可以自己尝试。
 
