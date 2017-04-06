@@ -1,3 +1,8 @@
+* 原文地址：[javascript-2017-beyond-browser](http://developer.telerik.com/topics/web-development/javascript-2017-beyond-browser/)
+* 原文作者：[TJ VanToll](http://developer.telerik.com/author/tvantoll/)
+* 译者：[?](#)
+* 校对者：[?](#)
+
 # JavaScript在2017年 - 超越浏览器
 
 随着技术世界的发展，JavaScript也随之发展。在开始的时候，JavaScript并不是软件世界发展的重点，不像服务器端应用程序，移动应用程序和机器人。而今天，JavaScript的发展已经将语言带到了聊天机器人，虚拟现实，物联网等方面。
