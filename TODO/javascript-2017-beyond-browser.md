@@ -1,312 +1,147 @@
-* 原文地址：[Getting to know CSS Grid Layout](https://cm.engineering/getting-to-know-css-grid-layout-818e43ca71a5)
-* 原文作者：[TJ VanToll](http://developer.telerik.com/author/tvantoll/)
-* 译者：[赵安冬](#)
-* 校对者：[金晶](#)
-
-
-# 翻译 | CSS栅格（CSS Grid）布局入门
-> 原文链接 [https://cm.engineering/getting-to-know-css-grid-layout-818e43ca71a5](https://cm.engineering/getting-to-know-css-grid-layout-818e43ca71a5)
-
-![banner](http://n1image.hjfile.cn/res7/2017/04/20/af1c9adfa03fdb0ee5343d933d967930.jpg)
-
-CSS栅格布局是浏览器Flexbox布局之后最重要的布局方式。我们可以忘记过去15年所使用的那些已经成为习以为常的各种“神奇数字”，hacks和变通布局方式。栅格布局提供了非常简单的声明布局方式，之后再也不需要一些常见的主流css框架，也能减少很多手动实现的布局方式
-
-如果你以前不熟悉CSS栅格布局，那么你可以开始了解它了。它是一种适用于容器元素，并能指定子元素的间距、大小和对齐方式的布局工具。
-
-CSS栅格布局赋予我们更强大的能力——大家熟悉的水平垂直居中布局，不需要增加标记语言就能做到。同样，这也能让我们不需要媒体查询就能根据可用空间自动适应。
-
-## 学习的最低要求
-首先一点学习栅格布局有不少新语法需要学习，但是你只需要稍微看下就能上手。本文将会用示例带你学习CSS栅格布局各种各样重要的入门概念。
-
-## 浏览器兼容性
-CSS栅格布局从Safari 10.1, Firefox 52, Opera 44, Chrome 57开始支持，微软Edge在Edge 15会更新对栅格布局的支持。
-
-微软的浏览器（IE10–11和Edge 13-14）有一种比较旧的实现，所以有不少限制，我们会简单介绍新的实现方式和老的实现方式之间的区别，这样你能知道如何规避他们。
-
-对于大多数布局，我们会使用下面的query特性来让老的浏览器对他们理解的特性也能工作：
-
-```css
-@supports (display: grid) {
-    .grid {
-        display: grid;
-    }
-}
-```
-
-不支持浏览器`@supports`或不支持栅格的浏览器将不会生效。
-
-为了能正确展示文中的示例，你需要使用[支持栅格布局的浏览器](https://igalia.github.io/css-grid-layout/enable.html)。
-
-## 创建带有间距（gutter）的的两列（column）栅格
-为了演示CSS栅格布局是如何定义列，我们从下面的布局开始：
-![grid-template-columns 和 grid-gap](http://n1image.hjfile.cn/res7/2017/04/20/5eb65d448f5f322c1738397169608a66.jpg)
-[使用grid-template-columns 和 grid-gap创建带间距的两列布局]
-
-为了创建上述栅格布局，我们需要使用`grid-template-columns`和`grid-gap`。
-`grid-template-columns`表示栅格中的列是如何布局的，它的值是以空格分割的一连串的值，这些值标示每列的大小，值的个数表示列的数目。
-
-例如，四列250px宽度的栅格布局像下面这样：
-
-```
-grid-template-columns: 250px 250px 250px 250px;
-```
-
-也可以使用`repeat`关键字表示：
-
-```
-grid-template-columns: repeat(4, 250px);
-```
-
-### 定义间距
-`grid-gap`定义了栅格布局的间距大小，接收一个或多个值，如果定义两个值则表示列（column）和行（row）的间距大小。
-
-在两列布局示例中，我们可以如下使用：
-
-```
-.grid {
-  display: grid;
-  grid-template-columns: 50vw 50vw;
-  grid-gap: 1rem;
-}
-```
-
-不幸的是，这个间距将会占用容器元素的整体宽度，计算出来就是`100vw + 1rem`，最终这个布局会导致出现水平滚动条。
-![viewport导致的水平滚动条](http://n1image.hjfile.cn/res7/2017/04/20/874a4e878340132738c4d7eb3bc7af30.jpg)
-[通过viewport单位创建带间距栅格导致的水平滚动条]
-
-为了解决这个空间溢出问题，我们需要些不同的方法来处理，需要用分数单位或者说是**FR**。
-
-### 分数单位
-分数单位标示占用可用空间的份额，如果900px是可用空间，其中的一个元素占有1份，另外的元素占有2份——那么第一个元素的宽度会是900px的1/3，另外的元素是900px的2/3。
-修改后用分数代替view-port单位的新代码如下：
-
-```
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1rem;
-}
-```
-
-### 内容对齐
-为了对齐示例中的内容，我们在子元素上使用grid布局，并加上对齐属性来定位他们到指定轨道(track)，轨道就是一个栅格的列或行的某个位置的常见的名称。栅格跟Flex布局一样，有一系列对齐的属性——共有四种值——`start`, `center`, `end`, 和`stretch`，分别对应其子元素所在的轨道。`stretch`跟其他不太一样，它会将元素从所在轨道的头拉伸到尾。
-
-![align-items 和 justify-content](http://n1image.hjfile.cn/res7/2017/04/20/cf6d2c4188e435b0afdc9553a8e6f80a.gif)
-
-[align-items 和 justify-content]
-
-例子中我们要将内容水平和垂直居中，可以通过在容器上设置下面这些属性：
-
-```
-.center-content {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-}
-```
-[示例地址](http://codepen.io/chriswrightdesign/pen/51f1dcaa9b6d815a240420106cd09a0b?editors=1100)
-
-### 使用旧的栅格布局实现两栏布局
-如果使用旧的栅格布局方式创建，我们得考虑其是否可行。旧的布局方式不仅没有`grid-gap`，而且你需要在每一个栅格元素上声明栅格元素的起始位置，否则默认会设置为1，这样所有的栅格都会堆在第一列。
-
-旧版本的布局方式需要通过增加间距作为栅格轨道的一部分，也需要设置每个栅格从哪里开始：
-
-```
-.grid-legacy {
-   display: -ms-grid;
-   -ms-grid-columns: 1fr 1rem 1fr; // 取代 gap 间距
-}
-.grid-legacy:first-child {
-   -ms-grid-column: 1;
-}
-.grid-legacy:last-child {
-	-ms-grid-column: 3;
-}
-```
-
-### 旧的布局方式实现对齐和全高度
-旧的布局方式跟IE 11中Flexbox有一样的问题，[在容器上设置最小高度（min-height）不一定会生效](https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items)。这个问题通过栅格布局实现起来更方便。
-
-为了实现这个效果我们在父容器的行属性上使用`minmax`方法，`minmax`指定了行或列的最大和最小值。
-
-```
--ms-grid-rows: minmax(100vh, 1fr);
-```
-
-在子元素上我们能指定为grid，设置行和列为`1fr`：
-
-```
-.ms-cell {
-   -ms-grid-columns: 1fr;
-   -ms-grid-rows: 1fr;
-}
-```
-
-最后，因为我们不能像Flexbox或最新栅格布局那样根据父元素对齐，我们必须使用元素自身的对齐方式来对齐：
-
-```
-.ms-align-center {
-    -ms-grid-column: 1;
-    -ms-grid-column-align: center; // 类似现代浏览器grid中的 align-self
-    -ms-grid-row-align: center; // 类似现代浏览器grid中的 justify-self
-}
-```
-
-[旧的两列布局示例](http://codepen.io/chriswrightdesign/pen/08b9afe6847968c1f319a5ce51e9eb95)
-
-到此我们实现了如何创建列、实现间距、内容对齐及对老旧浏览器的支持。接下来让我们实验下如何通过grid实现留白。
-
-## 通过CSS栅格实现留白（Negative Space）
-栅格布局允许你通过`grid-column-start`属性指定列开始的位置，所以就有了可以通过栅格创建留白的可能性。
-
-![使用grid-template-columns和grid-column-start创建留白](http://n1image.hjfile.cn/res7/2017/04/20/a6a9b8874569264a49475a76c8f3e4f9.jpg)
-[使用grid-template-columns和grid-column-start创建留白]
-
-创建留白的一种方式是在列的真实位置上设置一个数字，空出栅格元素的原始空间, 栅格元素也会被push到新的栅格列。
-
-![grid-column-start push](http://n1image.hjfile.cn/res7/2017/04/20/504a4d5a4b26296e84acd811ef587da4.gif)
-[随着grid-column-start push 第一项]
-
-在上面的留白示例中，html结构中用一个div包裹另外一个div：
-
-```
-<div class="grid">
-    <div class="child"><!-- 内容 --></div>
-</div
-```
-
-栅格像这样设置：
-
-```
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-```
-
-为了让子元素从右侧开始，我们设置子元素从第2列开始：
-
-```
-.child {
-    grid-column-start: 2;
-}
-```
-
-**注意**：在Firefox 52中的一个差异导致一个垂直对齐问题——[基于FR单位的行不会拉伸得跟整个窗口一样高](https://bugzilla.mozilla.org/show_bug.cgi?id=1346699)。为了解决（address）这个问题我们设置子元素为栅格项，并给每一行设置一个想要的高度：
-
-```
-.l-grid--full-height {
-    grid-template-rows: minmax(100vh, 1fr);
-}
-```
-
-[设置留白示例](http://codepen.io/chriswrightdesign/pen/5a9bc28c370ad5155515c3c7a19653d8)
-
-## 用内容死区（content dead-zones）创建空白
-在四列布局中，给本来在第三列的栅格项上设置`grid-column-start:2;`，那么会找到下一个可用的第二列来填充空间。
-
-栅格轨道会跳过某些列，直到找到下一列。我们可以利用这个方法在栅格内创建空白，没有内容的栅格也会被分配。
-[\[创建空白示例\]](http://codepen.io/chriswrightdesign/pen/427c3e51c320e04662be56dad44dee74)
-
-![](http://n1image.hjfile.cn/res7/2017/04/20/90fcea0b53d4712f827c74ec950cebd1.jpg)
-[使用grid-template-columns 和 grid-column-start创建空白]
-
-## 创建行
-如果我们想分割布局为四份，我们目前所了解的关于列的布局方式对行同样有用：
-
-```
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 250px 250px;
-}
-```
-
-![](http://n1image.hjfile.cn/res7/2017/04/20/1e6446cad82bb945bb7f559fa0f869e8.jpg)
-[同时使用grid-template-columns 和 grid-template-rows创建栅格布局]
-
-理想情况下这个示例是没问题的。因为此时每个栅格项的内容足够少而不会撑开每行。但随着内容的变化，一切都不一样了。当示例中的内容超出指定行的大小后，看下会发生什么：
-
-![](http://n1image.hjfile.cn/res7/2017/04/20/a2bce80e7d94d2b9f2931e061dff7780.jpg)
-[内容超出声明的行高]
-
-我们创建了250px高的两行，如果内容超过每行的高度，将会打破布局并和后面的行的内容重叠。并不是一个我们想要的结果。
-
-## 灵活的设置最小值
-这里的场景是设置了最小值，但是允许我们根据内容弹性变化。这里我们通过上面旧浏览器示例中的`minmax`关键字实现。
-
-```
-.grid {
-    grid-template-rows: minmax(250px, auto) minmax(250px, auto);
-}
-```
-[创建有最小值的弹性行](http://codepen.io/chriswrightdesign/pen/447e07c84aac9abb5514f9b9fbb18459)
-
-
-现在我们已经了解了创建带有内容的行的基础方法，我们开始来创建水平和垂直交错的更复杂栅格布局。
-
-![](http://n1image.hjfile.cn/res7/2017/04/20/cab8e4f4681e3841bcd7865650240058.jpg)
-\[使用grid-column-start和span关键字创建复杂栅格布局[Unsplash](https://unsplash.com/)]
-
-## 创建更复杂的栅格
-我们开始创建更复杂的栅格布局。将栅格中的每个栅格项设置成占据多条轨道，在一列内，我们能通过`grid-column-start`和`grid-column-end`实现，或者通过如下所示更简单的写法：
-
-```
-grid-column: 1 / 3;
-```
-
-用这种实现方式的弊端是并不是很“模块化”，为了定位每块内容需要写很多代码。`span`关键字更符合模块化的思路，因为我们能放在任何地方，让栅格来控制他。我们可以定义栅格项的开始位置，及其占据的轨道数：
-
-```
-.span-column-3 {
-    grid-column-start: span 3;
-}
-```
-
-任何添加该class的栅格将会从其开始位置，占据三个轨道。
-
-[\[通过span实现的复杂栅格\]](http://codepen.io/chriswrightdesign/pen/35102dd4a2cf7fbadb33dd53cb88787d)
-
-## 使用span设计一个布局
-我们能设计一个多轨道布局，通过将栅格布局打散成最小单位。本示例中的最小单位是图中高亮的部分。
-
-![](http://n1image.hjfile.cn/res7/2017/04/20/028fe538b6c135f129441ad7f7a0f3a6.jpg)
-[通过最小栅格单位结合span创建更大的栅格]
-
-围绕最小单位，我们能灵活的使用span来创建一些有意思的布局，因为span是可以叠加的——你可以结合列和行的轨道在栅格中创建多层级。
-
-## 不需要媒体查询（media queries）的弹性栅格
-虽然上面说到的例子能在可用空间内适应变化，但是没有一个是专门为空间变化设计的。栅格有两个非常有用的特性来适应可用空间的变化。这两个属性叫`auto-fit`和`auto-fill`，像下面这样结合`repeat function`和`minmax function`使用：
-
-```
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-```
-
-这些值代替了repeat中的数字，并计算在每条轨道上会填充多少行或列。二者之间最大不同是当一条轨道上空白的溢出时的他们的处理方式不同。
-
-`auto-fit`尝试放最大的数量的重复元素待一列内且该列能自动适配而不溢出。当没有足够的空间来放置更多的元素时，之后的元素将会放到下一行，不能填满的空间将会空着。
-
-![auto-fill](http://n1image.hjfile.cn/res7/2017/04/20/8c9786de6f128e9d4c3a8519f001baf1.gif)
-[示例：auto-fill. auto-fill会保留后面空间，auto-fit会让空白收缩为0px]
-
-`auto-fill`的表现跟`auto-fit`类似，但是任何的空白空间都会自动收缩，同时这一行的元素也会被拉升——类似flexbox的效果，列会随着可用空间变小发生折叠。
-
-![grid-auto-fit示例](http://n1image.hjfile.cn/res7/2017/04/20/c3a4e639995fd0ce30dbd8c561fd8a26.gif)
-
-[grid-auto-fit示例]
-
-依赖媒体查询的布局跟窗口大小关系很大，这不适合模块化——系统内的组件应该随所处的可用空间而变化。那么在实践中会是什么样的呢？
-
-![auto-fit](http://n1image.hjfile.cn/res7/2017/04/20/6a648b1e569c4400d70f85708d571e6f.gif)
-[grid auto-fit的真实示例]
-
-[\[栅格auto-fit示例\]](http://codepen.io/chriswrightdesign/pen/f93ce007ae9cc48eab4c577f1efac382)
-
-## 这只是个开始
-
-我们已经经历了快十五年的CSS浮动为主的布局方式，我们上面学习了几乎所有你能用float实现的布局——CSS栅格布局是这个领域的新代表，目前还没有很多的实践和研究。
-
-现在最重要的步骤是开始使用它。在构建、创建更多高级布局的时候会很方便。栅格布局还有不少未知领域，一旦我们更好地理解其能力并开始与其他特性结合，我们便能用更少代码创造更多有趣、灵活的布局，并能减少些框架抽象的麻烦。
-
-如果你感兴趣并想进一步探究CSS栅格，可以试下[Rachel Andrew的例子](http://gridbyexample.com/)，这里面通过带解释说明的实例探讨了CSS栅格布局的每一个特性。
-
+ * 原文地址：[javascript2017beyondbrowser](http://developer.telerik.com/topics/webdevelopment/javascript2017beyondbrowser/)
+ * 原文作者：[TJ VanToll](http://developer.telerik.com/author/tvantoll/)
+ * 译者：[赵安冬](#)
+ * 校对者：[金晶](#)
+  
+ 
+ 技术世界在发展，JavaScript也在同步发展。JavaScript在软件世界建起地盘的头几年，它从没想过涉足服务应用程序、移动端应用程序以及机器人之类业务。今天，随着JavaScript的发展，这门语言已经进入了聊天机器人、虚拟现实以及物联网等新领域。
+ 
+ 除了不断开拓新领域，在服务端、移动端以及桌面端应用等生态中，JavaScript的地位也越来越稳固。在本文中，我们将首先回顾去年所做的若干预测，然后展望2017年JavaScript会在浏览器之外开拓哪些新地盘。先来看看JavaScript在服务端应用程序中的情况吧。
+ 
+ ## Node.js
+ 
+ Node.js是构建服务器端应用程序的开源运行时库，这类JavaScript代码不是在浏览器中运行的。在过去的几年里，Node已经从初创公司中流行的技术框架演变为各种规模公司所使用的主流开发技术。
+ 
+ Node的包管理工具npm也不再是托管服务端应用程序模块的工具，而是转变为了分发JavaScript代码的规范化的工具。也许npm上的包的数量是最能表现Node的发展趋势。在去年的预测中，我们制作了下面的图表，比较了各种语言中包管理的数据，显示出了npm的优势。
+ 
+ ![](http://ofyfg9y7t.bkt.clouddn.com/modulecounts2016.jpg)
+  
+ 截至2015年12月，modulecounts.com的模块数量
+ 
+ 在过去一年里，npm的增长并没有放缓的迹象。事实上，npm包的数量从20万增长到了大约35万，促使整个Y轴比例尺都被迫调整。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/modulecounts2017.jpg)
+ 
+ 截至2016年12月，modulecounts.com统计的包数量
+ 
+ 增长背后的因素有很多，其中一个就是很多公司在基础服务中使用了Node。这同我们去年预测的结果相吻合。
+ 
+ > “在2016年，我们可以预见到更多的公司将会进一步采用Node和他的包管理工具npm。因为Node的长期支持计划，微软、IBM、Intel、Progress等大公司将会继续使用Node，用来替代一些.NET、Java之类的传统企业解决方案。”
+ 
+ 从Node的增长趋势来看，上面的预测结果并不意外。关于Node的案例研究表明，一部分中等规模的公司已经开始使用Node，包括Netflix，GoDaddy和Capital One等。
+ 
+ Node在关键基础设施中得到了应用，其中最惹人注目的非NASA莫属了。你也可以看看NASA对Node的研究，在这里我只摘录一段话。
+ 
+ > “在考虑宇航员的生命安全时，轻微的打嗝或者服务中断都会酿成生死事故。从EVA（舱外活动）的数据到太空中宇航员的各个领域里，Node.js都有助于确保所有人与事的安全。”
+ 
+ 但是Node的发展并非只有NASA帮忙。Node的包管理工具npm已经成为了存储跨环境JavaScript代码的不二选择，包管理工具的统一化反之也推动了Node的发展。
+ 
+ 在本文中，我们讨论的每个框架、每项技术都使用npm来存储和分发其源代码。在npm中搜索“jquery”，“polymer”，“react”，“cordova”或“nativescript”，你大概就能了解npm现在的规模。随着JavaScript的普及，npm也越来越受欢迎。npm越普及，Node.js发展越快。我们相信，这个趋势将会在一段时间内继续保持下去。
+ 
+ ![](http://ofyfg9y7t.bkt.clouddn.com/angularnpmdownloads.jpg)
+ 
+  
+ 在npmjs.com搜索“angular”得到近1万个结果。Angular是通过npm分发的众多类库之一。
+ 
+ 在2017年，我们相信更多的公司将从传统的开发方式（比如JAVA和C#）切换到Node。我们相信TypeScript也将有助于推动Node的成长，因为它对Java和C#的开发人员更加友好。Node对LTS版本的支持承诺也将有助于这一趋势，因为它保证了这些公司使用的版本会在未来几年得到持续的支持和维护。
+ 
+ 总的来说，大公司不喜欢维护多套开发系统和语言，而借助Node，这些公司可以用单一语言来整合所有的开发系统，还不仅仅是是服务器端的代码。下来我们看看JavaScript是如何影响移动端的。
+ 
+ ## PhoneGap和Cordova
+ 
+ PhoneGap以及它的基石Cordova，是JavaScript进入原生开发领域的初次尝试。Cordova将web代码封装在WebView中，借由WebView来驱动原生的移动应用。这种方法允许Web开发人员使用他们已经掌握的技能（即JavaScript）来开发移动应用程序，正因为如此，在很多年里，Cordova都是开发移动应用的重要选择。
+ 
+ 但是这种情况开始慢慢改变了。今天，Cordova面临了很多替代方案的挑战，它们大部分使用与Cordova类似的基于JavaScript的方案。也许Cordova最大的挑战来自谷歌主导的Progressive Web Apps（简称PWAs）。
+ 
+ ![](http://ofyfg9y7t.bkt.clouddn.com/progressivewebapps.jpg)
+ 
+ Google的Progressive Web Apps主页
+ 
+ PWAs为web世界了带来了很多近似原生的功能，比如推送通知、离线访问和主屏幕图标等。去年，我们预测Google将开始慢慢推行PWA方法。事实证明，这一预测还是过于保守，因为Google已经明确表示，他们将开展多种活动来推广PWAs。在最近的Chrome开发者峰会，以及今年的Google I/O会议上，谷歌都为PWAs安排了大量讨论。
+ 
+ PWAs和我们的讨论息息相关，因为它已经开始蚕食 Cordova的领域——需要使用原生功能的Web应用程序。如果你的web应用需要离线访问或者推送通知的功能，选择基于PWA 而不是 Cordova会是个更好的方案。尽管很难测量有多少人在混合应用中选择了PWAs，但已经有很多证据表明Cordova的使用量正在缩减。下面是最近两年Cordova每周被人们下载的次数。你可以看到，尽管Cordova下载数没有大幅波动，但增幅已经没有那么明显了。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/cordovadownloadsperweek.jpg)
+ 
+ 
+ 从2014年12月至2016年12月，“cordova”npm软件包的每周下载量。（数据来自npmstat.com）
+ 
+ 衰退还有一个原因。尽管我们认为PWA正在蚕食Cordova的份额，但我们也相信，移动领域中更新的开发方式也在蚕食了Cordova的份额。
+ 
+ ## Native mobile apps
+ 
+ JavaScript驱动的原生移动应用，这种概念由Appcelerator倡导，借助Facebook的React Native和Progress的NativeScript，目前已经流行开来。用JavaScript开发的原生应用程序不使用WebView，因此，不需要考虑基于Cordova的应用程序遇到的Web性能问题 。
+ 
+ 在去年的讨论中，我们预测2016年将会是这些框架成熟并广泛使用的一年，现在看来这些预测是准确的。在过去的两年里，React Native的每周下载次数在持续增加。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/reactnativedownloads.jpg)
+ 
+ 从2014年12月到2016年12月，“reactnative”npm软件包的每周下载量。（数据来自npmstat.com）
+ 
+ NativeScript也有同样的趋势。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/nativescriptdownloads.jpg)
+  
+ 从2014年12月至2016年12月，“nativescript”npm软件包的每周下载量。（数据来自npmstat.com）
+ 
+ 变化不只体现在这些JavaScript驱动的原生框架的下载数据提升上，最近的一项调查研究（State of JavaScript 2016）表明，JavaScript开发人员对React Native和NativeScript都很感兴趣。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/stateofjsmobileresults.jpg)
+ 
+ State of JavaScript 2016对移动开发领域兴趣调查的结果
+ 
+ 对JavaScript调查分析总结出了这些结果。
+ 
+ > 在兴趣分数上，“Cordova”和“PhoneGap”的得分很低，这也许是它们的性能问题导致的。虽然Cordova和PhoneGap所依赖的手机浏览器和JavaScript引擎有了很大提升，但还是不如运行原生代码（如React Native）。
+ 
+ 在2017年，随着越来越多的JavaScript开发人员开始尝试构建原生应用，我们期待这些使用JavaScript构建原生应用的框架能够加速发展。React框架的快速发展也将使React Native获益，而NativeScript则宣布在5月份完成Angular 2的支持，很多项目也会从Angular 1升级到Angular 2，NativeScript也将会从中获益。我们也希望JavaScript驱动原生框架能够吸引原生iOS和Android开发人员，因为它允许你只用一份代码就能在两个平台上构建真正的原生应用程序。
+ 
+ JavaScript越来越多地侵占了曾经以ObjectiveC和Java等语言为主的移动端领域。但这不是JavaScript正在侵入的唯一新领域。下面我们将讨论转到桌面应用程序 。
+ 
+ ## 桌面应用
+ 
+ 根据传统，如果要构建Windows或Mac应用程序，就要使用针对专门平台的工具，如WPF和Windows Forms，或者采用跨平台的方案，比如Java或Adobe Air 。不过，像上文中讨论的其他软件生态一样，基于JavaScript的解决方案也在蚕食这个领域。
+ 
+ 在去年的讨论中，我们讨论了用来构建桌面应用程序的两个最流行的JavaScript框架——NW.js和GitHub的Electron，同时判断其使用量在2016年将大幅增长。从现实来看，增长已经出现了，Electron现在也已经成为开发基于JavaScript的桌面应用程序的重要选择。
+ 
+ 如果比较“electron”和“nw”在npm上下载量，你将会看到“electron”（红线）和React Native的趋势类似，而NW.js的下载曲线相对平坦。
+  
+  ![](http://ofyfg9y7t.bkt.clouddn.com/electronvsnwdownloads.jpg)
+  
+ 从2016年9月至十一月2016年，“electron”和“NW”npm包的周下载量。（数据来自npmstat.com）
+ 
+ 2015年12月，在GitHub上，Electron有2万个 star，NW.js有2万5千个；今天，Elecron拥有近4万个star，NW.js则刚刚超过3万。
+ 
+ Electron也被主流桌面应用所接纳。该框架现在为Visual Studio Code提供支持。Visual Studio Code由微软提供，是广受欢迎的编辑器，到4月份已经获得了超过五百万用户。Electron还在React和Angular社区做了推广，所以在这两个框架中使用Electron的教程可以很容易地在网上被找到。
+ 
+ 我们预计，Electron在2017年将会继续占据统治地位。我们期待Electron能够跟最流行的框架（主要是React和Angular）进一步集成，从而获得软件供应商更多的关注。而且随着JavaScript继续侵入传统上由Java和基于Microsoft技术主导的领域，我们希望Electron将继续被用作WPF，Java和Adobe Air等开发的替代品。
+ 
+ 使用单一语言完成你的所有开发需求，这个方案不但有足够吸引力，还采取了JavaScript的一些最新的开发方式。最后，让我们看看JavaScript在一些新的软件领域的表现。
+ 
+ ## JavaScript的新边界
+ 
+ 如果你向分析师询问发展中国家的发展情况，他们脱口而出的是虚拟现实，聊天机器人和物联网（IoT）等一系列流行概念。
+ 
+ 在所有这些新技术中，JavaScript在聊天机器人这个领域是最重要的，人们使用JavaScript来开发从简单的Slack机器人乃至进行商业交易的复杂机器人。在聊天机器人领域中，大多数的框架在他们的SDK中都集成了Node库，包括Botkit，Microsoft的Bot Framework和Facebook的wit.ai。微软的Bot框架的文档甚至介绍了为什么要用Node来开发机器人。
+ 
+ > “基于Node的Bot Builder是很有力的构建机器人的框架，可以处理各种形式的交互，给出更多的引导，它可以将这些可能性很清楚地展示给用户，它使用一些框架（如Express和Restify），可以让开发人员用熟悉的方式来开发机器人。”
+ 
+ 重用JavaScript同样为许多流行的IoT库（如Losant和zetta）以及Leap Motion等设备提供了Node API。 Chrome浏览器团队和AFrame框架团队就是其中的典型，还有不少团队在虚拟现实中使用JavaScript。
+ 
+ ![](http://ofyfg9y7t.bkt.clouddn.com/chromevr.jpg)
+  
+ Google Chrome小组拥有一系列令人印象深刻的虚拟现实实验，它们都是基于JavaScript构建的，你也可以自己尝试。
+ 
+ 然而在C ++，Python和C＃主导 的领域，JavaScript并不具有很大的优势。比如，Oculus Rift设备主要使用C ++，Microsoft的HoloLens则需要你用C＃编写。
+ 
+ 我们预计这一趋势将在2017年开始发生改变。随着JavaScript的普及以及运行速度的提高，JavaScript将继续延伸到像VR和物联网这样的领域。随着新的软件开发生态系统的涌现，我们期待JavaScript能够快速上升为一等公民。
+ 
+ ## 万金油 JavaScript
+ 
+ 10年前，在服务器上使用JavaScript是不可想象的; 今天，Node拥有350万用户，年增长率达100％。5年前，使用JavaScript来驱动原生iOS或Android应用程序还只是星星之火， 今天NativeScript和React Native正以惊人的速度增长。3年前，使用JavaScript构建桌面应用程序很少见， 今天Electron每月下载超过1万次。
+ 
+ JavaScript不会用于所有场景下编程，因为许多其它语言更适合于解决某些具体场景下的问题。但是不管采用什么开发平台，JavaScript的广泛使用一定会是个重要因素。关于这个话题，Jeff Atwood有一句广为流传的话，也许用它来结尾再合适不过了，因为他的发言总是充满了预见性。
+ 
+ > “可以用JavaScript编写的应用程序，最终都将用JavaScript编写。”
+ 
+ 原文地址：http://developer.telerik.com/topics/webdevelopment/JavaScript2017beyondbrowser/
