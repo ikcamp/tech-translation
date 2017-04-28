@@ -1,7 +1,7 @@
  * 原文地址：[Getting to know CSS Grid Layout](https://cm.engineering/getting-to-know-css-grid-layout-818e43ca71a5)
  * 原文作者：[Chris Wright](https://cm.engineering/@cwrightdesign?source=post_header_lockup)
- * 译者：[郭华翔](#)
- * 校对者：[](#)
+ * 译者：[华翔](#)
+ * 校对者：[珂珂](#)、[干](#)
 
 
 # 翻译 | CSS网格（CSS Grid）布局入门
