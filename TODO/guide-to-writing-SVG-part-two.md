@@ -1,3 +1,9 @@
+ * 原文地址：[Pocket Guide to Writing SVG](http://svgpocketguide.com/book/)
+ * 原文作者：[Joni Trythall](http://jonibologna.com/)
+ * 译者：[DDU](#)
+ * 校对者：
+ 
+
 #编写SVG的口袋指南（下）
 
 浏览本文前可以先看下《[编写SVG的口袋指南（上）](http://mp.weixin.qq.com/s/y4ewNc2sEg_-DDbBEhtoRw)》
