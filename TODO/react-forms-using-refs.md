@@ -1,10 +1,10 @@
-React provides two standard ways to grab values from `<form>` elements. The first method is to implement what are called *controlled components* (see my [blog post on the topic](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)) and the second is to use React's `ref` property.
+React 提供了两种从 `<form>` 元素中获取值的标准方法。第一个方法被称为*受控组件* (可以看我[博客里发表的文章](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)) ，第二种方法是使用 React 的 `ref`  属性。
 
-Controlled components are heavy duty. The defining characteristic of a controlled component is the displayed value is bound to component state. To update the value, you execute a function attached to the `onChange` event handler on the form element. The `onChange` function updates the state property, which in turn updates the form element's value.
+受控组件很重，受控组件的特性是显示的值和组件的 state 绑定在一起。为了更新它的值，你要执行一个附加在 form 元素上的 `onChange` 事件处理函数。`onChange` 函数更新 state 属性，进而更新 form 元素的值。
 
-(Before we get too far, if you just want to see the code samples for this article: [here you go!](https://github.com/lorenseanstewart/react-forms-using-refs))
+（在看到下面的文章之前，如果你只是想看这篇文章的代码示例：[点击这里！](https://github.com/lorenseanstewart/react-forms-using-refs)）
 
-Here's an example of a controlled component:
+下面是一个受控组件的例子：
 
 ``` JSX
 import React, { Component } from 'react';
@@ -44,29 +44,26 @@ class ControlledCompExample extends Component {
 
 export default ControlledCompExample;
 ```
+input 的值是 `this.state.fullName` （在第7行和第26行）。 `onChange ` 函数是 `handleFullNameChange ` （第 10 - 14 行和第 27 行）。
 
-The value of the input is `this.state.fullName` (lines 7 and 26). The `onChange` function is `handleFullNameChange` (lines 10 - 14, and line 27).
+受控组件最主要的优势是：
+1、可以很轻松的**验证**用户的输入
+2、可以根据受控组件的值**动态的渲染其他的组件**。例如：一个用户在下拉列表中选择的值（例如：“dog” 或者 “ cat” ）可以控制在 form 中渲染的其他 form 组件（例如：一个设置品种的复选框）
 
-The main advantages of controlled components are:
+受控组件的缺点是要写大量的代码。你需要一个 state 属性通过 props 传递给 form 元素，还需要一个函数来更新这个属性的值。
 
-  1.You are set up to easily **validate** user input.
-  2.You can **dynamically render other components** based on the value of the controlled component. For example, the value a user selects from a dropdown (e.g. 'dog' or 'cat') can control which other form components (e.g. a checkbox set of breeds) are rendered in the form.
+对于一个表单元素来说这真的不是什么问题 —— 但是如果你需要一个庞大并且复杂的表单（不需要动态渲染或者实时验证），这时你将会发现如果过度使用受控表单你将会写一吨的代码。
 
-The downside to controlled components is the amount of code you have to write. You need a state property to pass to the form element as `props`, and you need a function to update the value of this property.
+从 form 元素获取值的一个简单而且能减少工作量的方法是用 `ref` 属性。不同的 form 元素和组件构成需要不同的方法，所以这篇文章剩下的内容分为以下几个部分。
 
-For one form element this isn't an issue – but if you have a large, complex form (that doesn't need dynamic rendering or real-time validation), you'll find yourself writing a ton of code if you overuse controlled components.
+1、[文本输入框、数字输入框和选择框](#react-refs-1)
+2、[子组件通过 props 传值给父组件](#react-refs-2)
+3、[一组 Radio 标签](#react-refs-3)
+4、[一组 Checkbox 标签](#react-refs-4)
 
-An easier and less labor-intensive way to grab values from a form element is to use the `ref` property. Different form elements and component compositions require different strategies, so the rest of this post is divided into the following sections.
+###  1、文本输入框、数字输入框和选择框
 
-1.[Text inputs, number inputs, and selects](#react-refs-1)
-2.[Passing props from child to parent](#react-refs-2)
-3.[Radio sets](#react-refs-3)
-4.[Checkbox sets](#react-refs-4)
-
-
-###  1.Text inputs, number inputs, and selects
-
-Text and number inputs provide the most straightforward example of using `ref`s. In the `ref` attribute of the input, add an arrow function that takes the input as an argument. I tend to name the argument the same as the element itself as seen on line 3 below:
+文本和数字输入框提供了使用 `refs` 的最简单的例子。在 input 的 `refs` 属性里，添加一个箭头函数并且把 input 作为参数。我趋向于把参数命名为和元素本身一样的的名字，就像下面的第三行所示：
 
 ```JSX
 <input
@@ -74,7 +71,7 @@ Text and number inputs provide the most straightforward example of using `ref`s.
   ref={input => this.fullName = input} />
 ```
 
-Since it's an alias for the input element itself, you can name the argument whatever you'd like:
+由于它是 input 元素本身的别名，你可以随心所欲的来命名参数：
 
 ```JSX
 <input
@@ -82,8 +79,9 @@ Since it's an alias for the input element itself, you can name the argument what
   ref={cashMoney => this.amount = cashMoney} />
 ```
 
-You then take the argument and assign it to a property attached to the class's `this` keyword. The inputs (i.e. the DOM node) are now accessible as `this.fullName` and `this.amount`. The values of the inputs are accessible as `this.fullName.value` and `this.amount.value`.
-The same strategy works for select elements (i.e. dropdowns).
+你可以设置参数并将它分配给一个属性，然后附加到这个类的 `this` 关键字上。这个输入框（例如： DOM 节点）通过 `this.fullName` 和 `this.amount` 是可以被读取的。这个输入框的值可以通过 `this.fullName.value` 和 `this.amount.value` 读取。
+
+选择元素也可以用相同的方法（例如：下拉列表）。
 
 ```JSX
 <select
@@ -95,19 +93,19 @@ The same strategy works for select elements (i.e. dropdowns).
 </select>
 ```
 
-The value selected is accessible as `this.petType.value`.
+选择元素的值可以通过 `this.petType.value` 获取。
 
-### 2、Passing props from child to parent
+### 2、子组件通过 props 传值给父组件
 
-With a controlled component, getting the value from a child component to a parent is straightforward – the value already lives in the parent! It's passed down to the child. An `onChange` function is also passed down and updates the value as the user interacts with the UI.
+使用受控组件，父组件获取子组件的值是很简单的 —— 值已经存在于父组件中了！它从子组件传过来。一个 `onChange` 函数也被传了过来，并且通过用户和 UI 的交互来更新该值。
 
-You can see this at work in the controlled component examples in my [previous post](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/).
+你可以在我[上篇文章](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)的受控组件示例中看到它是如何运行的。
 
-While the value already lives in the parent's state in controlled components, this is not so when using `ref`s. With `ref`s, the value resides in the DOM node itself, and must be communicated *up* to the parent.
+虽然该值已经存在于受控组件的父组件中，但是当使用 `ref` 的时候却不是这样。使用 `ref` 的时候，该值存在于 DOM 节点自身当中，必须和父组件有通信。
 
-To pass this value from child to parent, the parent needs to pass down a *'hook'*, if you will, to the child. The child then attaches a node to the 'hook' so the parent has access to it.
+要将该值从子组件传给父组件，父组件必须传递一个 ` hook` （如果你愿意）给子组件。然后子组件给  ` hook` 附加一个节点， 以便于父组件可以读取它。
 
-Let's look at some code before discussing this further.
+在我们更深入的探讨之前先来看一些代码。
 
 ```JSX
 import React, { Component } from 'react';
@@ -144,19 +142,19 @@ function CustomInput(props) {
 export default RefsForm;
 ```
 
-Above you see a form component `RefForm`, and an input component called `CustomInput`. Usually, the arrow function is on the input itself, but here it's being passed down as a prop (see lines 15 and 27). Since the arrow function resides in the parent, the `this` of `this.firstName` lives in the parent.
-
-The value of the child input is being assigned to the `this.firstName` property of the parent, so the child's value is available to the parent. Now, in the parent, `this.firstName` refers to a DOM node in the child component (i.e. the input in `CustomInput`).
-
-Not only can the DOM node of the input be *accessed* by the parent, but the value of the node can also be *assigned* from within the parent. This is demonstrated on line 7 above. Once the form is submitted, the value of the input is set to 'Got ya!'.
-
-This pattern is a bit mind bending, so stare at it for a while and play around with the code until it sinks in.
+通过上面的代码，可以看到一个 form 组件 `RefForm` 和一个叫做 `CustomInput `  的 input 组件。通常，箭头函数都是在 input 自身上面，但是从这（15 - 27 行）可以看到它是通过 props 传递的。由于箭头函数存在于父组件中，所以 `this.firstName` 中的 `this` 指向父组件。
  
-You may be better off making radios and checkboxes controlled components, but if you really want to use `refs` the next two sections are for you.
+input 子组件的值被赋给父组件的 `this.firstName` 属性，所以父组件可以获得子组件的值。现在，父组件中的 `this.firstName` 指的是子组件中的 DOM 节点（例如： `CustomInput ` 中的 input）。
 
-### 3. Radio sets
+父组件不仅可以访问 input 中的 DOM 节点，还可以在父组件内给节点的值赋值。在上文的第7行可以看到例子。一旦表单被提交， input 的值就被设置为 “Got ya!” 。
 
-Unlike text and number input elements, radios come in sets. Each element in a set has the same `name` attribute, like so:
+这种方式有点点摸不着头脑，所以仔细揣摩一会，敲一下代码直到完全理解它。
+
+    你可能会写出来更好的 radios 和 checkboxes  受控组件，但是如果你真的想要用 `refs` ，那么接下来的两篇文章会帮到你。
+
+### 3、一组 Radio 标签
+
+不像 text 和 number 这类 input 元素，radio 元素是成组出现的。每组中的元素都有相同的 `name` 属性，就像这样：
 
 ```JSX
 <form>
@@ -176,17 +174,16 @@ Unlike text and number input elements, radios come in sets. Each element in a se
 </form>
 ```
 
-There are three options in the "pet" radio set – "cat", "dog", and "ferret".
+在一组 “pet” radio 标签中有三个选项 —— “cat”、“dog” 和 “ferret”。
 
-Since the whole set is the object of our concern, setting a `ref` on each radio input is not ideal. And, unfortunately, there's no DOM node that encapsulates a set of radios.
+由于我们关心的是整个组的元素，所以给每个 radio 设置 `ref` 并不是一个好主意。而不幸的是，并没有一个 DOM 节点是封装了一组 radios 的。
 
-Retrieving the value of the radio set can be obtained through **three steps**:
-1.Set a ref on the `<form>` tag (line 20 below).
-2.Extract the set of radios from the form. In this case, it is the `pet` set (line 9 below).
-- A node list and a value is returned here. In this case, this node list includes three input nodes, and the value selected.
-- Keep in mind that a node list looks like an array but is not, and lacks array methods. There's more on this topic in the next section.
-
-3.Grab the value of the set using dot notation (line 13 below).
+可以通过下面的**三步**来检索出一组 radio 的值：
+  1、在 `form` 标签上设置 ref （下面的第20行）。
+  2、从 from 中取出这组 radios 。然后它应该是一组 `pet`（下面的第9行）。
+- 此处返回一个节点列表和一个值。在这种情况下，这个节点列表包含三个 input 节点和被选中的值。
+- 需要注意的是这个节点列表像一个数组，但是并不是哦，而且它没有数组的方法。在下个章节中还有更多关于这个话题的内容。
+3、使用 `.` 方法来获取这组的值（下面的第13行）。
 
 ```JSX
 import React, { Component } from 'react';
@@ -233,7 +230,7 @@ class RefsForm extends Component {
 export default RefsForm;
 ```
 
-This works even if you are composing a form from children components. Although there's more logic in the components, the technique for getting the value from the radio set remains the same.
+如果你正在用子组件写一个表单也是可行的。尽管组件中会有更多的逻辑，但是从一组 radio 中获取值的方法是不变的。
 
 ```JSX
 import React, { Component } from 'react';
@@ -290,20 +287,19 @@ function RadioSet(props) {
 export default RefsForm;
 ```
 
-### 4.Checkbox sets
+### 4、一组 Checkbox 标签
 
-Unlike a radio set, a checkbox set may have multiple values selected. This makes extracting these values a little more complicated than extracting the value of a radio set.
+和一组 radio 标签不一样，一组 Checkbox 标签可能有多个值。导致获取这些值会比获取一组 radio 的值难一些。
 
-Retrieving the selected values of the checkbox set can be done through these **five steps**:
+可以通过下面的**五步**来检索出一组 checkbox 标签被选中的值：
 
-1.Set a ref on the `<form>` tag (line 27 below).
-2.Extract the set of checkboxes from the form. In this case, it is the `pet` set (line 9).
-- A node list and a value is returned here.
-- Keep in mind that a node list looks like an array but is not, and lacks array methods, which takes us to the next step...
-
-3.Convert the node list to an array, so array methods are available (`checkboxArray` on line 12).
-4.Use `Array.filter()` to grab only the checked checkboxes (`checkedCheckboxes` on line 15).
-5.Use `Array.map()` to keep only the values of the checked checkboxes (`checkedCheckboxesValues` on line 19).
+1、在 `form` 标签上设置 ref （下面的第27行）。
+2、从 from 中取出这组 checkboxes 。然后它应该是一组 `pet` （第9行）。
+- 此处返回一个节点列表和一个值
+- 需要注意的是这个节点列表像一个数组，但是并不是哦，而且它没有数组的方法，然后我们就需要进行下面的这一步 ... 
+3、把这个节点列表转换成一个数组，然后就可以使用数组的方法了（第 12 行的 `checkboxArray ` ）。
+4、使用  `Array.filter()` 获取选中的 checkboxes  （第 15 行的 `checkedCheckboxes ` ）。
+5、使用  `Array.map()` 获取选中的 checkboxes 的唯一的值（第 19 行的 `checkedCheckboxesValues ` ）
 
 ```JSX
 import React, { Component } from 'react';
@@ -356,7 +352,7 @@ class RefsForm extends Component {
 export default RefsForm;
 ```
  
-Using a checkbox set child component works just like the radio set example in the previous section.
+使用子组件写 checkbox 的方法和上一章节中写 radio 的方法是一样的。
 
 ``` JSX
 import React, { Component } from 'react';
@@ -420,13 +416,19 @@ function CheckboxSet(props) {
 export default RefsForm;
 ```
 
-### Conclusion
+### 结论
 
-If you don't need to:
+如果你不需要：
 
-1.monitor the value of a form element in real-time (e.g. in order to render subsequent components based on user input), or
-2.perform custom validation in real-time,
+1、实时监视 form 元素的值（例如：为了基于用户的输入渲染之后的组件）
+2、实时执行自定义验证方法
 
-then using `refs` to grab data from form elements is a good bet.
+那么使用 `ref` 方法获取 form 元素的值是一个很好的方法。
 
-The primary value of using `refs` over controlled component is that, in most cases, you will write less code. The exceptional case is that of checkbox sets (and radios to a lesser degree). For checkbox sets, the amount of code you save by using refs is minimal, so it's less clear whether to use a controlled component or `ref`s.
+大多数情况下，越过受控组件使用 `ref` 最主要的价值是会写更少的代码。 checkbox （ radios 其次）是一个特例。对于 checkbox ，使用 `refs` 省下的代码量是很少的，所以无法说是使用受控组件好还是 `ref` 好。
+
+
+
+
+    
+
