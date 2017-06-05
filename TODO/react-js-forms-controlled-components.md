@@ -1,29 +1,29 @@
-# React.js Forms: Controlled Components
+# React 表单：受控组件
 
-This post covers the following controlled components:
-- text inputs
-- number inputs
-- radio inputs
-- checkbox inputs
-- textareas
-- selects
+本文涵盖以下受控组件：
+- 文本输入框
+- 数字输入框
+- 单选框
+- 复选框
+- 文本域
+- 下拉选择框
 
-Also covered are:
-- Clearing/resetting the form's data
-- Submitting data
-- Validation
+同时也包含:
+- 表单数据的清除和重置
+- 表单数据的提交
+- 表单校验
 
-> Just want the code? [Here it is!](https://github.com/lorenseanstewart/react-controlled-form-components)   
-> Check out the [Demo](http://lorenstewart.me/react-controlled-form-components/).   
-> *Be sure to have your browser's console open as you use the demo.*    
+> [点击这里](https://github.com/lorenseanstewart/react-controlled-form-components)直接查看示例代码。   
+> 检出[示例代码](http://lorenstewart.me/react-controlled-form-components/)。    
+> **请在使用示例代码时打开浏览器的控制台**    
 
-## Introduction
+## 介绍
 
-The problem I came across when learning [React.js](https://facebook.github.io/react/) was finding real-world examples of controlled form components. Examples of controlled text inputs are plentiful, but what about checkboxes? Radios? Selects?
+我学习 [React.js](https://facebook.github.io/react/) 时遇到了问题，那就是难以找到受控组件的真实示例。受控文本输入框的例子倒是很丰富，但复选框、单选框、下拉选择框的例子却不尽人意。
 
-Here is a list of real-world examples of controlled form components; it's the list I wish I found early on in my React education. All form elements are represented here except for date and time inputs, which need a post of their own.
+本文列举了真实的受控表单组件示例，我要是在学习 React 的时候早点发现这些示例就好了。文中列举了所有的表单元素，而日期和时间输入框则需要另开篇幅详细讨论。
 
-To speed up development time, sometimes it's tempting to import a library for something like form elements. When it comes to something like forms, I've found that using library just makes life more difficult when I need to add custom behavior or validation. Once you know proper React patterns, creating form components isn't difficult and it's something we should all probably do ourselves. Please use the code in this post as inspiration or as a starting point for your own form components.
+有时候，为表单元素引入函数库是十分诱人的，因为它能加速开发。而对于表单，我发现当需要添加自定义行为或表单校验时，使用函数库会使事情变得更复杂。一旦掌握合适的 React 套路，你会发现构建表单组件并非难事，并且有些东西我们完全可以自己动手，丰衣足食。请把本文的示例代码当作你创建表单组件的起点或灵感之源。
 
 In addition to the code for individual components, I've put them all together in a (pet adoption!) form so you can see how child components update the parent component's state, and how the parent then updates the child component via props (unidirectional data flow).
 
