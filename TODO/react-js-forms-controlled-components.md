@@ -15,28 +15,30 @@
 
 > [点击这里](https://github.com/lorenseanstewart/react-controlled-form-components)直接查看示例代码。   
 > 检出[示例代码](http://lorenstewart.me/react-controlled-form-components/)。    
-> **请在使用示例代码时打开浏览器的控制台**    
+> **请在使用示例代码时打开浏览器的控制台。**    
 
 ## 介绍
 
-我学习 [React.js](https://facebook.github.io/react/) 时遇到了问题，那就是难以找到受控组件的真实示例。受控文本输入框的例子倒是很丰富，但复选框、单选框、下拉选择框的例子却不尽人意。
+在学习 [React.js](https://facebook.github.io/react/) 时我遇到了一个问题，那就是很难找到受控组件的真实示例。受控文本输入框的例子倒是很丰富，但复选框、单选框、下拉选择框的例子却不尽人意。
 
-本文列举了真实的受控表单组件示例，我要是在学习 React 的时候早点发现这些示例就好了。文中列举了所有的表单元素，而日期和时间输入框则需要另开篇幅详细讨论。
+本文列举了真实的受控表单组件示例，要是在学习 React 的时候我早点发现这些示例就好了。文中列举了几乎所有的表单元素，而日期和时间输入框则需要另开篇幅详细讨论。
 
-有时候，为表单元素引入函数库是十分诱人的，因为它能加速开发。而对于表单，我发现当需要添加自定义行为或表单校验时，使用函数库会使事情变得更复杂。一旦掌握合适的 React 套路，你会发现构建表单组件并非难事，并且有些东西我们完全可以自己动手，丰衣足食。请把本文的示例代码当作你创建表单组件的起点或灵感之源。
+有时候，人们很容易为了某些需求比如表单而引入框架，因为它能加速开发。而对于表单，我发现当需要添加自定义行为或表单校验时，使用框架会使事情变得更复杂。不过一旦掌握合适的 React 套路，你会发现构建表单组件并非难事，并且有些东西完全可以自己动手，丰衣足食。请把本文的示例代码当作你创建表单组件的起点或灵感之源。
 
-In addition to the code for individual components, I've put them all together in a (pet adoption!) form so you can see how child components update the parent component's state, and how the parent then updates the child component via props (unidirectional data flow).
+除了提供单独的组件代码，我还将这些组件放进表单中，方便你理解子组件更新父组件 state 的方式，以及父组件通过 props 更新子组件的方式。
 
-**Note: **[This form](http://lorenstewart.me/react-controlled-form-components/) is built with the wonderful [create-react-app](https://github.com/facebookincubator/create-react-app) build configuration. If you haven't installed it yet, I strongly recommend doing so (`npm install -g create-react-app`). It's by far the easiest way to get set-up to build React apps.
+**注意：**本[表单示例](http://lorenstewart.me/react-controlled-form-components/)由不错的 [create-react-app](https://github.com/facebookincubator/create-react-app) 构建配置生成，如果你还没有安装该构建配置，我强烈推荐你安装一下（`npm install -g create-react-app`）。目前这是搭建 React 应用最简单的方式。
 
-## What is a controlled component?
+## 什么是受控组件?
 
-A controlled component has two aspects:
+受控组件有两个特点:
+1. 受控组件提供方法，让我们在每次 `onChange` 事件发生时控制它们的数据，而不是一次性地获取表单数据（例如用户点提交按钮时）。“被控制“ 的表单数据保存在 state 中（在本文示例中，是父组件或容器组件的 state）。
+2. 受控组件的展示数据是其父组件通过 props 传递下来的。
 
-1. Controlled components have functions to govern the data going into them on every `onChange` event, rather than grabbing the data only once, e.g. when a user clicks a submit button. This 'governed' data is then saved to state (in this case, the parent/container component's state).
-2. Data displayed by a controlled component is received through props passed down from it's parent/container component.
+(译者注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到(通过 refs 或者选择器)表单数据，而不能实时控制）
 
 This is a one-way loop – from (1) child component input (2) to parent component state and (3) back down to the child component via props – is what is meant by unidirectional data flow in React.js application architecture.
+这是一个单向循环 —— 
 
 ## Architecture of the form
 
