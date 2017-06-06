@@ -37,12 +37,11 @@
 
 (译者注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到(通过 refs 或者选择器)表单数据，而不能实时控制）
 
-This is a one-way loop – from (1) child component input (2) to parent component state and (3) back down to the child component via props – is what is meant by unidirectional data flow in React.js application architecture.
-这是一个单向循环 —— 
+这是一个单向循环 —— （数据）从（1）子组件流入到（2）父组件的 state，接着（3）通过 props 回到子组件，它是 React.js 应用架构中，单向数据流的含义。
 
-## Architecture of the form
+## 表单结构
 
-Our highest level component, is named `App`, and here it is:
+我们的顶级组件叫做 `App`，这是它的代码：
 
 ```jsx
 import React, { Component } from 'react';  
@@ -68,11 +67,12 @@ class App extends Component {
 export default App;  
 ```
 
-`App` doesn't do anything but render on our `index.html` page. The interesting part of `App` is on line 13, the `FormContainer`.
+`App` 只负责渲染 `index.html` 页面。整个 `App` 组件最有趣的部分是 13 行，`FormContainer` 组件。
 
-## Interlude: container (smart) components vs (dumb) components
+## 插曲: 容器（智能）组件 VS 普通（木偶）组件
 
 This is a good time to mention container (smart) components vs (dumb) components. Container components house business logic, make data calls, etc. Regular, or dumb, components receive data from their parent (container) component. Dumb components may trigger logic, like updating state, but only by means of functions passed down from the parent (container) component.
+是时候提及一下容器（智能）组件 VS 普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他操作。
 
 **Note:** I should point out that not all parent components are container components, but that's how our form is set up. It's perfectly fine to have a hierarchy of dumb components within dumb components.
 
