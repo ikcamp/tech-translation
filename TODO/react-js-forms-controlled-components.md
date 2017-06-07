@@ -35,7 +35,7 @@
 1. 受控组件提供方法，让我们在每次 `onChange` 事件发生时控制它们的数据，而不是一次性地获取表单数据（例如用户点提交按钮时）。“被控制“ 的表单数据保存在 state 中（在本文示例中，是父组件或容器组件的 state）。
 2. 受控组件的展示数据是其父组件通过 props 传递下来的。
 
-(译者注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到(通过 refs 或者选择器)表单数据，而不能实时控制）
+(译注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到(通过 refs 或者选择器)表单数据，而不能实时控制）
 
 这是一个单向循环 —— （数据）从（1）子组件流入到（2）父组件的 state，接着（3）通过 props 回到子组件，它是 React.js 应用架构中，单向数据流的含义。
 
@@ -71,14 +71,13 @@ export default App;
 
 ## 插曲: 容器（智能）组件 VS 普通（木偶）组件
 
-This is a good time to mention container (smart) components vs (dumb) components. Container components house business logic, make data calls, etc. Regular, or dumb, components receive data from their parent (container) component. Dumb components may trigger logic, like updating state, but only by means of functions passed down from the parent (container) component.
-是时候提及一下容器（智能）组件 VS 普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他操作。
+是时候提及一下容器（智能）组件和普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他业务操作。普通组件则从它的父（容器）组件接受数据。木偶组件有可能触发更新 state 这类逻辑行为，但它仅仅是通过从父（容器）组件传入的方法来达到该目的（译注：这里还是指更新父组件的 state，通过传入方法来更新 state 本质上还是通过父组件的传参来控制子组件，子组件即 “木偶” ）。
 
-**Note:** I should point out that not all parent components are container components, but that's how our form is set up. It's perfectly fine to have a hierarchy of dumb components within dumb components.
+**注意：** 虽然在我们的表单应用里父组件就是容器组件，但我要强调，并非所有的父组件都是容器组件。木偶组件嵌套木偶组件也是极好的。
 
-## Back to Architecture
+## 回到应用结构
 
-The `FormContainer` houses the form element components, calls data in the `componentDidMount` lifecycle hook, and contains the logic for updating the state of the form. For the sake of simplicity, I've left out the props and change handlers of the form element components in the outline below. (Scroll to the end of the post for the complete code.)
+`FormContainer` 组件包含了表单元素组件，它在 `componentDidMount` 的生命周期钩子方法里请求数据，此外还包含更新表单应用 state 的逻辑行为。在下面的预览代码里，我移除了表单元素的 props 和 change 事件句柄，这样看起来更简洁清晰（拉到文章底部，可以看到完整代码）。
 
 ```jsx
 import React, {Component} from 'react';  
