@@ -73,7 +73,7 @@ export default App;
 
 是时候提及一下容器（智能）组件和普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他业务操作。普通组件则从它的父（容器）组件接受数据。木偶组件有可能触发更新 state 这类逻辑行为，但它仅仅是通过从父（容器）组件传入的方法来达到该目的（译注：这里还是指更新父组件的 state，通过传入方法来更新 state 本质上还是通过父组件的传参来控制子组件，子组件即 “木偶” ）。
 
-**注意：** 虽然在我们的表单应用里父组件就是容器组件，但我要强调，并非所有的父组件都是容器组件。木偶组件嵌套木偶组件也是极好的。
+**注意：** 虽然在我们的表单应用里父组件就是容器组件，但我要强调，并非所有的父组件都是容器组件。木偶组件嵌套木偶组件也是非常好的。
 
 ## 回到应用结构
 
@@ -137,13 +137,13 @@ class FormContainer extends Component {
 }
 ```
 
-Now that the basic architecture is laid out, let's take a look at each child element.
+我们勾勒出了应用基础结构，接下来我们一起浏览下每个子组件的细节。
 
-## `<SingleInput />`
+## `<SingleInput />` 组件
 
-This component can be either a `text` or a `number` input, depending on the props you pass it. A great way to document the props a component takes is via React's PropTypes. If any props are missing, or if the prop is the wrong data type, a warning will appear in the browser console.
+该组件可以是 `text` 或 `number` 输入框，这取决于你传入的 props。通过 React 的 PropTypes，我们可以非常好地记录组件拿到的 props。如果漏传 props 或传入错误的数据类型, 浏览器的控制台中会出现警告信息。
 
-Listed below are the PropTypes for the `<SingleInput />` component.
+下面列举 `<SingleInput />` 组件的 PropTypes：
 
 ```js
 SingleInput.propTypes = {  
@@ -159,9 +159,9 @@ SingleInput.propTypes = {
 };
 ```
 
-PropTypes indicate the type of the prop(string, number, array, object, etc.), whether it is required (`isRequired`), and much more. (See the [React docs](https://facebook.github.io/react/docs/typechecking-with-proptypes.html) for more details).
+PropTypes 声明了 prop 的类型（string、 number、 array、 object 等等），其中包括了必需（`isRequired）和非必需的 prop，当然它还有更多的用途（欲知更多细节，请查看 [React 文档](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)）。
 
-Let's go through these one by one.
+下面我们逐个把玩它们：
 
 1. `inputType` accepts two different strings:  `'text'` or `'number'`. These options determine whether a `<input type="text" />` or an `<input type="number" />` is rendered.
 2. `title`: accepts a string that will be rendered in the input's label.
