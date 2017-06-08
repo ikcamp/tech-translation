@@ -1,7 +1,7 @@
  * 原文地址：[React Forms: Using Refs](https://css-tricks.com/react-forms-using-refs/)
  * 原文作者：[Loren Stewart](https://github.com/lorenseanstewart)
- * 译者：[萌萌](#)
- * 校对者：[小 boy](#)
+ * 译者：[萌萌](https://github.com/yanyixin)
+ * 校对者：[小 boy](https://github.com/pobusama)
 
 
 # 翻译 | React 表单： Refs 的运用
