@@ -1,3 +1,11 @@
+ * 原文地址：[React Forms: Using Refs](https://css-tricks.com/react-forms-using-refs/)
+ * 原文作者：[Loren Stewart](https://github.com/lorenseanstewart)
+ * 译者：[萌萌](#)
+ * 校对者：[小 boy](#)
+
+
+# 翻译 | React 表单： Refs 的运用
+
 React 提供了两种从 `<form>` 元素中获取值的标准方法。第一种方法是实现所谓的**受控组件** (可以看我[博客里发表的文章](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)) ，第二种方法是使用 React 的 `ref`  属性。
 
 受控组件很重，被展示的值和组件的 state 绑定是它的特性。我们通过执行一个附着在 form 元素上的 `onChange` 事件句柄，来更新被展示的值。`onChange` 函数更新 state 属性，进而更新 form 元素的值。
