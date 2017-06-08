@@ -64,10 +64,10 @@ input 的值是 `this.state.fullName` （在第7行和第26行）。 `onChange `
 
 从 form 元素取值的简便的方法是使用 `ref` 属性。我们用不同的方式来应对不同的 form 元素和组件结构，所以这篇文章剩下的内容分为以下几个部分。
 
-1、[文本输入框、数字输入框和选择框](#react-refs-1)
-2、[子组件通过 props 传值给父组件](#react-refs-2)
-3、[ Radio 标签集合](#react-refs-3)
-4、[ Checkbox 标签集合](#react-refs-4)
+1. [文本输入框、数字输入框和选择框](#react-refs-1)
+2. [子组件通过 props 传值给父组件](#react-refs-2)
+3. [ Radio 标签集合](#react-refs-3)
+4. [ Checkbox 标签集合](#react-refs-4)
 
 ###  1、文本输入框、数字输入框和选择框
 
