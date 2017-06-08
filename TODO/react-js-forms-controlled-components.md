@@ -161,16 +161,16 @@ SingleInput.propTypes = {
 
 PropTypes 声明了 prop 的类型（string、 number、 array、 object 等等），其中包括了必需（`isRequired）和非必需的 prop，当然它还有更多的用途（欲知更多细节，请查看 [React 文档](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)）。
 
-下面我们逐个把玩它们：
+下面我们逐个讨论这些 PropType：
 
-1. `inputType` accepts two different strings:  `'text'` or `'number'`. These options determine whether a `<input type="text" />` or an `<input type="number" />` is rendered.
-2. `title`: accepts a string that will be rendered in the input's label.
-3. `name`: the name attribute for the input.
-4. `controlFunc`: is the function passed down from the parent/container component. This function will update the parent/container  component's state every time there is a change because it is attached to React's onChange handler.
-5. `content`: the content of the input. A controlled input will only display the data passed into it via props.
-6. `placeholder`: a string that will be the input's placeholder text.
+1. `inputType` 接收两个字符串： `'text'` 或 `'number'`。该设置指定了渲染 `<input type="text" />` 组件还是 `<input type="number" />` 组件。
+2. `title`： 接收一个字符串，我们将它渲染到输入框的 label 元素中。
+3. `name`： 输入框的 name 属性。
+4. `controlFunc`：它是父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当 input 输入值改变时，该方法都会被执行，从而更新父组件或容器组件的 state。
+5. `content`: 输入框内容。受控输入框只会显示通过 props 传入的数据。
+6. `placeholder`: 输入框的占位符文本，是一个字符串。
 
-Since we don't need any logic or internal state for our input, it can be a pure functional component. Pure functional components are attached to a `const`. Here is all the code for the `<SingleInput />`. All of the form element components in this post are pure functional components.
+既然该组件不需要任何逻辑行为和内部 state，那我们可以将它写成纯函数组件（pure functional component）。纯函数组件被挂载到一个 `const` 常量上。下面是 `<SingleInput />` 组件的所有代码。本文列举的所有表单元素组件都是纯函数组件。
 
 ```jsx
 import React from 'react';
@@ -203,7 +203,7 @@ SingleInput.propTypes = {
 export default SingleInput;  
 ```
 
-And the `handleFullNameChange` function (passed into the `controlFunc` prop) updates the `<FormContainer />`'s state.
+接着，我们用 `handleFullNameChange` 方法（它被传入到 `controlFunc` prop 属性）来更新 `<FormContainer />` 容器组件的 state。
 
 ```js
 // FormContainer.js
@@ -216,7 +216,7 @@ handleFullNameChange(e) {
 // in the constructor
 ```
 
-The new container's state is then passed back into the `<SingleInput />` via the `content` prop.
+随后我们将容器组件更新后的 state （译注：这里指 state 上挂载的 ownerName 属性）通过 `content` prop 传回 `<SingleInput />` 组件。
 
 ## `<Select />`
 
