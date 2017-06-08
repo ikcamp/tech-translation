@@ -218,9 +218,9 @@ handleFullNameChange(e) {
 
 随后我们将容器组件更新后的 state （译注：这里指 state 上挂载的 ownerName 属性）通过 `content` prop 传回 `<SingleInput />` 组件。
 
-## `<Select />`
+## `<Select />` 组件
 
-The select component (i.e. a `dropdown`), takes the following props:
+选择组件（例如下拉选择组件），接收以下 props：
 
 ```jsx
 Select.propTypes = {  
@@ -232,8 +232,8 @@ Select.propTypes = {
 };
 ```
 
-1. `name`: a string that will populate the `name` attribute of our form element.
-2. `options`: an array (of strings in our case) in which each item will become an option by using `props.options.map()` in the component's render method.
+1. `name`：填充表单元素上 `name` 属性的一个字符串变量。
+2. `options`：一个数组（本例是字符串数组），通过在组件的 render 方法中使用 `props.options.map()`， 数组中的每一项都会渲染一个选择项。
 3. `selectedOption`: if we are prepopulating the form with either default data, or with data a user added in the past (e.g. this is used when a user edits data they have submitted on a prior occasion).
 4. `controlFunc`: is the function passed down from the parent/container component. This function will update the parent/container component's state every time there is an change because it is attached to React's `onChange` handler.
 5. `placeholder`: a string that populates the first `<option>` tag, and acts as placeholder text. We set the value of this option to an empty string in the component (see line 10 below)
