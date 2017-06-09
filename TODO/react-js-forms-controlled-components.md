@@ -166,7 +166,7 @@ PropTypes 声明了 prop 的类型（string、 number、 array、 object 等等�
 1. `inputType` 接收两个字符串： `'text'` 或 `'number'`。该设置指定了渲染 `<input type="text" />` 组件还是 `<input type="number" />` 组件。
 2. `title`： 接收一个字符串，我们将它渲染到输入框的 label 元素中。
 3. `name`： 输入框的 name 属性。
-4. `controlFunc`：它是父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当 input 输入值改变时，该方法都会被执行，从而更新父组件或容器组件的 state。
+4. `controlFunc`：它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当 input 输入值改变时，该方法都会被执行，从而更新父组件或容器组件的 state。
 5. `content`: 输入框内容。受控输入框只会显示通过 props 传入的数据。
 6. `placeholder`: 输入框的占位符文本，是一个字符串。
 
@@ -233,10 +233,10 @@ Select.propTypes = {
 ```
 
 1. `name`：填充表单元素上 `name` 属性的一个字符串变量。
-2. `options`：一个数组（本例是字符串数组），通过在组件的 render 方法中使用 `props.options.map()`， 数组中的每一项都会渲染一个选择项。
-3. `selectedOption`: if we are prepopulating the form with either default data, or with data a user added in the past (e.g. this is used when a user edits data they have submitted on a prior occasion).
-4. `controlFunc`: is the function passed down from the parent/container component. This function will update the parent/container component's state every time there is an change because it is attached to React's `onChange` handler.
-5. `placeholder`: a string that populates the first `<option>` tag, and acts as placeholder text. We set the value of this option to an empty string in the component (see line 10 below)
+2. `options`：是一个数组（本例是字符串数组）。通过在组件的 render 方法中使用 `props.options.map()`， 该数组中的每一项都会被渲染成一个选择项。
+3. `selectedOption`: 用以显示表单填充的默认选项，或用户已选择的选项（例如当用户编辑之前已提交过的表单数据时，可以使用这个 prop）。
+4. `controlFunc`：它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当改变选择框组件的值时，该方法都会被执行，从而更新父组件或容器组件的 state。
+5. `placeholder`：作为占位文本的字符串，用来填充第一个 `<option>` 标签。本组件中，我们将第一个选项的值设置成空字符串（参看下面代码的第10行）。
 
 ```jsx
 import React from 'react';
@@ -271,9 +271,9 @@ Select.propTypes = {
 export default Select;  
 ```
 
-Note the `key` attribute in our option tags (line 14). React requires a unique `key` for every element that is rendered through a repeater operation like our `.map()` function. Since each element in our options array is unique, we can use it as the `key` prop. This `key` helps React keep track of DOM changes. Your app won't break if leave out the `key` attribute in your repeater/mapping function, but you'll have warnings in your browser console and rendering performance will be compromised.
+请注意 option 标签中的 `key` 属性（第14行）。React 要求被循环操作渲染的每个元素必须拥有独一无二的 `key` 值，我们这里的 `.map()` 方法就是所谓的循环操作。既然选择项数组中的每个元素是独有的，我们就把它们当成 `key` prop。该 `key` 值协助 React 追踪 DOM 变化。虽然在循环操作或 mapping 时忘加 `key` 属性不会中断应用，但是浏览器的控制台里会出现警告，并且渲染性能将受到影响。
 
-Below is the handler function (that is passed into the `controlFun` prop from `<FormContainer />`) that controls our select (reminder: it lives in `<FormContainer />`).
+以下是控制选择框组件（记住，该组件存在于 `<FormContainer />` 组件中）的句柄方法（该方法从 `<FormContainer />` 组件传入到子组件的 `controlFun` prop 中）
 
 ```jsx
 // FormContainer.js
@@ -286,7 +286,7 @@ handleAgeRangeSelect(e) {
 // in the constructor
 ```
 
-## `<CheckboxOrRadioGroup />`
+## `<CheckboxOrRadioGroup />` 组件
 
 Unlike the other components, the `<CheckboxOrRadioGroup />` component takes in an array through its props, maps over the array (just like the options of the `<Select />` component above), and renders a set of form elements – either a set of checkboxes or a set or radios.
 
