@@ -307,10 +307,10 @@ CheckboxGroup.propTypes = {
 2. `type`：接收 `'checkbox'` 或 `'radio'` 两种配置的一种，并用指定的配置渲染输入框（译注：这里指复选输入框或单选输入框）。
 3. `setName`：一个字符串，用以填充每个单选或复选框的 `name` 属性值。
 4. `options`：一个由字符串元素组成的数组，数组元素用以渲染每个单选框或复选框的值和 label 的内容。例如，`['dog', 'cat', 'pony']` 数组中的元素将会渲染三个单选框或复选框。
-5. `selectedOptions`: an array, in our case an array of strings, of pre-selected options. In the example used in #4 above, if `selectedOptions` contained `'dog'` and `'pony'` then these two options would render as checked and `'cat'` would render unchecked. This is the array that will be submitted as the user's choices.
-6. `controlFunc`: the function that handles adding and removing strings from the used as `selectedOptions` prop.
+5. `selectedOptions`：一个由字符串元素组成的数组，用来表示预选项。在示例 4 中，如果 `selectedOptions` 数组包含 `'dog'` 和 `'pony'` 元素，那么相应的两个选项会被渲染成选中状态，而 `'cat'` 选项则被渲染成未选中状态。当用户提交表单时，该数组将会是用户的选择数据。
+6. `controlFunc`：一个方法，用来处理从 `selectedOptions` 数组 prop 中添加或删除字符串的操作。
 
-This is the most interesting component in our form. Here's the code:
+这是本表单应用中最有趣的组件，让我们来看一下：
 
 ```jsx
 import React from 'react';
@@ -347,14 +347,14 @@ CheckboxOrRadioGroup.propTypes = {
 
 export default CheckboxOrRadioGroup;  
 ```
+`checked={ props.selectedOptions.indexOf(option) > -1 }` 这一行代码表示单选框或复选框是否被选中的逻辑。
 
-The logic that determines if a radio/checkbox is checked, is found in the line: `checked={ props.selectedOptions.indexOf(option) > -1 }`.
+属性 `checked` 接收一个布尔值，用来表示 input 组是否应该被渲染成选中状态。我们在检查到 input 的值是否是 `props.selectedOptions` 数组的元素之一时生成该布尔值。
+`myArray.indexOf(item)` 方法返回 item 在数组中的索引值。如果 item 不在数组中，返回 `-1`，因此，我们写了 `> -1`。
 
-The input attribute `checked` takes a Boolean to determine if the input should render as checked. We generate this Boolean by checking to see if the value of the input is an element in the `props.selectedOptions` array. `myArray.indexOf(item)` returns the index of the item in an array. If the item is NOT in the array, it returns `-1`. Thus, we have `> -1`.
+注意，`0` 是一个合法的索引值，所以我们需要 `> -1` ，否则代码会有 bug。如果没有 `> -1`，`selectedOptions` 数组中的第一个 item —— 其索引为 0 —— 将永远不会被渲染成选中状态，因为 `0` 是一个类 `false` 的值（译注：在 `checked` 属性中，`0` 会被当成 `false` 处理）。
 
-Keep in mind that `0` is a legitimate index number, so you need the `> -1` or your code will be buggy; without it, the first item in the `selectedOptions` array – with an index of `0` – will never render as checked, because `0` is a falsey value.
-
-The handler function for this component is also more interesting that the others.
+本组件的句柄方法同样比其他的有趣。
 
 ```jsx
 handlePetSelection(e) {
