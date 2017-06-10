@@ -288,9 +288,9 @@ handleAgeRangeSelect(e) {
 
 ## `<CheckboxOrRadioGroup />` 组件
 
-Unlike the other components, the `<CheckboxOrRadioGroup />` component takes in an array through its props, maps over the array (just like the options of the `<Select />` component above), and renders a set of form elements – either a set of checkboxes or a set or radios.
+`<CheckboxOrRadioGroup />` 与众不同， 它从 props 拿到传入的数组（像此前 `<Select />` 组件的选项数组一样），通过遍历数组来渲染一组表单元素的集合 —— 可以是复选框集合或单选框集合。
 
-Let's dive into the PropTypes to better understand `<CheckboxOrRadioGroup />`.
+让我们深入 PropTypes 来更好地理解 `<CheckboxOrRadioGroup />` 组件。
 
 ```jsx
 CheckboxGroup.propTypes = {  
@@ -303,10 +303,10 @@ CheckboxGroup.propTypes = {
 };
 ```
 
-1. `title`: a string that populates the label for the set of checkboxes/radios
-2. `type`: takes one of two possible options, `'checkbox'` or `'radio'`, and renders inputs of the indicated type.
-3. `setName`: a string that will populate the `name` attributes of each checkbox/radio.
-4. `options`: an array, in our case an array of strings, that determines the label and value for each checkbox/radio. E.g., `['dog', 'cat', 'pony']` will render three checkboxes/radios, one for each item in the array.
+1. `title`：一个字符串，用以填充单选或复选框集合的 label 标签内容。
+2. `type`：接收 `'checkbox'` 或 `'radio'` 两种配置的一种，并用指定的配置渲染输入框（译注：这里指复选输入框或单选输入框）。
+3. `setName`：一个字符串，用以填充每个单选或复选框的 `name` 属性值。
+4. `options`：一个由字符串元素组成的数组，数组元素用以渲染每个单选框或复选框的值和 label 的内容。例如，`['dog', 'cat', 'pony']` 数组中的元素将会渲染三个单选框或复选框。
 5. `selectedOptions`: an array, in our case an array of strings, of pre-selected options. In the example used in #4 above, if `selectedOptions` contained `'dog'` and `'pony'` then these two options would render as checked and `'cat'` would render unchecked. This is the array that will be submitted as the user's choices.
 6. `controlFunc`: the function that handles adding and removing strings from the used as `selectedOptions` prop.
 
