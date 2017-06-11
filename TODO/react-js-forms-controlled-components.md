@@ -372,23 +372,24 @@ handlePetSelection(e) {
 }
 ```
 
-As with all of our handler functions, the event object is passed in so its value can be extracted. We attached this value to the constant `newSelection`. We then declare the `newSelectionArray` variable near the top of the function. It is a `let` variable rather than a `const` because it will be assigned within one of the `if/else` blocks. We declare it outside of these blocks so it is in the outer scope of the function and is accessible to all the blocks within.
+如同所有句柄方法一样，事件对象被传入方法，这样一来我们就能拿到事件对象的值（译注：准确来说，应该是事件目标元素的值）。我们将该值赋给`newSelection` 常量。接着我们在方法顶部附近定义 `newSelectionArray` 变量。因为我们将在一个 `if/else` 代码块里对该变量进行赋值，所以用 `let` 而非 `const` 来定义它。我们在代码块外部进行定义，这样一来被定义变量的作用域就是方法内部的最外沿，并且方法内的代码块都能访问到外部定义的变量。
 
-This function has to handle two possibilities.
+该方法需要处理两种可能的情况。
 
-If the value of the input **IS NOT** in the `selectedOptions` array, it needs to be added.
-If the value of the input **IS** in the `selectedOptions` array, it needs to be removed.
+如果 input 组件的值**不在** `selectedOptions` 数组中，我们要将值添加进该数组。
+如果 input 组件的值**在** `selectedOptions` 数组中，我们要从数组中删除该值。
 
-`Adding (lines 8 - 10):` To add a new value to the array of selections, we create a new array by destructuring the original array (indicated by the three dots `...` in front of the array) and adding the new value to the end `newSelectionArray = [...this.state.selectedPets, newSelection];`.
+`添加（第 8 - 10 行）：` 为了将新值添加进选项数组，我们通过解构旧数组（数组前的三点`...`表示解构）创建一个新数组，并且将新值添加到数组的尾部 `newSelectionArray = [...this.state.selectedPets, newSelection];`。
 
-Notice, the original array is not mutated with a method like `.push()`, but, rather, a new array is created. This practice of creating new objects and arrays rather than mutating existing ones is another best practice in React. This allows developers to more easily keep track of state change, and allows third party state management libraries like [Redux](http://redux.js.org/docs/introduction/) to do highly performant shallow checking of data types rather than performance hindering deep checking.
+注意，我们创建了一个新数组，而不是通过类似 `.push()` 的方法来改变原数组。不改变已存在的对像和数组，而是创建新的对象和数组，这在 React 中是又一个最佳实践。开发者这样做可以更容易地追逐 state 的变化，而第三方 state 管理库，如 Redux 则可以做高性能的浅检查，而不是阻塞性能的深检查。
 
-Removing (lines 6 - 8): The `if` block checks to see if the selection is in the array by means of the `.indexOf()` trick used above. If the selection is already in the array, it is removed using the JavaScript array method `.filter()`. This method returns a new array (remember to avoid mutating in React!) containing all items that meet the filter condition.
+删除（第 6 - 8 行）：`if` 代码块借助此前用到的 `.indexOf()` 小技巧，检查选项是否在数组中。如果选项已经在数组中，通过 `.filter()`. 方法，该选项将被移除。 该方法返回一个包含所有满足 filter 条件的元素的新数组（记住要避免在 React 直接修改数组或对象！）。
 
 ```js
 newSelectionArray = this.state.selectedPets.filter(s => s !== newSelection)  
 ```
-In this case, all selections are being returned except for the one passed into the function.
+
+在这种情况下，除了传入到方法中的选项之外，其他选项都会被返回。
 
 ## `<TextArea />`
 
