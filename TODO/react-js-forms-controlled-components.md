@@ -391,9 +391,11 @@ newSelectionArray = this.state.selectedPets.filter(s => s !== newSelection)
 
 在这种情况下，除了传入到方法中的选项之外，其他选项都会被返回。
 
-## `<TextArea />`
+## `<TextArea />` 组件
 
 The `<TextArea />` component is very similar to the components covered already. Its props should be familiar by now, with the exception of `resize` and `rows`.
+`<TextArea />` 组件和我们已提到的那些非常相似，除了 `resize` 和 `rows`，目前你应该对它的 prop 很熟悉了。
+
 ```jsx
 TextArea.propTypes = {  
   title: React.PropTypes.string.isRequired,
@@ -405,15 +407,16 @@ TextArea.propTypes = {
   controlFunc: React.PropTypes.func.isRequired
 };
 ```
-1. `title`: accepts a string that will be rendered in the textarea's label.
-2. `rows`: accepts an integer that determines how many rows high the textarea will be.
-3. `name`: the name attribute for the textarea.
-4. `content`: the content of the textarea. A controlled input will only display the data being passed into it via props.
-5. `resize`: accepts a boolean that determines if the textarea will be resizable.
-6. `placeholder`: a string that will be the textarea's placeholder text.
-7. `controlFunc`: is the function passed down from the parent/container component. This function will update the parent/container component's state every time there is an change because it is attached to React's `onChange` handler.
 
-The complete code for the `<TextArea />`:
+1. `title`：接收一个字符串，用以渲染文本域的 label 标签内容。
+2. `rows`：接收一个整数，用来指定文本域的行数。
+3. `name`：文本域的 name 属性。
+4. `content`：文本域的内容。受控组件只会显示通过 props 传入的数据。
+5. `resize`： 接受一个布尔值，用来指定文本域能否调整大小。
+6. `placeholder`：充当文本域占位文本的字符串。
+7. `controlFunc`： 它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当改变选择框组件的值时，该方法都会被执行，从而更新父组件或容器组件的 state。
+
+`<TextArea />` 组件的完整代码：
 
 ```jsx
 import React from 'react';
@@ -445,11 +448,11 @@ TextArea.propTypes = {
 export default TextArea;  
 ```
 
-The `<TextAreas />`'s control function operates in the same manner as the `<SingleInput />`. Please refer to the `<SingleInput />` for details.
+`<TextAreas />` 组件的控制方法和 `<SingleInput />` 如出一辙。细节部分请参考 `<SingleInput />` 组件。
 
-## Form Actions
+## 表单操作
 
-There are two functions that operate on the form as a whole, `handleClearForm` and `handleFormSubmit`.
+`handleClearForm` 和 `handleFormSubmit` 方法操作整个表单。
 
 #### 1. handleClearForm
 
