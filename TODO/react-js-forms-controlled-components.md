@@ -474,11 +474,11 @@ handleClearForm(e) {
 }
 ```
 
-Voilà! `e.preventDefault()` prevents the page from reloading, and the `setState()` function clears the form.
+注意，`e.preventDefault()` 阻止了页面重新加载，接着 `setState()` 方法用来清除表单数据。
 
 #### 2. handleFormSubmit
 
-In order to submit this form's data, we construct an object out of the appropriate state properties. Then use an AJAX library or technique to send this data to an API (which is not covered in this post).
+为了提交表单数据，我们从 state 中抽取需要提交的属性值，创建了一个对象。接着使用 AJAX 库或技术将这些数据发送给 API（本文暂不介绍）。
 
 ```jsx
 handleFormSubmit(e) {  
@@ -497,7 +497,8 @@ handleFormSubmit(e) {
   this.handleClearForm(e);
 }
 ```
-Notice that the form is cleared after submitting, by invoking `this.handleClearForm(e)`.
+
+请注意我们在提交数据后执行 `this.handleClearForm(e)` 清除了表单。
 
 ## Validation
 
