@@ -456,9 +456,9 @@ export default TextArea;
 
 #### 1. handleClearForm
 
-Since we are using unidirectional data flow throughout our form, clearing the form's options is a breeze. Each value of each element is controlled by the state of the `<FormContainer />`. The container's state is passed into the child components via props. The values being displayed by the form components change only when the `<FormContainer />`'s state changes.
+既然我们在表单的各处都使用了单向数据流，那么清除表单数据对我们来说也是小菜一碟。`<FormContainer />` 组件的 state 控制了每个表单元素的值。该容器的 state 通过 props 传入子组件。只有当 `<FormContainer />` 组件的 state 改变时，表单组件显示的值才会改变。
 
-Clearing the data displayed in the form's child components is as easy as setting the container's state to empty arrays and empty strings (and `0` in the case of our number input).
+清除表单子组件中显示的数据很简单，只要把容器的 state （译注：这里是指 state 对像上挂载的各个变量）设置成空数组和空字符串就可以了（如果有数字输入框的话则是将值设置成 `0`）。
 
 ```jsx
 handleClearForm(e) {  
