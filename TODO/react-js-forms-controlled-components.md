@@ -500,9 +500,9 @@ handleFormSubmit(e) {
 
 请注意我们在提交数据后执行 `this.handleClearForm(e)` 清除了表单。
 
-## Validation
+## 表单校验
 
-Controlled form components are a great foundation for custom validation. Suppose you would like to exclude the letter 'e' from the `<TextArea />` component.
+受控表单组件非常适合自定义表单校验。假设要从 `<TextArea />` 组件中排除字母 "e"，可以这样做：
 
 ```jsx
 handleDescriptionChange(e) {  
@@ -515,9 +515,9 @@ handleDescriptionChange(e) {
 }
 ```
 
-The `textArray` above is created by splitting the string `e.target.value` into an array of individual letters. Then the letter 'e' (or whatever character you would like to exclude) is filtered out. The array of letters is joined again, and the new string is set to component state. Not to bad!
+把 `e.target.value` 字符串分割成字母数组，就生成了上述的 `textArray`。这样字母 “e” （或其他设法排除的字母）就被过滤掉了。再把字母组成的数组拼成字符串，最后用该新字符串去设置组件 state。还不错吧？
 
-This code above is in [the repo for this post](https://github.com/lorenseanstewart/react-controlled-form-components), but commented out, so feel free to tweak it meet your own purposes.
+以上代码放在本文的仓库中，但我注释掉了它们，你可以按自己的需求自由地调整。
 
 ## `<FormContainer />`
 
