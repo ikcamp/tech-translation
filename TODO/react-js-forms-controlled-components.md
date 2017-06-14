@@ -1,3 +1,8 @@
+ * 原文地址：[React.js Forms: Controlled Components](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)
+ * 原文作者：[Loren Stewart](http://lorenstewart.me/author/lorenseanstewart/)
+ * 译者：[小 B0Y](http://pobusama.github.io/about/)
+ * 校对者：[](#)
+
 # React 表单：受控组件
 
 本文涵盖以下受控组件：
@@ -21,13 +26,13 @@
 
 在学习 [React.js](https://facebook.github.io/react/) 时我遇到了一个问题，那就是很难找到受控组件的真实示例。受控文本输入框的例子倒是很丰富，但复选框、单选框、下拉选择框的例子却不尽人意。
 
-本文列举了真实的受控表单组件示例，要是在学习 React 的时候我早点发现这些示例就好了。文中列举了几乎所有的表单元素，而日期和时间输入框则需要另开篇幅详细讨论。
+本文列举了真实的受控表单组件示例，要是我在学习 React 的时候早点发现这些示例就好了。除了日期和时间输入框需要另开篇幅详细讨论，文中列举了几乎所有的表单元素。
 
-有时候，人们很容易为了某些需求比如表单而引入框架，因为它能加速开发。而对于表单，我发现当需要添加自定义行为或表单校验时，使用框架会使事情变得更复杂。不过一旦掌握合适的 React 套路，你会发现构建表单组件并非难事，并且有些东西完全可以自己动手，丰衣足食。请把本文的示例代码当作你创建表单组件的起点或灵感之源。
+有时候，人们很容易为了某些需求，譬如表单，而引入框架，因为它能加速开发。而对于表单，我发现当需要添加自定义行为或表单校验时，使用框架会使事情变得更复杂。不过一旦掌握合适的 React 套路，你会发现构建表单组件并非难事，并且有些东西完全可以自己动手，丰衣足食。请把本文的示例代码当作你创建表单组件的起点或灵感之源。
 
 除了提供单独的组件代码，我还将这些组件放进表单中，方便你理解子组件更新父组件 state 的方式，以及父组件通过 props 更新子组件的方式。
 
-**注意：**本[表单示例](http://lorenstewart.me/react-controlled-form-components/)由不错的 [create-react-app](https://github.com/facebookincubator/create-react-app) 构建配置生成，如果你还没有安装该构建配置，我强烈推荐你安装一下（`npm install -g create-react-app`）。目前这是搭建 React 应用最简单的方式。
+**注意：** 本[表单示例](http://lorenstewart.me/react-controlled-form-components/)由挺不错的 [create-react-app](https://github.com/facebookincubator/create-react-app) 构建配置生成，如果你还没有安装该构建配置，我强烈推荐你安装一下（`npm install -g create-react-app`）。目前这是搭建 React 应用最简单的方式。
 
 ## 什么是受控组件?
 
@@ -35,9 +40,9 @@
 1. 受控组件提供方法，让我们在每次 `onChange` 事件发生时控制它们的数据，而不是一次性地获取表单数据（例如用户点提交按钮时）。“被控制“ 的表单数据保存在 state 中（在本文示例中，是父组件或容器组件的 state）。
 2. 受控组件的展示数据是其父组件通过 props 传递下来的。
 
-(译注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到(通过 refs 或者选择器)表单数据，而不能实时控制）
+(译注：这里作者的意思是通过受控组件， 可以拿到用户操作表单的实时数据，从而更新父组件 state ，再单向渲染表单元素 UI ，其中 state 的变动是可以跟踪的。如果不使用受控组件，在用户实时操作表单时，比如在输入框输入文本时，不会同步到父组件的 state，虽然能同步输入框本身的 value，但父组件的 state 无法感知，因此只能在某一时间，比如提表单时一次性地拿到（通过 refs 或者选择器）表单数据，而难以实时控制）
 
-这是一个单向循环 —— （数据）从（1）子组件流入到（2）父组件的 state，接着（3）通过 props 回到子组件，它是 React.js 应用架构中，单向数据流的含义。
+这个单向循环 —— （数据）从（1）子组件流入到（2）父组件的 state，接着（3）通过 props 回到子组件，就是 React.js 应用架构中单向数据流的含义。
 
 ## 表单结构
 
@@ -71,13 +76,13 @@ export default App;
 
 ## 插曲: 容器（智能）组件 VS 普通（木偶）组件
 
-是时候提及一下容器（智能）组件和普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他业务操作。普通组件则从它的父（容器）组件接受数据。木偶组件有可能触发更新 state 这类逻辑行为，但它仅仅是通过从父（容器）组件传入的方法来达到该目的（译注：这里还是指更新父组件的 state，通过传入方法来更新 state 本质上还是通过父组件的传参来控制子组件，子组件即 “木偶” ）。
+是时候提及一下容器（智能）组件和普通（木偶）组件了。容器组件包含业务逻辑，它会发起数据请求或进行其他业务操作。普通组件则从它的父（容器）组件接收数据。木偶组件有可能触发更新 state 这类逻辑行为，但它仅通过从父（容器）组件传入的方法来达到该目的（译注：这里还是指更新容器组件的 state，通过传入方法来更新 state 本质上还是通过父组件的传参来控制子组件，子组件即 “木偶” ）。
 
-**注意：** 虽然在我们的表单应用里父组件就是容器组件，但我要强调，并非所有的父组件都是容器组件。木偶组件嵌套木偶组件也是非常好的。
+**注意：** 虽然在我们的表单应用里父组件就是容器组件，但我要强调，并非所有的父组件都是容器组件。木偶组件嵌套木偶组件也是可以的。
 
 ## 回到应用结构
 
-`FormContainer` 组件包含了表单元素组件，它在 `componentDidMount` 的生命周期钩子方法里请求数据，此外还包含更新表单应用 state 的逻辑行为。在下面的预览代码里，我移除了表单元素的 props 和 change 事件句柄，这样看起来更简洁清晰（拉到文章底部，可以看到完整代码）。
+`FormContainer` 组件包含了表单元素组件，它在生命周期钩子方法 `componentDidMount` 里请求数据，此外还包含更新表单应用 state 的逻辑行为。在下面的预览代码里，我移除了表单元素的 props 和 change 事件句柄，这样看起来更简洁清晰（拉到文章底部，可以看到完整代码）。
 
 ```jsx
 import React, {Component} from 'react';  
@@ -110,10 +115,10 @@ class FormContainer extends Component {
     });
   }
   handleFormSubmit() {
-    // submit logic goes here
+    // 提交逻辑写在这
   }
   handleClearForm() {
-    // clear form logic goes here
+    // 清楚表单逻辑写在这
   }
   render() {
     return (
@@ -141,7 +146,7 @@ class FormContainer extends Component {
 
 ## `<SingleInput />` 组件
 
-该组件可以是 `text` 或 `number` 输入框，这取决于你传入的 props。通过 React 的 PropTypes，我们可以非常好地记录组件拿到的 props。如果漏传 props 或传入错误的数据类型, 浏览器的控制台中会出现警告信息。
+该组件可以是 `text` 或 `number` 输入框，这取决于传入的 props。通过 React 的 PropTypes，我们可以非常好地记录组件拿到的 props。如果漏传 props 或传入错误的数据类型, 浏览器的控制台中会出现警告信息。
 
 下面列举 `<SingleInput />` 组件的 PropTypes：
 
@@ -159,18 +164,18 @@ SingleInput.propTypes = {
 };
 ```
 
-PropTypes 声明了 prop 的类型（string、 number、 array、 object 等等），其中包括了必需（`isRequired）和非必需的 prop，当然它还有更多的用途（欲知更多细节，请查看 [React 文档](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)）。
+PropTypes 声明了 prop 的类型（string、 number、 array、 object 等等），其中包括了必需（`isRequired`）和非必需的 prop，当然它还有更多的用途（欲知更多细节，请查看 [React 文档](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)）。
 
 下面我们逐个讨论这些 PropType：
 
-1. `inputType` 接收两个字符串： `'text'` 或 `'number'`。该设置指定了渲染 `<input type="text" />` 组件还是 `<input type="number" />` 组件。
+1. `inputType` 接收两个字符串：`'text'` 或 `'number'`。该设置指定渲染 `<input type="text" />` 组件或 `<input type="number" />` 组件。
 2. `title`： 接收一个字符串，我们将它渲染到输入框的 label 元素中。
 3. `name`： 输入框的 name 属性。
-4. `controlFunc`：它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当 input 输入值改变时，该方法都会被执行，从而更新父组件或容器组件的 state。
+4. `controlFunc`：它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当输入框的输入值改变时，该方法都会被执行，从而更新父组件或容器组件的 state。
 5. `content`: 输入框内容。受控输入框只会显示通过 props 传入的数据。
 6. `placeholder`: 输入框的占位符文本，是一个字符串。
 
-既然该组件不需要任何逻辑行为和内部 state，那我们可以将它写成纯函数组件（pure functional component）。纯函数组件被挂载到一个 `const` 常量上。下面是 `<SingleInput />` 组件的所有代码。本文列举的所有表单元素组件都是纯函数组件。
+既然该组件不需要任何逻辑行为和内部 state，那我们可以将它写成纯函数组件（pure functional component）。我们将纯函数组件赋值给一个 `const` 常量上。下面是 `<SingleInput />` 组件的所有代码。本文列举的所有表单元素组件都是纯函数组件。
 
 ```jsx
 import React from 'react';
@@ -211,9 +216,8 @@ export default SingleInput;
 handleFullNameChange(e) {  
   this.setState({ ownerName: e.target.value });
 }
-// make sure to have:
+// constructor 方法里别漏掉了这行:
 // this.handleFullNameChange = this.handleFullNameChange.bind(this);
-// in the constructor
 ```
 
 随后我们将容器组件更新后的 state （译注：这里指 state 上挂载的 ownerName 属性）通过 `content` prop 传回 `<SingleInput />` 组件。
@@ -232,11 +236,11 @@ Select.propTypes = {
 };
 ```
 
-1. `name`：填充表单元素上 `name` 属性的一个字符串变量。
+1. `name`：填充表单元素上 `name` 属性的字符串变量。
 2. `options`：是一个数组（本例是字符串数组）。通过在组件的 render 方法中使用 `props.options.map()`， 该数组中的每一项都会被渲染成一个选择项。
 3. `selectedOption`: 用以显示表单填充的默认选项，或用户已选择的选项（例如当用户编辑之前已提交过的表单数据时，可以使用这个 prop）。
 4. `controlFunc`：它是从父组件或容器组件传下来的方法。因为该方法挂载在 React 的 onChange 句柄上，所以每当改变选择框组件的值时，该方法都会被执行，从而更新父组件或容器组件的 state。
-5. `placeholder`：作为占位文本的字符串，用来填充第一个 `<option>` 标签。本组件中，我们将第一个选项的值设置成空字符串（参看下面代码的第10行）。
+5. `placeholder`：作为占位文本的字符串，用来填充第一个 `<option>` 标签。本组件中，我们将第一个选项的值设置成空字符串（参看下面代码的第 10 行）。
 
 ```jsx
 import React from 'react';
@@ -271,7 +275,7 @@ Select.propTypes = {
 export default Select;  
 ```
 
-请注意 option 标签中的 `key` 属性（第14行）。React 要求被循环操作渲染的每个元素必须拥有独一无二的 `key` 值，我们这里的 `.map()` 方法就是所谓的循环操作。既然选择项数组中的每个元素是独有的，我们就把它们当成 `key` prop。该 `key` 值协助 React 追踪 DOM 变化。虽然在循环操作或 mapping 时忘加 `key` 属性不会中断应用，但是浏览器的控制台里会出现警告，并且渲染性能将受到影响。
+请注意 option 标签中的 `key` 属性（第 14 行）。React 要求被循环操作渲染的每个元素必须拥有独一无二的 `key` 值，我们这里的 `.map()` 方法就是所谓的循环操作。既然选择项数组中的每个元素是独有的，我们就把它们当成 `key` prop。该 `key` 值协助 React 追踪 DOM 变化。虽然在循环操作或 mapping 时忘加 `key` 属性不会中断应用，但是浏览器的控制台里会出现警告，并且渲染性能将受到影响。
 
 以下是控制选择框组件（记住，该组件存在于 `<FormContainer />` 组件中）的句柄方法（该方法从 `<FormContainer />` 组件传入到子组件的 `controlFun` prop 中）
 
@@ -281,9 +285,8 @@ export default Select;
 handleAgeRangeSelect(e) {  
   this.setState({ ownerAgeRangeSelection: e.target.value });
 }
-// make sure to have:
+// constructor 方法里别漏掉了这行:
 // this.handleAgeRangeSelect = this.handleAgeRangeSelect.bind(this);
-// in the constructor
 ```
 
 ## `<CheckboxOrRadioGroup />` 组件
@@ -349,7 +352,7 @@ export default CheckboxOrRadioGroup;
 ```
 `checked={ props.selectedOptions.indexOf(option) > -1 }` 这一行代码表示单选框或复选框是否被选中的逻辑。
 
-属性 `checked` 接收一个布尔值，用来表示 input 组是否应该被渲染成选中状态。我们在检查到 input 的值是否是 `props.selectedOptions` 数组的元素之一时生成该布尔值。
+属性 `checked` 接收一个布尔值，用来表示 input 组件是否应该被渲染成选中状态。我们在检查到 input 的值是否是 `props.selectedOptions` 数组的元素之一时生成该布尔值。
 `myArray.indexOf(item)` 方法返回 item 在数组中的索引值。如果 item 不在数组中，返回 `-1`，因此，我们写了 `> -1`。
 
 注意，`0` 是一个合法的索引值，所以我们需要 `> -1` ，否则代码会有 bug。如果没有 `> -1`，`selectedOptions` 数组中的第一个 item —— 其索引为 0 —— 将永远不会被渲染成选中状态，因为 `0` 是一个类 `false` 的值（译注：在 `checked` 属性中，`0` 会被当成 `false` 处理）。
@@ -381,7 +384,7 @@ handlePetSelection(e) {
 
 `添加（第 8 - 10 行）：` 为了将新值添加进选项数组，我们通过解构旧数组（数组前的三点`...`表示解构）创建一个新数组，并且将新值添加到数组的尾部 `newSelectionArray = [...this.state.selectedPets, newSelection];`。
 
-注意，我们创建了一个新数组，而不是通过类似 `.push()` 的方法来改变原数组。不改变已存在的对像和数组，而是创建新的对象和数组，这在 React 中是又一个最佳实践。开发者这样做可以更容易地追逐 state 的变化，而第三方 state 管理库，如 Redux 则可以做高性能的浅检查，而不是阻塞性能的深检查。
+注意，我们创建了一个新数组，而不是通过类似 `.push()` 的方法来改变原数组。不改变已存在的对像和数组，而是创建新的对象和数组，这在 React 中是又一个最佳实践。开发者这样做可以更容易地追逐 state 的变化，而第三方 state 管理库，如 Redux 则可以做高性能的浅比较，而不是阻塞性能的深比较。
 
 删除（第 6 - 8 行）：`if` 代码块借助此前用到的 `.indexOf()` 小技巧，检查选项是否在数组中。如果选项已经在数组中，通过 `.filter()`. 方法，该选项将被移除。 该方法返回一个包含所有满足 filter 条件的元素的新数组（记住要避免在 React 直接修改数组或对象！）。
 
@@ -393,7 +396,6 @@ newSelectionArray = this.state.selectedPets.filter(s => s !== newSelection)
 
 ## `<TextArea />` 组件
 
-The `<TextArea />` component is very similar to the components covered already. Its props should be familiar by now, with the exception of `resize` and `rows`.
 `<TextArea />` 组件和我们已提到的那些非常相似，除了 `resize` 和 `rows`，目前你应该对它的 prop 很熟悉了。
 
 ```jsx
@@ -517,11 +519,11 @@ handleDescriptionChange(e) {
 
 把 `e.target.value` 字符串分割成字母数组，就生成了上述的 `textArray`。这样字母 “e” （或其他设法排除的字母）就被过滤掉了。再把字母组成的数组拼成字符串，最后用该新字符串去设置组件 state。还不错吧？
 
-以上代码放在本文的仓库中，但我注释掉了它们，你可以按自己的需求自由地调整。
+以上代码放在本文的仓库中，但我将它们注释掉了，你可以按自己的需求自由地调整。
 
-## `<FormContainer />`
+## `<FormContainer />` 组件
 
-As promised, here is the complete code for the `<FormContainer />` component:
+下面是我承诺给你们的 `<FormContainer />` 组件完整代码，
 
 ```jsx
 import React, {Component} from 'react';  
@@ -554,8 +556,8 @@ class FormContainer extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
   }
   componentDidMount() {
-    // simulating a call to retrieve user data
-    // (create-react-app comes with fetch polyfills!)
+    // 模拟请求用户数据
+    //（create-react-app 构建配置里包含了 fetch 的 polyfill）
     fetch('./fake_db.json')
       .then(res => res.json())
       .then(data => {
@@ -683,9 +685,10 @@ class FormContainer extends Component {
 
 export default FormContainer;
 ```
-## Conclusion
 
-Admittedly, building controlled form components with React requires some repetition (e.g, the handler functions in the container), but the control you have over your app and the transparency of state change is well worth the up-front effort. Your code will be maintainable, and very performant.
+## 总结
 
-If you'd like to be notified when I publish a new post, you can sign up for my mailing list in the navbar of the blog.
+我承认用 React 构建受控表单组件要做一些重复劳动(比如容器组件中的句柄方法)，但就你对应用的掌控和 state 变更的透明性来说，预先投入精力是超值的。你的代码会变得可维护并且很高效。
+
+如果想在我发布新文章时接到通知，你可以在[博客](http://lorenstewart.me)的导航栏部分注册我的邮件清单。
 
