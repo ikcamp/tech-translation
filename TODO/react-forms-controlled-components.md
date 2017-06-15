@@ -1,9 +1,9 @@
 * 原文地址：[React.js Forms: Controlled Components](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)
 * 原文作者：[Loren Stewart](http://lorenstewart.me/author/lorenseanstewart/)
 * 译者：[小 B0Y](http://pobusama.github.io/about/)
-* 校对者：[](#) 
+* 校对者：[珂珂君](#) 
 
-# React 表单：受控组件
+# 翻译 | 玩转 React 表单 —— 受控组件详解
 
 本文涵盖以下受控组件：
 - 文本输入框
