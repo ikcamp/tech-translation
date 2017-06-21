@@ -11,6 +11,7 @@
 如果你想要为其他孩子留下一些东西，你可以把它放在一个盒子里。
 
 ![1](./img/a-crash-course-in-memory-management/01_01-768x542.png)
+<img src="./img/a-crash-course-in-memory-management/01_01-768x542.png" style="width: 500px; height: auto"/>
 
 在每个盒子旁边都有一个数字，这些数字就是内存地址，用来告诉别人在哪里找到你留给他们的东西。
 
