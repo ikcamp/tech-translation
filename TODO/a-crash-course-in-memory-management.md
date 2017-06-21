@@ -1,29 +1,30 @@
  * 原文地址：[A crash course in memory management](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
  * 原文作者：[Lin Clark](https://code-cartoons.com/)
+ * 译者：[黑黑](#)
 
  # 翻译 | 内存管理速成课（1）
 
 要理解为什么将ArrayBuffer和SharedArrayBuffer添加到JavaScript中，您需要了解一些关于内存管理的内容。
 
-您可以将机器中的内存看作一堆盒子。就像你在办公室里的邮箱，或是幼儿园小孩存放东西的收纳箱。
+您可以将机器中的内存看作一堆盒子。就像你在办公室里的邮箱，或是要求小孩子们使用的收纳箱。
 
 如果你想要为其他孩子留下一些东西，你可以把它放在一个盒子里。
 
-![1](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_01-500x353.png)
+![1](./img/a-crash-course-in-memory-management/01_01-768x542.png)
 
 在每个盒子旁边都有一个数字，这些数字就是内存地址，用来告诉别人在哪里找到你留给他们的东西。
 
-这些盒子中的每一个都具有相同的尺寸，并且可以容纳一定量的信息。盒子的尺寸是针对机器的。这个大小称为字长。它通常是32位或64位。但是为了显示方便，我将使用8位字长。
+这些盒子中的每一个都具有相同的尺寸，并且可以容纳一定量的信息。盒子的尺寸取决于机器。这个大小称为字长。它通常是32位或64位。但是为了显示方便，这里我们使用8位字长。
 
 ![2](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_02-500x121.png)
 
-如果我们想把数字2放在其中一个盒子中，我们可以很容易地做到这一点。数字很[容易用二进制表示](https://www.khanacademy.org/math/algebra-home/alg-intro-to-algebra/algebra-alternate-number-bases/v/decimal-to-binary)。
+如果我们想把数字2放在其中一个盒子中，我们可以很容易地做到这一点。数字很[容易转换成二进制](https://www.khanacademy.org/math/algebra-home/alg-intro-to-algebra/algebra-alternate-number-bases/v/decimal-to-binary)。
 
 ![3](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_03-500x229.png)
 
 如果我们想要的东西不是数字怎么办？比如字母H？
 
-我们需要一种方法来代表它。 为了做到这一点，我们需要一种编码，像[UTF-8](https://en.wikipedia.org/wiki/UTF-8)。 我们需要一些东西把它变成那样的数字，比如一个编码器环。之后我们就可以存储它了。
+我们需要一个类似[UTF-8](https://en.wikipedia.org/wiki/UTF-8)的编码来用数字代替这些东西。而为了把这些东西转换成数字，我们需要一个类似编码器环的工具。之后我们就可以存储它了。
 
 ![4](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_04-500x277.png)
 
@@ -44,7 +45,7 @@ js引擎利用编码器把该值转换成二进制。
 
 ![7](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_07-500x370.png)
 
-它将在内存中找到可以将该二进制放入的空间。 这个过程称为分配内存。
+它将在内存中找到可以容纳该二进制的空间。这个过程称为分配内存。
 
 ![8](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_08-500x367.png)
 
@@ -76,7 +77,7 @@ C没有JavaScript在内存上的抽象层。而是直接在内存上运行。你
 
 ![12](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/06/01_12-500x360.png)
 
-您可以使用函数`malloc`（内存分配的简写）来申请一些可以容纳数据的内存地址。这将把这些地址从空闲列表中拿走。当你处理完这些数据后，你必须调用函数`free`释放掉`malloc`函数申请的内存。之后，这些地址将被添加回空闲列表。
+您可以使用函数`malloc`（内存分配的简写）来申请一些可以容纳数据的内存地址。这将把这些地址从空闲列表中拿走。当你处理完这些数据后，你须调用函数`free`释放掉由`malloc`函数申请的内存。之后，这些地址将被添加回空闲列表。
 
 你必须弄清楚何时调用这些功能。这就是为什么它被称为手动内存管理——你自己管理内存。
 
