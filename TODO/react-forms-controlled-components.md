@@ -32,7 +32,7 @@
 
 除了提供单独的组件代码，我还将这些组件放进表单中，方便你理解子组件如何更新父组件 state ，以及接下来父组件如何通过 props（单向数据流）更新子组件。
 
-**注意：**本[表单示例](http://lorenstewart.me/react-controlled-form-components/)由很赞的 [create-react-app](https://github.com/facebookincubator/create-react-app) 构建配置生成，如果你还没有安装该构建配置，我强烈推荐你安装一下（`npm install -g create-react-app`）。目前这是搭建 React 应用最简单的方式。
+**注意**：本[表单示例](http://lorenstewart.me/react-controlled-form-components/)由很赞的 [create-react-app](https://github.com/facebookincubator/create-react-app) 构建配置生成，如果你还没有安装该构建配置，我强烈推荐你安装一下（`npm install -g create-react-app`）。目前这是搭建 React 应用最简单的方式。
 
 ## 什么是受控组件?
 
