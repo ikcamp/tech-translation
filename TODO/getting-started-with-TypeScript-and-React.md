@@ -4,7 +4,7 @@
 - 校对者：veizz
 
 
-#             开始使用 TypeScript 和 React
+#             翻译 | 开始使用 TypeScript 和 React
 [Tom Dale](https://medium.com/@tomdale/glimmer-js-whats-the-deal-with-typescript-f666d1a3aad0)    和其他人有一些关于 TypeScript 比较好的博文，跟随这些博文，我最近开始使用 TypeScript。今天，我将展示如何从零开始建立一个 TypeScript 工程，以及如何使用 Webpack 管理构建过程。我也将陈述关于 TypeScript 的第一印象，尤其是使用 TypeScript 和 ReactJS。
 
 我不会深入到 TypeScript 语法的具体细节，你可以阅读 [TypeScript handbook](https://www.typescriptlang.org/docs/tutorial.html) 或者免费书籍 [TypeScript Deep Dive](https://basarat.gitbooks.io/typescript/content/docs/getting-started.html)，它们是关于 TypeScript 比较好的入门材料。
