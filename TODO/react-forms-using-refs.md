@@ -4,7 +4,7 @@
  * 校对者：[小 boy](https://github.com/pobusama)
 
 
-# 翻译 | React 表单： Refs 的运用
+# 翻译 | 玩转 React 表单 —— Refs 的运用
 
 React 提供了两种从 `<form>` 元素中获取值的标准方法。第一种方法是实现所谓的**受控组件** (可以看我[博客里发表的文章](http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/)) ，第二种方法是使用 React 的 `ref`  属性。
 
