@@ -3,27 +3,27 @@
  * 译者：[黑黑](#)
  * 校对者：[Bob](#)
 
- # 翻译 | 老司机带你秒懂内存管理 - 第二部（共三部）
+ # 翻译 | 看图学习 ArrayBuffers 和 SharedArrayBuffers，秒变老司机 - 第二部（共三部）
 
-在上一篇文章中，我解释了像 JavaScript 这样的语言是如何自动管理内存的。还解释了如何在 C 语言中手动管理内存。
+在上一篇文章中，老司机带你了解了像 JavaScript 这样的语言是如何自动管理内存的。还解释了如何在 C 语言中手动管理内存。
 
-我们为什么要在介绍 ArrayBuffers 和 SharedArrayBuffers 之前，解释了内存管理的知识呢？
+我们为什么要在介绍 ArrayBuffers 和 SharedArrayBuffers 之前，先解释内存管理的知识呢？
 
-这是因为 ArrayBuffers 为你在 JavaScript 中手动管理内存提供了途径。
+这是因为，在 JavaScript 中，正是 ArrayBuffers 给你提供了手动管理内存的途径。
 
-为什么要去手动处理内存呢？
+为什么要去手动管理内存呢？
 
 正如我们在上一篇文章中谈到的关于自动内存管理的利弊：自动内存管理对开发人员来说比较友好。但它增加了一些额外的开销，在某些情况下，这些开销可能导致性能问题。
 
 ![1](./img/a-crash-course-in-memory-management/02_01-768x438.png)
 
-例如，当您在 JS 中创建变量时，引擎必须猜测它的数据类型，以及如何保存在内存中。因此，JS 引擎通常预留的空间比这个变量真正需要的空间大很多。根据变量的不同，内存分配可能会比实际需要的大2-8倍，这会导致大量的内存浪费。
+例如，当你在 JS 中创建变量时，引擎必须猜测它的数据类型，以及如何保存在内存中。因此，JS 引擎通常预留的空间比这个变量真正需要的空间大很多。根据变量的不同，内存分配可能会比实际需要的大2-8倍，这会导致大量的内存浪费。
 
-此外, 某些创建和使用 JS 对象的模式会使收集垃圾变得更加困难。如果您手动管理内存的话, 可以根据实际使用需求来决定分配和释放内存的策略。
+此外, 某些创建和使用 JS 对象的模式会使收集垃圾变得更加困难。如果你手动管理内存的话, 可以根据实际使用需求来决定分配和释放内存的策略。
 
-大多数时候, 这没什么大不了的。大多数场景对性能要求并不苛刻，反而需要担心手动内存管理。对于常见场景，手动内存管理甚至可能会更慢。
+大多数时候, 这没什么大不了的。因为，大多数场景对性能要求并不苛刻。你反而需要担心的是手动内存管理。对于常见场景，手动内存管理甚至可能会更慢。
 
-但是对于那些在底层需要极致优化的场景，ArrayBuffers 和 SharedArrayBuffers 为您提供了一个选择。
+但是对于那些在底层需要极致优化的场景，ArrayBuffers 和 SharedArrayBuffers 为你提供了一个选择。
 
 ![2](./img/a-crash-course-in-memory-management/02_02-768x438.png)
 
@@ -41,7 +41,7 @@ ArrayBuffer 只是一串 0 和 1。它是不知道怎么拆分这个数组中各
 
 为了提供上下文信息，把 ArrayBuffer 拆分开，我们需要将它放在视图中。这些数据的视图可以添加类型化数组，并且有很多不同的类型数组可以使用。
 
-例如，您可以使用 Int8 类型的数组，将 ArrayBuffer 分解为8位字节。
+例如，你可以使用 Int8 类型的数组，将 ArrayBuffer 分解为8位字节。
 
 ![5](./img/a-crash-course-in-memory-management/02_05-768x273.png)
 
@@ -77,7 +77,7 @@ ArrayBuffer 只是一串 0 和 1。它是不知道怎么拆分这个数组中各
 
 在 JavaScript 中，可以通过 [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 来实现这些，但跟其他语言中的线程处理方式有些不同。默认情况下，它们不共享内存。
 
-![9](./img/a-crash-course-in-memory-management/02_08-768x553.png)
+![9](./img/a-crash-course-in-memory-management/02_09-768x553.png)
 
 这意味着，如果想处理一些其他线程上的数据，你不得不通过 [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage) 方法将数据完整的复制一份过来。
 
@@ -121,7 +121,7 @@ Safari 10.1 已经支持了，Firefox 和 Chrome 的版本 将在7月或8月发�
 
 我们希望 JavaScript 库的开发者们开发出更简单安全的使用 SharedArrayBuffers 的库。
 
-此外，一旦 SharedArrayBuffers 内置到平台中，WebAssembly 可以利用它实现多线程。到那时，你就可以使用像 Rust 这种以 处理并发性为目标的语言一样轻松的处理多线程。
+此外，一旦 SharedArrayBuffers 内置到平台中，WebAssembly 可以利用它实现多线程。到那时，你就可以使用像 Rust 这种以处理并发性为目标的语言一样轻松的处理多线程。
 
 下一章，我们将介绍那些库开发者们构建抽象同时又避免条件竞争（race conditions）所使用的工具 [Atomics](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics)。
 
