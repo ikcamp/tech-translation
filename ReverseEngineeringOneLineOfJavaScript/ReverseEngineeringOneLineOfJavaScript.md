@@ -1,6 +1,6 @@
 [原文：Reverse Engineering One Line of JavaScript](https://www.alexkras.com/reverse-engineering-one-line-of-javascript/)
 
-# Reverse Engineering One Line of JavaScript
+# 一行JavaScript代码的逆向工程
 
 几个月前，我看到一个邮件问：有没有人可以解析这一行 JavaScript 代码
 
@@ -322,9 +322,9 @@ setInterval(draw, 64);
 
 ``` JavaScript
 var P ='p.\n';
- 
+
 ...
- 
+
 if (magicIsOdd) { // &1
     index = 1; // second char in P - .
 } else {
