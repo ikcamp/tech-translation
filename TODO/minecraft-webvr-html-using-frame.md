@@ -8,7 +8,7 @@
 ![](https://css-tricks.com/images/minesweeper-webvr-demo.gif)
 
 ## A-Frame
-几年前，Mozilla 发明并开发了 [WebVR](https://webvr.rocks/) ——一套在浏览器中创造身临其境 VR 体验的 JavaScript API —— 并将其发布在一个实验版本的 Firefox 浏览器中。此后，WebVR 得到了 Google、Microsoft、Samsung 以及 Oculus 等其他公司的广泛支持。而现在，WebVR 更是在短短几个月内就被内嵌在发行版的 Firefox 浏览器中，并被设置为默认开启！
+几年前，Mozilla 发明并开发了 [WebVR](https://webvr.rocks/) —— 一套在浏览器中创造身临其境 VR 体验的 JavaScript API —— 并将其发布在一个实验版本的 Firefox 浏览器中。此后，WebVR 得到了 Google、Microsoft、Samsung 以及 Oculus 等其他公司的广泛支持。而现在，WebVR 更是在短短几个月内就被内嵌在发行版的 Firefox 浏览器中，并被设置为默认开启！
 
 为什么会诞生 WebVR？Web 为 VR 带来了开放性；在 Web 上，内容并不由管理员所控制，用户也不被关在高高的围墙花园（walled garden）中。Web 也为 VR 带来了连通性；在 Web 上，我们能够在世界中穿梭 —— 就像我们点击超链接在页面见穿梭一样。随着 WebGL 的成熟以及诸如 Web Assembly 和 Service Workers 规范的提出，WebVR 已经准备好了。
 
@@ -209,7 +209,7 @@ function getRandomColor() {
 
 在组件被注册后，我们可以**直接使用 HTML** 来链接该组件。A-Frame 框架中的所有代码都是对 HTML 的扩展，而且这些扩展可以用于其他对象和其他场景。很棒的是，开发者可以写一个向对象添加物理元素的组件，使用这个组件的人甚至不会察觉到 JavaScript 在他的场景中加入了这个物理元素！
 
-注意力转回刚刚的盒子实体，将 `random-color` 添加为 HTML 属性来插入 `random-color` 组件。我们将组件保存为一个 JS 文件，然后在场景代码之前引用它：
+注意力回到刚刚的盒子实体，将 `random-color` 作为 HTML 属性插入到 `random-color` 组件中。我们将组件保存为一个 JS 文件，然后在场景代码之前引用它：
 
 ```html
 <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
@@ -234,7 +234,7 @@ function getRandomColor() {
 ```
 [在 CodePen 中打开](https://codepen.io/mozvr/pen/ryWKqy)
 
-组件可以被插入任何实体，但并不需要像在传统继承模式中那样创建或扩展类。如果我们想在类似 `<a-shpere>` 或 `<a-obj-model>` 中附加组件，加就是了！
+组件可以插入到任何实体中，但并不需要像在传统继承模式中那样创建或扩展类。如果我们想在类似 `<a-shpere>` 或 `<a-obj-model>` 中附加组件，直接加就是了！
 
 ```html
 <!-- 在其他实体上重用并附加随机颜色组件 -->
