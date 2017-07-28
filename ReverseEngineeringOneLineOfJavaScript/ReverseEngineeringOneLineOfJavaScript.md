@@ -4,7 +4,7 @@
 
 几个月前，我看到一个邮件问：有没有人可以解析这一行 JavaScript 代码
 
-``` JavaScript
+```js
 <pre id=p><script>n=setInterval("for(n+=7,i=k,P='p.\\n';i-=1/k;P+=P[i%2?(i%2*j-j+n/k^j)&1:2])j=k/i;p.innerHTML=P",k=64)</script>
 ```
 
@@ -20,7 +20,7 @@
 
 index.html
 
-``` JavaScript
+```js
 <script src="code.js"></script>
 <pre id="p"></pre>
 ```
@@ -29,7 +29,7 @@ index.html
 
 code.js
 
-``` JavaScript
+```js
 var delay = 64;
 var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
 var n = setInterval(draw, delay);
@@ -39,7 +39,7 @@ var n = setInterval(draw, delay);
 
 我注意到的另一个点，变量 `p` 指向了存在于 HTML 的 DOM 结构里 id 为 `p` 的标签，就是那个之前我包装过的 pre 标签，事实上，元素标签可以通过他们的 id 用 JavaScript 来获取，只要 id 有且只有用字符组成。这里，我通过 `document.getElementById("p")` 来让它更加直观。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p"); // < --------------
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -53,7 +53,7 @@ var n = setInterval(draw, delay);
 
 下一步，我声明了变量 `i`，`p` 和 `j`，然后把他们放在函数的顶部。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p");
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -71,7 +71,7 @@ var n = setInterval(draw, delay);
 
 我把 `for` 循环分解成 `while` 循环。只保留了 `for` 的CHECK_EVERY_LOOP部分（for的三个部分分别是RUNS_ONCE_ON_INIT; CHECK_EVERY_LOOP; DO_EVERY_LOOP），然后把其他的代码分别移到循环的内外部。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p");
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -98,7 +98,7 @@ var n = setInterval(draw, delay);
 
 最终的返回值将当成 P 的角标，然后赋值给一个 P 字符串，所以它应该写成 `P += P[index]`。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p");
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -146,7 +146,7 @@ AND 001
 
 或者说，5是一个奇数，`5 & 1` 的结果是 1。用 JavaScript 的控制台很容易可以证明下面这个逻辑。
 
-``` JavaScript
+```js
 0 & 1 // 0 - even return 0
 1 & 1 // 1 - odd return 1
 2 & 1 // 0 - even return 0
@@ -157,7 +157,7 @@ AND 001
 
 可以注意到，我把 `index` 改名为 `magic`。所以展开 `& 1` 之后的代码看起来是下面这样的。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p");
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -196,7 +196,7 @@ var n = setInterval(draw, delay);
 
 接下来，我将会分解 `P += P[index]` 到一个 switch 表达式里。现在我们可以很清晰的知道 index 只有可能是 0，1 或者 2 当中的其中一个值。也可以知道 P 的初始化总是 `var P ='p.\n'`，为 0 时指向 `p`，为 1 时指向 `.`，为 2 时指向 `\n` - 新的一行字符串。
 
-``` JavaScript
+```js
 var delay = 64;
 var p = document.getElementById("p");
 // var draw = "for(n+=7,i=delay,P='p.\\n';i-=1/delay;P+=P[i%2?(i%2*j-j+n/delay^j)&1:2])j=delay/i;p.innerHTML=P";
@@ -251,7 +251,7 @@ var n = setInterval(draw, delay);
 
 这里我放了个错误，把 `p.innerHTML = P;` 放错地方了，更新后，把它移出了while循环
 
-``` JavaScript
+```js
 const DELAY = 64; // approximately 15 frames per second 15 frames per second * 64 seconds = 960 frames
 var n = 1;
 var p = document.getElementById("p");
@@ -320,7 +320,7 @@ setInterval(draw, 64);
 
 当然，之前我们就已经知道了，当 `let magic = ((i % 2 * j - j + n / DELAY) ^ j)` 中的 magic 是奇数的时候用 `.` ，如果是偶数则用 `p`。
 
-``` JavaScript
+```js
 var P ='p.\n';
 
 ...
@@ -344,7 +344,7 @@ if (magicIsOdd) { // &1
 
 注意到每次循环里，我们都会执行：
 
-``` JavaScript
+```js
 j = DELAY / i;
 i -= 1 / DELAY;
 ```
@@ -395,7 +395,7 @@ i -= 1 / DELAY;
 
 这里有一些在 JavaScript 控制台的输出，0 或者 -2 意味着结果是偶数，1 则是奇数。
 
-``` JavaScript
+```js
 1 ^ 1 // 0 - even p
 1.1 ^ 1.1 // 0 - even p
 0.9 ^ 1 // 1 - odd .
