@@ -1,7 +1,7 @@
 * 原文地址：[Reverse Engineering One Line of JavaScript](https://hacks.mozilla.org/2017/06/a-cartoon-intro-to-arraybuffers-and-sharedarraybuffers/)
 * 原文作者：[Alex Kras](https://www.alexkras.com/author/admin/)
 * 译者：李波
-* 校对者：冬青
+* 校对者：冬青、小萝卜
 
 # 翻译 | 一行JavaScript代码的逆向工程
 
