@@ -39,7 +39,7 @@ var n = setInterval(draw, delay);
 
 接下来，因为 `setInterval` 可以接收一个函数或者字符串来执行，字符串 `var draw` 会被 setInterval 用 `eval` 来解析并执行。所以我把它移到一个新建的函数体内。 然后保留旧的那行代码，以供参考。
 
-我注意到的另一个点，变量 `p` 指向了存在于 HTML 的 DOM 结构里 id 为 `p` 的标签，就是那个之前我包装过的 pre 标签。事实上，元素标签可以通过他们的 id 用 JavaScript 来获取，只要 id 仅由字母数组组成。这里，我通过 `document.getElementById("p")` 来让它更加直观。
+我注意到的另一个点，变量 `p` 指向了存在于 HTML 的 DOM 结构里 id 为 `p` 的标签，就是那个之前我包装过的 pre 标签。事实上，元素标签可以通过他们的 id 用 JavaScript 来获取，只要 id 仅由字母数字组成。这里，我通过 `document.getElementById("p")` 来让它更加直观。
 
 ```js
 var delay = 64;
