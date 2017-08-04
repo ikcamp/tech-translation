@@ -1,7 +1,9 @@
-[原文：Reverse Engineering One Line of JavaScript](https://www.alexkras.com/reverse-engineering-one-line-of-javascript/)
+* 原文地址：[Reverse Engineering One Line of JavaScript](https://www.alexkras.com/reverse-engineering-one-line-of-javascript)
+* 原文作者：[Alex Kras](https://www.alexkras.com/author/admin/)
+* 译者：李波
+* 校对者：冬青、小萝卜
 
-# 一行JavaScript代码的逆向工程
-
+# 翻译 | 一行JavaScript代码的逆向工程
 几个月前，我看到一个邮件问：有没有人可以解析这一行 JavaScript 代码？
 
 ```js
