@@ -4,7 +4,8 @@
 * 校对者：冬青、小萝卜
 
 # 翻译 | 一行JavaScript代码的逆向工程
-几个月前，我看到一个邮件问：有没有人可以解析这一行 JavaScript 代码？
+
+几个月前，我看到一个邮件问：有没有人可以解析这一行 JavaScript 代码
 
 ```js
 <pre id=p><script>n=setInterval("for(n+=7,i=k,P='p.\\n';i-=1/k;P+=P[i%2?(i%2*j-j+n/k^j)&1:2])j=k/i;p.innerHTML=P",k=64)</script>
