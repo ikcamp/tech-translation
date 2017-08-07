@@ -1,4 +1,4 @@
-# 使用A-Frame打造WebVR版《我的世界》
+# 翻译 | 使用A-Frame打造WebVR版《我的世界》
 
 - 原文地址：[Minecraft in WebVR with HTML Using A-Frame](https://css-tricks.com/minecraft-webvr-html-using-frame/)
 - 原文作者：[Kevin Ngo](http://ngokevin.com/)
