@@ -1,7 +1,9 @@
 # 使用A-Frame打造WebVR版《我的世界》
 
-原文链接：https://css-tricks.com/minecraft-webvr-html-using-frame/<br />
-翻译：Felix
+- 原文地址：[Minecraft in WebVR with HTML Using A-Frame](https://css-tricks.com/minecraft-webvr-html-using-frame/)
+- 原文作者：[Kevin Ngo](http://ngokevin.com/)
+- 译者：[Felix](https://github.com/LittlePineapple)
+- 校对：[阿希](https://github.com/aximario)
 
 我是 Kevin Ngo，一名就职于 [Mozilla VR 团队](https://mozvr.com/)的 web 虚拟现实开发者，也是 [A-Frame](https://aframe.io/) 的核心开发人员。今天，我们来看看如何使用 A-Frame 构建一个够在 HTC Vive、Oculus Rift、Samsung GearVR、Google Cardboard、桌面设备以及移动设备上运行的、支持空间追踪（room-scale）技术的 WebVR 版《我的世界》示例。该示例基于 A-Frame，且仅使用 11 个 HTML 元素！
 
