@@ -2,8 +2,8 @@
 
 - 原文地址：[Minecraft in WebVR with HTML Using A-Frame](https://css-tricks.com/minecraft-webvr-html-using-frame/)
 - 原文作者：[Kevin Ngo](http://ngokevin.com/)
-- 译者：[Felix](https://github.com/LittlePineapple)
-- 校对：[阿希](https://github.com/aximario)
+- 译者：[Felix](#)
+- 校对：[阿希](#)、[专家](#)
 
 我是 Kevin Ngo，一名就职于 [Mozilla VR 团队](https://mozvr.com/)的 web 虚拟现实开发者，也是 [A-Frame](https://aframe.io/) 的核心开发人员。今天，我们来看看如何使用 A-Frame 构建一个够在 HTC Vive、Oculus Rift、Samsung GearVR、Google Cardboard、桌面设备以及移动设备上运行的、支持空间追踪（room-scale）技术的 WebVR 版《我的世界》示例。该示例基于 A-Frame，且仅使用 11 个 HTML 元素！
 
@@ -12,7 +12,7 @@
 ## A-Frame
 几年前，Mozilla 发明并开发了 [WebVR](https://webvr.rocks/) —— 一套在浏览器中创造身临其境 VR 体验的 JavaScript API —— 并将其发布在一个实验版本的 Firefox 浏览器中。此后，WebVR 得到了 Google、Microsoft、Samsung 以及 Oculus 等其他公司的广泛支持。而现在，WebVR 更是在短短几个月内就被内嵌在发行版的 Firefox 浏览器中，并被设置为默认开启！
 
-为什么会诞生 WebVR？Web 为 VR 带来了开放性；在 Web 上，内容并不由管理员所控制，用户也不被关在高高的围墙花园（walled garden）中。Web 也为 VR 带来了连通性；在 Web 上，我们能够在世界中穿梭 —— 就像我们点击超链接在页面见穿梭一样。随着 WebGL 的成熟以及诸如 Web Assembly 和 Service Workers 规范的提出，WebVR 已经准备好了。
+为什么会诞生 WebVR？Web 为 VR 带来了开放性；在 Web 上，内容并不由管理员所控制，用户也不被关在高高的围墙花园（walled garden）中。Web 也为 VR 带来了连通性；在 Web 上，我们能够在世界中穿梭 —— 就像我们点击超链接在页面见穿梭一样。随着 WebGL 的成熟以及诸如 Web Assembly 和 Service Workers 规范的提出，Web 已经为 VR 准备好了。
 
 [Mozilla VR 团队](https://mozvr.com/)创造了 A-Frame 框架来为 WebVR 生态系统抛砖引玉，该框架给予开发者构建 3D 和 VR 世界的能力。
 
@@ -36,7 +36,7 @@ A-Frame 官方网站首页
 ```
 [在 CodePen 中打开](https://codepen.io/mozvr/pen/BjygdO)
 
-就是这样！只用使用**一行 HTML（<a-scene>）即可搞定 3D 和 VR 样板代码搭建**，包括：canvas、场景、渲染器、渲染循环、摄像机以及 raycaster。然后，我们可以通过使用添加子元素的方式来为场景添加对象。**无需构建**，就只是一个简单的、可随意拷贝粘贴的 HTML 文件。
+就是这样！只用使用**一行 HTML（\<a-scene\>）即可搞定 3D 和 VR 样板代码搭建**，包括：canvas、场景、渲染器、渲染循环、摄像机以及 raycaster。然后，我们可以通过使用添加子元素的方式来为场景添加对象。**无需构建**，就只是一个简单的、可随意拷贝粘贴的 HTML 文件。
 
 <hr />
 
@@ -156,7 +156,7 @@ ECS 的优势在于它的可组合性；我们可以混合和搭配这些可复�
 在这个部分，我们将会对若干 A-Frame 组件的实现做一些深入探讨。在实践中，我们经常会通过已由 A-Frame 社区开发人员编写好的 HTML 来使用组件，而不是从头构建它们。
 
 ### 实体-组件范式
-在 A-Frame 场景中的每一个对象都是 `<a-entity>`，其本身什么也不能做，就像一个空 `<div>` 一样。我们将组件（不要和 Web Components 或 React Components 混淆）插入实体来给予其外观、行为和逻辑。
+在 A-Frame 场景中的每一个对象都是 `<a-entity>`，其本身什么也不能做，就像一个空 `<div>` 一样。我们将组件 **（不要和 Web Components 或 React Components 混淆）** 插入实体来给予其外观、行为和逻辑。
 
 对于一个盒子来说，我们会为其配置及添加 A-Frame 的基础[几何组件](https://aframe.io/docs/0.5.0/components/geometry.html)和[材质组件](https://aframe.io/docs/0.5.0/components/material.html)。组件使用 HTML 属性来表示，组件属性默认使用类似 CSS 样式的表示方法来表示。下面是一个 `<a-box>` 的基础组件拆解写法，可以看到 `<a-box>` 事实上包裹了若干组件：
 
@@ -166,7 +166,7 @@ ECS 的优势在于它的可组合性；我们可以混合和搭配这些可复�
 <a-entity geometry="primitive: box; depth: 0.5; height: 0.5; width 0.5"
           material="color: red; shader: standard"></a-entity>
 ```
-使用组件的好处是它们的具有可组合性。我们可以通过混合和搭配一堆已有的组件来构造出各种各样的对象。
+使用组件的好处是它们的具有**可组合性**。我们可以通过混合和搭配一堆已有的组件来构造出各种各样的对象。
 
 在 3D 开发中，我们可能构建出的对象类型在数量和复杂性上是无限的，因此我们需要一个简便的、全新的、非传统继承式的对象定义方法。与 2D web 相比，我们不再拘泥于使用一小撮固定的 HTML 元素并将它们嵌套在很深的层次结构中。
 
@@ -352,7 +352,7 @@ function getRandomColor() {
 <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
 ```
 
-就是这样！**只要一个 script 标签和一个 HTML 属性，我们就能瞬移了。**在 [A-Frame 仓库](https://aframe.io/registry/)中可以找到更多很酷的组件。
+就是这样！ **只要一个 script 标签和一个 HTML 属性，我们就能瞬移了。** 在 [A-Frame 仓库](https://aframe.io/registry/)中可以找到更多很酷的组件。
 
 ### 为右手添加体素生成器功能
 
