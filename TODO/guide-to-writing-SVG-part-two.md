@@ -4,6 +4,7 @@
 阅读本文前可以先浏览《[编写SVG的口袋指南（上）](http://mp.weixin.qq.com/s/y4ewNc2sEg_-DDbBEhtoRw)》
 原文： [Pocket Guide to Writing SVG](http://svgpocketguide.com/book/)
 贡献者： 晨雪
+校对者： 逍遥珺、LittlePineapple、可木
 
 ## 第三节：工作区
 
