@@ -1,4 +1,4 @@
-# 翻译 | 关键CSS和Webpack: 减小阻塞渲染的CSS的自动化解决方案
+# 翻译 | 关键CSS和Webpack: 减少阻塞渲染的CSS的自动化解决方案
 
 
 ![image.png-292.6kB](./img/critical-css-and-webpack/1_01.png)
