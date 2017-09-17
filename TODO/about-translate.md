@@ -78,7 +78,7 @@ iKcamp 由来自各个公司的优秀小伙伴组成。从**地理空间**上来
 #### 一校：组内校对
 第一轮校对是组内校对，组内成员之间交换文章，检查**基本的语法和格式问题**并修改。这样在进行第二轮校对的时候就减轻少了一些工作量。
 
-![组内校对](http://upload-images.jianshu.io/upload_images/1561693-999c19ec72c2ac9e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![组内校对](http://upload-images.jianshu.io/upload_images/1561693-2beed151029bac7b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
 ### 二校：认领校对
 一校完成之后，相当于每篇文章都符合基本的格式规范，都能够表达出来作者的基本思想了。下一步就要开始进行“真正的”校对 —— **二校**。二校主要校对文章句子的准确度和顺畅度，还有格式。
 
