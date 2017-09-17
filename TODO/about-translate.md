@@ -27,7 +27,7 @@
 ### 翻译流程
 此次翻译流程参考了掘金翻译的流程，并做了一些优化，最后放到了 iKcamp 的 GitHub 仓库中。放到 GitHub 上是为了更方便的分享内容和讨论，因为之后我们可能会加入其他的公司的小伙伴，gitHub 是一个很好的分享和交流平台，可以让大家更专心的做事情。翻译流程可以分为下面的几步，详细的内容在下面会讲到。
 
-![fork 项目.png](http://upload-images.jianshu.io/upload_images/1561693-4c9815fee2b3739b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![整体流程](http://upload-images.jianshu.io/upload_images/1561693-4c9815fee2b3739b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
@@ -45,22 +45,22 @@ iKcamp 由来自各个公司的优秀小伙伴组成。从**地理空间**上来
 - 关于催稿，就由 Master 下调至组长，组长至组内成员，能够更好的利用资源的分配
 - 由组长把控组内的翻译质量，继而再由 Master 管控小组的翻译质量
 
-![Master.png](http://upload-images.jianshu.io/upload_images/1561693-3678ac96a49f32e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![成员分配图](http://upload-images.jianshu.io/upload_images/1561693-3678ac96a49f32e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 主要翻译流程
 ### 认领文章
 
 分好小组之后，下面开始**以组为单位**认领文章。每个组内的小伙伴会商量一下想翻译哪些文章，然后再以组为单位到 label 为**翻译认领**的 issue 下面认领文章。
 
-![组长认领issue.jpeg](http://upload-images.jianshu.io/upload_images/1561693-1b08dd48416cae0a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![认领翻译流程](http://upload-images.jianshu.io/upload_images/1561693-1b08dd48416cae0a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 这里我把 issue 的 label 分为 8 种：
 
-![issue 状态-2.png](http://upload-images.jianshu.io/upload_images/1561693-73940437fa7568a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/h/400)
+![issue 状态](http://upload-images.jianshu.io/upload_images/1561693-73940437fa7568a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500)
 
 组长到对应的 issue 下面留言“认领翻译”之后， Master 会把 issue 的状态由 “翻译认领” 切换为 “正在翻译”。
 
-![issue 状态.png](http://upload-images.jianshu.io/upload_images/1561693-b3dfc442ea63795e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![issue 状态的切换](http://upload-images.jianshu.io/upload_images/1561693-b3dfc442ea63795e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 分配好小组，认领完文章之后，会留时间让大家认真的阅读翻译流程和翻译规范。磨刀不误砍柴工，这些都是翻译工作开始之前的基础，熟悉了这些之后，能够避免很多错误和减少校对的工作量。
 
@@ -72,19 +72,19 @@ iKcamp 由来自各个公司的优秀小伙伴组成。从**地理空间**上来
 
 翻译流程总的可以概括为下图：
 
-![在 issue 下留言认领翻译.png](http://upload-images.jianshu.io/upload_images/1561693-2683cf744e934c55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![翻译流程](http://upload-images.jianshu.io/upload_images/1561693-2683cf744e934c55.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 校对
 #### 一校：组内校对
 第一轮校对是组内校对，组内成员之间交换文章，检查**基本的语法和格式问题**并修改。这样在进行第二轮校对的时候就减轻少了一些工作量。
 
-![abc.jpeg](http://upload-images.jianshu.io/upload_images/1561693-999c19ec72c2ac9e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
+![组内校对](http://upload-images.jianshu.io/upload_images/1561693-999c19ec72c2ac9e.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
 ### 二校：认领校对
 一校完成之后，相当于每篇文章都符合基本的格式规范，都能够表达出来作者的基本思想了。下一步就要开始进行“真正的”校对 —— **二校**。二校主要校对文章句子的准确度和顺畅度，还有格式。
 
 和认领翻译的文章一样，不做任何限制，组内成员商量想要认领的文章，然后到 label 为**校对认领**的 PR 下面留言认领校对。
 
-![组内成员商量认领的校对文章.png](http://upload-images.jianshu.io/upload_images/1561693-fff45791ab34173b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![认领校对](http://upload-images.jianshu.io/upload_images/1561693-fff45791ab34173b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ### 修改
 每次校对完成之后，翻译此文章的小伙伴都要根据校对者的意见进行一次修改。在修改过程中可以把一些想法和建议丢到小组内商量，如果和校对者意见不一致的地方，也可以在校对者的留言下方进行回复商量。最终确定修改的方案。
 ### 终校
