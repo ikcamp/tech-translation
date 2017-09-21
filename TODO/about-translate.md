@@ -2,9 +2,9 @@
 
 在平时的工作中，我们都会经常查阅一些英文文档来解决平时遇到的问题和拓宽视野。看到好的文章或者书籍有没有想要和小伙伴分享的冲动，那么我们一起来翻译吧～
 
-翻译主张 **“信 达 雅”** ，身为非专业翻译人员，要达到以上三点不是很容易的，但是我们要尽可能往这个方向上努力。一是提高自己的表达水平和阅读能力；二是能够让读者更加的明白作者本来的思想。有句话说得好：当把别人讲明白的时候，自己才算是真正的理解了。
+翻译主张 **“信 达 雅”** 。“信”指意义不悖原文，即是译文要准确，不偏离，不遗漏，也不要随意增减意思；“达”指不拘泥于原文形式，译文通顺明白；“雅”则指译文时选用的词语要得体，追求文章本身的古雅，简明优雅。身为非专业翻译人员，要达到以上三点不是很容易的，但是我们要尽可能往这个方向上努力。一是提高自己的表达水平和阅读能力；二是能够让读者更加的明白作者本来的思想。有句话说得好：当把别人讲明白的时候，自己才算是真正的理解了。
 
-2017 年 6 月 5 日，iKcamp 开始翻译第二本书 —— [《JavaScript 轻量级函数式编程》](https://github.com/ikcamp/Functional-Light-JS)。如果看过 iKcamp 之前发过的文章，应该对本书有一个大致的了解，本书的作者是火爆全球的 **《你不知道的 JavaScript》** 一书原作者 。旨在探索函数式编程的核心思想，但是并不会使用大量复杂的概念来诠释，所以称之为“轻量级函数式编程”。“轻量”并不意味着本书是一本“入门级”的书籍，相反，本书包含各种复杂的细节，深入探讨每个知识点，希望可以让读者对函数式编程有一个更深的理解。
+2017 年 6 月 5 日，iKcamp 开始翻译第二本书 —— [《JavaScript 轻量级函数式编程》](https://github.com/ikcamp/Functional-Light-JS)。如果你看过 iKcamp 最近在掘金、知乎或者公众号上发过的关于这本书的文章，应该对本书有一个大致的了解，本书的作者是火爆全球的 **《你不知道的 JavaScript》** 一书原作者 。旨在探索函数式编程的核心思想，但是并不会使用大量复杂的概念来诠释，所以称之为“轻量级函数式编程”。“轻量”并不意味着本书是一本“入门级”的书籍，相反，本书包含各种复杂的细节，深入探讨每个知识点，希望可以让读者对函数式编程有一个更深的理解。
 
 身为这次翻译项目的 Master，在这个过程中学会了如何组织一次翻译项目，如何定制翻译计划。秉承着 iKcamp 的分享精神，下面介绍一下我们这次翻译的流程、遇到的一些问题、解决的方式以及待优化的点。希望大家看了之后可以对组织翻译项目有一定的理解，然后也可以提出自己的建议或者解决方案，也可以应用在自己的项目中。
 
@@ -46,7 +46,8 @@
 
 我当时想的办法是给每一个流程规定一个 deadline，这个 deadline 是根据项目进度来说能给的最宽裕的时间，然后在认领翻译的时候，小伙伴可以根据自己最近时间的宽裕程度来决定翻译完成的时间，只要在这个 deadline 之前都可以。下面是我们认领时候的一张截图。
 
-![认领截图](http://upload-images.jianshu.io/upload_images/1561693-1e450d37efda61e8.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E8%AE%A4%E9%A2%86%E6%88%AA%E5%9B%BE.jpeg" height = "290" alt="认领截图" align=center />
+
 基本格式为：`认领类型（翻译／校对认领）- 截止时间`。
 这样就可以不用强制每个人的进度，让小伙伴自己来掌控进度。时间是自己选的，哈哈，那就要在规定的时间完成咯。
 
@@ -71,11 +72,13 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 
 ## 一、准备
 Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 label，用 label 可以很直观的来确认文章目前的进度。我把 issue 的 label 分为 8 种：
-![issue 状态](http://upload-images.jianshu.io/upload_images/1561693-73940437fa7568a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500)
+
+<img src="http://oux6kzfrp.bkt.clouddn.com/issue%20%E7%8A%B6%E6%80%81-2.png" height = "290" alt="issue 状态" align=center />
 
 不同的 label 对应着目前的文章进度。在 issue 的下方附上对应原文的地址，这样可以让译者更方便的找到对应的原文去翻译，还是上面的那张图片：
 
-![issue的用途](http://upload-images.jianshu.io/upload_images/1561693-8b93b9e3b9497200.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://oux6kzfrp.bkt.clouddn.com/issue%E7%9A%84%E7%94%A8%E9%80%94.jpeg" height = "290" alt="issue 状态" align=center />
+
 
 ## 二、主要翻译流程
 
@@ -87,7 +90,7 @@ Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 la
 
 组长到对应的 issue 下面留言“认领翻译”之后， Master 会把 issue 的状态由 “翻译认领” 切换为 “正在翻译”。
 
-![切换 issue 的 label ](http://upload-images.jianshu.io/upload_images/1561693-2b84f997892500c1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E5%88%87%E6%8D%A2label.jpeg" height = "290" alt="issue 状态" align=center />
 
 分配好小组，认领完文章之后，会留时间让大家认真的阅读翻译流程和翻译规范。磨刀不误砍柴工，这些都是翻译工作开始之前的基础，熟悉了这些之后，能够避免很多错误和减少校对的工作量。
 
@@ -102,51 +105,50 @@ Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 la
 
 下面为发起 Pull request 的两种方式：
 
-![发起 Pull request](http://upload-images.jianshu.io/upload_images/1561693-82bb3c4a045fd1b1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%8F%90pr.jpeg" width = "500" height = "240" alt="发起 Pull request" align=center />
 
-点击按钮之后，会出现下面的页面：
+点击按钮之后，会出现下面的页面，在图中可以看到，先选择目标分支，然后选择翻译时自己建的分支，此时就会产生文件的对比，然后点击下方的 `Create pull request` 绿色按钮，就成功的发起了一个 Pull request。
 
-![pr的分支.jpeg](http://upload-images.jianshu.io/upload_images/1561693-3e680ee50dc56c4c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
-
-在上图中可以看到，先选择目标分支，然后选择翻译时自己建的分支，此时就会产生文件的对比，然后点击下方的 `Create pull request` 绿色按钮，就成功的发起了一个 Pull request。
+<img src="http://oux6kzfrp.bkt.clouddn.com/pr%E7%9A%84%E5%88%86%E6%94%AF.jpeg" width = "450" height = "270" alt="pr的分支" align=center />
 
 到目前为止，翻译流程已经结束了，翻译过程可以概括为下面的几步：
+
 ![翻译流程](http://upload-images.jianshu.io/upload_images/1561693-1c3cbdb0998ebaee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 校对
 #### 如何校对
 当译者完成翻译发起 Pull request 之后，在对应的 Pull request 下方会有译者的提交记录。
 
-![提交记录](http://upload-images.jianshu.io/upload_images/1561693-1ed9425d2cbe392a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95.jpeg" width = "450" height = "220" alt="提交记录" align=center />
 
 点进去，就会看到译者的改动点，把鼠标放到你认为需要修改的那一行，会出来一个深蓝色的**加号**，点击加号，会出来一个文本框，在里面输入你的建议，点击绿色按钮 `Start a review` 即可。
 
-![校对](http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
+<img src="http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900" width = "510" height = "320" alt="校对" align=center />
 
 #### 一校：组内校对
 第一轮校对是组内校对，组内成员之间交换文章，检查**基本的语法和格式问题**并修改。这样在进行第二轮校对的时候就减轻少了一些工作量。
 
 ![组内校对](http://upload-images.jianshu.io/upload_images/1561693-2beed151029bac7b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/300)
-### 二校：认领校对
+#### 二校：认领校对
 一校完成之后，相当于每篇文章都符合基本的格式规范，都能够表达出来作者的基本思想了。下一步就要开始进行“真正的”校对 —— **二校**。二校主要校对文章句子的准确度和顺畅度，还有格式。
 
 和认领翻译的文章一样，不做任何限制，组内成员商量想要认领的文章，然后到 label 为**校对认领**的 PR 下面留言认领校对。
 
 ![认领校对](http://upload-images.jianshu.io/upload_images/1561693-88a1f6c12fb89186.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-### 修改
+#### 修改
 每次校对完成之后，翻译此文章的小伙伴都要根据校对者的意见进行一次修改。在修改过程中可以把一些想法和建议丢到小组内商量，如果和校对者意见不一致的地方，也可以在校对者的留言下方进行回复商量。最终确定修改的方案。
-### 终校
+#### 终校
 经历了一次翻译、两次校对和两次修改之后，文章整体都差不多了，不过还差最后一步，就是作为一名读者去真正的阅读文章：切身的去体会读者的感受；句子读着是否顺口；有没有格式错误影响阅读体验。所以接下来就是最后一轮校对 —— **终校**。每位小伙伴可以选择自己感兴趣的文章进行校对。同时也鼓励大家，有哪些看不懂的地方就在下方留言，我们一同讨论解决办法。
 
 
-### 关于校对
+#### 关于校对
 在此大家可能会有一个误会，就是校对比翻译更轻松一些。其实我并不是这样认为的。我觉得翻译和校对同样重要，他们的时间比重应该是大差不差的。校对者要确保文章的表达力度、格式及能否被读者所理解，付出的时间也和翻译相当或者更甚。所以，我们的校对不止进行了一遍。尽量做到能清楚的表达作者的意思，而且容易让读者理解。
 在此次的翻译中，我也为大家留了充足的时间去校对，文本格式、表达意思都会去斟酌，相信付出的时间和成果是成正比的。
 
-## 整合
+### 整合
 文章有很多互相引用的地方，比如第 6 章会引用第 2 章的段落标题。由于在翻译过程中译者对于作者的思想和上下文的语境可能理解的不是很透彻，所以我们把这一步放在了最后。在最后一步我们统一修改引用的地方，确保上下文一致。
 
-## 结尾
+## 三、结尾
 整个翻译项目大致是上面介绍的这些，流程可以概括为下图：
 ![总流程](http://upload-images.jianshu.io/upload_images/1561693-9045c63b8f602665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
