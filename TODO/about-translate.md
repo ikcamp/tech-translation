@@ -39,14 +39,14 @@
 - 这个文档要方便打开，并且支持各个系统，没有格式的阻碍。
 - 每位小伙伴都可以随时访问到。
 
-基于以上几点要求，我们最终采取的策略是在 GitHub 上新建一个仓库，用 Markdown 的形式，以读者的视角把整个翻译流程展示出来。具体链接可以[戳这里](https://github.com/ikcamp/iKcamp-document)
+基于以上几点要求，我们最终采取的策略是在 GitHub 上新建一个仓库，用 Markdown 的形式，以读者的视角把整个翻译流程展示出来。具体链接可以[戳这里](https://github.com/ikcamp/iKcamp-document)。
 
 #### 3、如何确保翻译进度
 其实这个是很头疼的一点，因为参与的小伙伴可能来自不同的公司和不同的部门，那么他们的时间也是不确定的。可能有时候忙一些，有时候闲一些，怎么才能在确保翻译进度的前提下让小伙伴高质量的完成翻译呢？
 
 我当时想的办法是给每一个流程规定一个 deadline，这个 deadline 是根据项目进度来说能给的最宽裕的时间，然后在认领翻译的时候，小伙伴可以根据自己最近时间的宽裕程度来决定翻译完成的时间，只要在这个 deadline 之前都可以。下面是我们认领时候的一张截图。
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/%E8%AE%A4%E9%A2%86%E6%88%AA%E5%9B%BE.jpeg" height = "290" alt="认领截图" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E8%AE%A4%E9%A2%86%E6%88%AA%E5%9B%BE.jpeg" width = "530" alt="认领截图" align=center />
 
 基本格式为：`认领类型（翻译／校对认领）- 截止时间`。
 这样就可以不用强制每个人的进度，让小伙伴自己来掌控进度。时间是自己选的，哈哈，那就要在规定的时间完成咯。
@@ -73,11 +73,11 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 ## 一、准备
 Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 label，用 label 可以很直观的来确认文章目前的进度。我把 issue 的 label 分为 8 种：
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/issue%20%E7%8A%B6%E6%80%81-2.png" height = "290" alt="issue 状态" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/issue%20%E7%8A%B6%E6%80%81-2.png" height = "320" alt="issue 状态" align=center />
 
 不同的 label 对应着目前的文章进度。在 issue 的下方附上对应原文的地址，这样可以让译者更方便的找到对应的原文去翻译，还是上面的那张图片：
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/issue%E7%9A%84%E7%94%A8%E9%80%94.jpeg" height = "290" alt="issue 状态" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/issue%E7%9A%84%E7%94%A8%E9%80%94.jpeg" width = "530" alt="issue 状态" align=center />
 
 
 ## 二、主要翻译流程
@@ -90,7 +90,7 @@ Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 la
 
 组长到对应的 issue 下面留言“认领翻译”之后， Master 会把 issue 的状态由 “翻译认领” 切换为 “正在翻译”。
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/%E5%88%87%E6%8D%A2label.jpeg" height = "290" alt="issue 状态" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E5%88%87%E6%8D%A2label.jpeg" width = "530" alt="issue 状态" align=center />
 
 分配好小组，认领完文章之后，会留时间让大家认真的阅读翻译流程和翻译规范。磨刀不误砍柴工，这些都是翻译工作开始之前的基础，熟悉了这些之后，能够避免很多错误和减少校对的工作量。
 
@@ -105,11 +105,11 @@ Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 la
 
 下面为发起 Pull request 的两种方式：
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%8F%90pr.jpeg" width = "500" height = "240" alt="发起 Pull request" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%8F%90pr.jpeg" width = "530" alt="发起 Pull request" align=center />
 
 点击按钮之后，会出现下面的页面，在图中可以看到，先选择目标分支，然后选择翻译时自己建的分支，此时就会产生文件的对比，然后点击下方的 `Create pull request` 绿色按钮，就成功的发起了一个 Pull request。
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/pr%E7%9A%84%E5%88%86%E6%94%AF.jpeg" width = "450" height = "270" alt="pr的分支" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/pr%E7%9A%84%E5%88%86%E6%94%AF.jpeg" width = "530" alt="pr的分支" align=center />
 
 到目前为止，翻译流程已经结束了，翻译过程可以概括为下面的几步：
 
@@ -119,11 +119,11 @@ Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 la
 #### 如何校对
 当译者完成翻译发起 Pull request 之后，在对应的 Pull request 下方会有译者的提交记录。
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95.jpeg" width = "450" height = "220" alt="提交记录" align=center />
+<img src="http://oux6kzfrp.bkt.clouddn.com/%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95.jpeg" width = "530" alt="提交记录" align=center />
 
 点进去，就会看到译者的改动点，把鼠标放到你认为需要修改的那一行，会出来一个深蓝色的**加号**，点击加号，会出来一个文本框，在里面输入你的建议，点击绿色按钮 `Start a review` 即可。
 
-<img src="http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900" width = "510" height = "320" alt="校对" align=center />
+<img src="http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900" width = "530" alt="校对" align=center />
 
 #### 一校：组内校对
 第一轮校对是组内校对，组内成员之间交换文章，检查**基本的语法和格式问题**并修改。这样在进行第二轮校对的时候就减轻少了一些工作量。
