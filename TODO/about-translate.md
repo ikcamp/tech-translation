@@ -4,7 +4,9 @@
 
 翻译主张 **“信 达 雅”** ，身为非专业翻译人员，要达到以上三点不是很容易的，但是我们要尽可能往这个方向上努力。一是提高自己的表达水平和阅读能力；二是能够让读者更加的明白作者本来的思想。有句话说得好：当把别人讲明白的时候，自己才算是真正的理解了。
 
-2017 年 6 月 5 日，iKcamp 开始翻译第二本书 —— [《JavaScript 轻量级函数式编程》](https://github.com/ikcamp/Functional-Light-JS)。身为这次翻译项目的 Master，在这个过程中学会了如何组织一次翻译项目，如何定制翻译计划。秉承着 iKcamp 的分享精神，下面介绍一下我们这次翻译的流程、遇到的一些问题、解决的方式以及待优化的点。希望大家看了之后可以对组织翻译项目有一定的理解，然后也可以提出自己的建议或者解决方案。
+2017 年 6 月 5 日，iKcamp 开始翻译第二本书 —— [《JavaScript 轻量级函数式编程》](https://github.com/ikcamp/Functional-Light-JS)。如果看过 iKcamp 之前发过的文章，应该对本书有一个大致的了解，本书的作者是火爆全球的 **《你不知道的 JavaScript》** 一书原作者 。旨在探索函数式编程的核心思想，但是并不会使用大量复杂的概念来诠释，所以称之为“轻量级函数式编程”。“轻量”并不意味着本书是一本“入门级”的书籍，相反，本书包含各种复杂的细节，深入探讨每个知识点，希望可以让读者对函数式编程有一个更深的理解。
+
+身为这次翻译项目的 Master，在这个过程中学会了如何组织一次翻译项目，如何定制翻译计划。秉承着 iKcamp 的分享精神，下面介绍一下我们这次翻译的流程、遇到的一些问题、解决的方式以及待优化的点。希望大家看了之后可以对组织翻译项目有一定的理解，然后也可以提出自己的建议或者解决方案，也可以应用在自己的项目中。
 
 
 #### 项目详情：
@@ -15,13 +17,11 @@
 * **参与成员：** iKcamp 中的 17 名童鞋
 * **预计完成时间：** 2 个月
 
-## 关于本书
-如果看过 iKcamp 之前发过的文章，应该会有一个大致的了解，本书的作者是火爆全球的 **《你不知道的 JavaScript》** 一书原作者 。旨在探索函数式编程的核心思想，但是并不会使用大量复杂的概念来诠释，所以称之为“轻量级函数式编程”。“轻量”并不意味着本书是一本“入门级”的书籍，相反，本书包含各种复杂的细节，深入探讨每个知识点，希望可以让读者对函数式编程有一个更深的理解。
 ## 需要考虑的问题：
-在开始翻译之前，有很多问题都要考虑一下，下面的几点是我们在项目中遇到的一些问题。
+在开始翻译之前，有很多问题都需要考虑好，下面几点也是我在项目开始之前都考虑的问题，列出来和大家探讨一下：
 - 如何确保翻译质量
 - 如何让每位成员都熟知**翻译流程**和**翻译规范**
-- 如何催稿
+- 如何确保翻译进度
 - 成员之间的联系方式
 ### 解决方案
 #### 1、如何确保翻译质量
@@ -35,23 +35,23 @@
 
 #### 2、如何让每位成员都熟知**翻译流程**和**翻译规范**
 如果让每位成员都熟知**翻译流程**和**翻译规范**，那么就要满足下面的几点要求：
-1. 要有一个文档，上面清晰的写着如何走完整个翻译流程。
-2. 这个文档要方便打开，并且支持各个系统，没有格式的阻碍。
-3. 每位小伙伴都可以随时访问到。
+- 要有一个文档，上面清晰的写着如何走完整个翻译流程。
+- 这个文档要方便打开，并且支持各个系统，没有格式的阻碍。
+- 每位小伙伴都可以随时访问到。
 
-基于以上几点要求，我们最终采取的策略是在 git 上新建一个仓库，用 markdown 的形式，以读者的视角把整个翻译流程展示出来。具体链接可以[戳这里](https://github.com/ikcamp/iKcamp-document)
+基于以上几点要求，我们最终采取的策略是在 GitHub 上新建一个仓库，用 Markdown 的形式，以读者的视角把整个翻译流程展示出来。具体链接可以[戳这里](https://github.com/ikcamp/iKcamp-document)
 
-#### 3、如何催稿
+#### 3、如何确保翻译进度
 其实这个是很头疼的一点，因为参与的小伙伴可能来自不同的公司和不同的部门，那么他们的时间也是不确定的。可能有时候忙一些，有时候闲一些，怎么才能在确保翻译进度的前提下让小伙伴高质量的完成翻译呢？
 
-我当时想的办法是给每一个流程规定一个 deadline，这个 deadline 是根据项目进度来说能给的最宽裕的时间，然后在认领翻译的时候，只要在这个 deadline 之前都可以。下面是我们认领时候的一张截图。
+我当时想的办法是给每一个流程规定一个 deadline，这个 deadline 是根据项目进度来说能给的最宽裕的时间，然后在认领翻译的时候，小伙伴可以根据自己最近时间的宽裕程度来决定翻译完成的时间，只要在这个 deadline 之前都可以。下面是我们认领时候的一张截图。
 
-![认领截图](http://upload-images.jianshu.io/upload_images/1561693-1e450d37efda61e8.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![认领截图](http://upload-images.jianshu.io/upload_images/1561693-1e450d37efda61e8.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 基本格式为：`认领类型（翻译／校对认领）- 截止时间`。
-这样可以让小伙伴根据自己最近时间的宽裕程度来决定完成任务所需的时间。时间是自己选的，哈哈，那就要在规定的时间完成咯。
+这样就可以不用强制每个人的进度，让小伙伴自己来掌控进度。时间是自己选的，哈哈，那就要在规定的时间完成咯。
 
 #### 4、成员之间的联系方式
-iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同参加了一个翻译项目。那么如何可以让小伙伴都能明确的知道目前项目的进度以及一起讨论问题呢？这里我们就需要一个平台可视化目前项目的进度，还需要一个可以交流的平台。
+iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同参加了一个翻译项目。那么如何可以让小伙伴都能明确的知道目前项目的进度以及一起讨论问题呢？这里我们就需要一个平台，可以可视化目前项目的进度，还需要一个可以交流的平台。
 当时我想到了一下几种工具：
 - Google Docs
 - Teambition
@@ -70,12 +70,12 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 - 整合
 
 ## 一、准备
-把每篇文章提一个 issue，并且每个 issue 附上相对应的 label，用 label 可以很直观的来确认个文章目前的进度。我把 issue 的 label 分为 8 种：
+Master 把每篇文章提一个 issue，并且每个 issue 附上相对应的 label，用 label 可以很直观的来确认文章目前的进度。我把 issue 的 label 分为 8 种：
 ![issue 状态](http://upload-images.jianshu.io/upload_images/1561693-73940437fa7568a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500)
 
 不同的 label 对应着目前的文章进度。在 issue 的下方附上对应原文的地址，这样可以让译者更方便的找到对应的原文去翻译，还是上面的那张图片：
 
-![issue的用途](http://upload-images.jianshu.io/upload_images/1561693-8b93b9e3b9497200.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![issue的用途](http://upload-images.jianshu.io/upload_images/1561693-8b93b9e3b9497200.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
 ## 二、主要翻译流程
 
@@ -87,7 +87,7 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 
 组长到对应的 issue 下面留言“认领翻译”之后， Master 会把 issue 的状态由 “翻译认领” 切换为 “正在翻译”。
 
-![切换 issue 的 label ](http://upload-images.jianshu.io/upload_images/1561693-2b84f997892500c1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![切换 issue 的 label ](http://upload-images.jianshu.io/upload_images/1561693-2b84f997892500c1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
 分配好小组，认领完文章之后，会留时间让大家认真的阅读翻译流程和翻译规范。磨刀不误砍柴工，这些都是翻译工作开始之前的基础，熟悉了这些之后，能够避免很多错误和减少校对的工作量。
 
@@ -96,19 +96,19 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 #### 函数式编程专有名词库
 在翻译的过程中，难免会遇到很多描述不太清楚的专有名词，一个办法是小组内进行讨论，最后商量出来结果，小组内统一翻译。可是这样有一个不好的地方就是：小组内虽然统一了，可是组与组之间并没有统一。所以在这里，我们建了一个[函数式编程专有名词库](https://github.com/ikcamp/ETC)，把在翻译过程中遇到的专有名词及其翻译都添加到这个库中，这样大家翻译的时候遇到不太明白的就可以在此库中查找，统一了大家的翻译，不会出现一词两译的情况。
 
-因为本书的主题是函数式编程，所以这个名词库里大部分都是函数式编程相关的专有名词。大家可以按照项目的不同来决定名次库的主题，也可以把翻译过程中遇到的所有名词都放在一起，这个就看你们的需求啦。
+因为本书的主题是函数式编程，所以这个名词库里大部分都是函数式编程相关的专有名词。大家可以按照项目的不同来决定名词库的主题，也可以把翻译过程中遇到的所有名词都放在一起，这个就看你们的需求啦。
 ### 翻译完成
 小伙伴完成翻译之后，要在 GitHub 上发起 Pull request，然后在 PR 下留言写上对应的 issue 链接。这样 PR 和 issue 就关联起来了。之后的工作就主要在 **PR** 下留言完成。
 
 下面为发起 Pull request 的两种方式：
 
-![发起 Pull request](http://upload-images.jianshu.io/upload_images/1561693-82bb3c4a045fd1b1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![发起 Pull request](http://upload-images.jianshu.io/upload_images/1561693-82bb3c4a045fd1b1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
 点击按钮之后，会出现下面的页面：
 
-![pr的分支.jpeg](http://upload-images.jianshu.io/upload_images/1561693-3e680ee50dc56c4c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![pr的分支.jpeg](http://upload-images.jianshu.io/upload_images/1561693-3e680ee50dc56c4c.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
-在上图中可以看到，选择目标分支，然后选择翻译时自己建的分支，就会产生文件的对比，然后点击下方的 `Create pull request` 绿色按钮，就成功的发起了一个 Pull request。
+在上图中可以看到，先选择目标分支，然后选择翻译时自己建的分支，此时就会产生文件的对比，然后点击下方的 `Create pull request` 绿色按钮，就成功的发起了一个 Pull request。
 
 到目前为止，翻译流程已经结束了，翻译过程可以概括为下面的几步：
 ![翻译流程](http://upload-images.jianshu.io/upload_images/1561693-1c3cbdb0998ebaee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -117,11 +117,11 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 #### 如何校对
 当译者完成翻译发起 Pull request 之后，在对应的 Pull request 下方会有译者的提交记录。
 
-![提交记录](http://upload-images.jianshu.io/upload_images/1561693-1ed9425d2cbe392a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![提交记录](http://upload-images.jianshu.io/upload_images/1561693-1ed9425d2cbe392a.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
-点进去，就会看到译者的改动点，把鼠标放到你认为需要改动的那一行，会出来一个深蓝色的**加号**，点击加号，会出来一个文本框，在里面输入你的建议，点击绿色按钮 `Start a review` 即可。
+点进去，就会看到译者的改动点，把鼠标放到你认为需要修改的那一行，会出来一个深蓝色的**加号**，点击加号，会出来一个文本框，在里面输入你的建议，点击绿色按钮 `Start a review` 即可。
 
-![校对](http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000)
+![校对](http://upload-images.jianshu.io/upload_images/1561693-e509fd62c18b02dc.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900)
 
 #### 一校：组内校对
 第一轮校对是组内校对，组内成员之间交换文章，检查**基本的语法和格式问题**并修改。这样在进行第二轮校对的时候就减轻少了一些工作量。
@@ -158,5 +158,8 @@ iKcamp 的小伙伴来自不同的公司和不通的部门，但是现在共同�
 - 翻译的统一性
 
 ## 本次翻译项目产出的成果
+- [JavaScript 轻量级函数式编程](https://github.com/ikcamp/Functional-Light-JS)
 - [函数式编程专有名词库](https://github.com/ikcamp/ETC)
 - [翻译规范](https://github.com/ikcamp/iKcamp-document) —— 包含翻译流程文档、排版规则和校对规范。
+
+
