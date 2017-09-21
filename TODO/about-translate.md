@@ -46,7 +46,7 @@
 
 我当时想的办法是给每一个流程规定一个 deadline，这个 deadline 是根据项目进度来说能给的最宽裕的时间，然后在认领翻译的时候，小伙伴可以根据自己最近时间的宽裕程度来决定翻译完成的时间，只要在这个 deadline 之前都可以。下面是我们认领时候的一张截图。
 
-<img src="http://oux6kzfrp.bkt.clouddn.com/%E8%AE%A4%E9%A2%86%E6%88%AA%E5%9B%BE.jpeg" width = "530" alt="认领截图" align=center />
+<img src="http://upload-images.jianshu.io/upload_images/1561693-1e450d37efda61e8.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000" width = "530" alt="认领截图" align=center />
 
 基本格式为：`认领类型（翻译／校对认领）- 截止时间`。
 这样就可以不用强制每个人的进度，让小伙伴自己来掌控进度。时间是自己选的，哈哈，那就要在规定的时间完成咯。
