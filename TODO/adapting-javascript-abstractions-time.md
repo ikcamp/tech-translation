@@ -1,23 +1,27 @@
 原文链接：[Adapting JavaScript Abstractions Over Time](https://css-tricks.com/adapting-javascript-abstractions-time/)
 
-Even if you haven't read my post [The Importance Of JavaScript Abstractions When Working With Remote Data](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/), chances are you're already convinced that maintainability and scalability are important for your project and the way toward that is introducing abstractions.
+- 译者：小溪里
+- 校对者：？？？
 
-For the purposes of this post, let's assume that an abstraction, in JavaScript, is a module.
+
+即使你还没有读过我的文章《[在处理网络数据的 JavaScript 抽象的重要性](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)》，很有可能你已经意识到在你的项目中可维护性和可扩展性很重要，这也是介绍 `JavaScript`抽象的目的。
+
+为了介绍这篇文章，我们假设在 `JavaScript` 中抽象是一个模块。
+
+一个模块的最初实现只是它们漫长（也许是持久的）的生命周期过程的开始。我将一个模块的生命周期分成 3 个事件。
+
+1. 模块介绍。项目中重复使用它的最初实现和过程；
+2. 调整模块。随着时间推移随时调整模块；
+3. 移除模块。
+
+在我先前的[文章](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)中，重心放在了第一点上。而在这篇文章中，我将在第二点上引入更多思考。
+
+处理对模块中的更改是我经常碰到的一个难题。与引入模块相比，开发者维护和更改模块的方式对保证项目的可维护性和可拓展性是同等重要甚至是更加重要。我看过一个写得很好、抽象得很好的模块随着时间推移历经多次更改后背彻底毁了。我自己也经常是造成那种毁灭性更改的其中一个。
+
+当我说毁灭性，我意思是可维护性和可扩展性角度上的毁灭。我也明白，从接近工作的最后期限和必须释放资源的意义上，放慢对你所有可能性的变化的思考都不是一种优先方案。
 
 
-The initial implementation of a module is only the beginning of the long (and hopefully lasting) process of their life-being. I see 3 major events in the lifecycle of a module:
-
-1. Introduction of the module. The initial implementation and the process of re-using it around the project.
-2. Changing the module. Adapting the module over time.
-3. Removing the module.
-
-In my [previous post](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/) the emphasis was just on that first one. In this article, think more about that second one.
-
-Handling changes to a module is a pain point I see frequently. Compared to introducing the module, the way developers maintain or change it is equally or even more important for keeping the project maintainable and scalable. I've seen a well-written and abstracted module completely ruined over time by changes. I've sometimes been the one who has made those disastrous changes!
-
-When I say disastrous, I mean disastrous from a maintainability and scalability perspective. I understand that from the perspective of approaching deadlines and releasing features which must work, slowing down to think about all the potential image of your change isn't always an option.
-
-The reasons why a developer's changes might not be as optimal are countless. I'd like to stress one in particular:
+开发者做出的更改也许不是最理想的理由可能有无数种，我在这里想特别强调一个：
 
 ### The Skill of Making Changes in Maintainable Manner
 Here's a way you can start making changes like a pro.
