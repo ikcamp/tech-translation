@@ -39,13 +39,15 @@ class API {
   /**
    * Fetch API's specific way to check
    * whether an HTTP response's status code is in the successful range.
+   * API 数据获取的特有方法
+   * 检查一个 HTTP 返回的状态码是否在成功的范围内
    */
   _handleError(_res) {
       return _res.ok ? _res : Promise.reject(_res.statusText);
   }
 
   /**
-   * Get data abstraction
+   * 获取数据的抽象
    * @return {Promise}
    */
   get(_endpoint) {
@@ -59,7 +61,7 @@ class API {
   }
 };
 ```
-在这个示例中，公共方法 `API.get（）`返回一个Promise。使用API模块，在所有需要获取远程数据的地方，直接调用Fetch API即可， 无需调用 `window.fetch（）`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。
+在这个示例中，公共方法 `API.get（）`返回一个 `Promise`。使用 `API` 模块，在所有需要获取远程数据的地方，直接调用 `Fetch API`即可， 无需调用 `window.fetch（）`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。**
 
 现在，让我们说说修改的要求！当技术主管要求我们切换到另一种获取远程数据的方法时。我们需要切换到[Axios](https://github.com/axios/axios)。我们应当如何应对？
 
@@ -74,11 +76,11 @@ class API {
 
 讲解完毕！现在让我们深入应用这些修改的实际方法。
 
-### Approach 1: Delete code. Write code.
+### 方法一：删除代码。编写代码。
 ```js
 class API {
   constructor() {
-    this.url = 'http://whatever.api/v1/'; // says the same
+    this.url = 'http://whatever.api/v1/'; // 一模一样的
   }
 
   _handleError(_res) {
@@ -99,40 +101,41 @@ class API {
   }
 };
 ```
-Sounds reasonable enough. Commit. Push. Merge. Done.
+听起来很合理。 发布、上传、合并、完成。
 
-However, there are certain cases why this might not be a good idea. Imagine the following happens: after switching to Axios, you find out that there is a feature which doesn't work with [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) (the Axios's interface for getting resource method), but was previously working just fine with Fetch's fancy new browser API. What do we do now?
+不过，在某些情况下，这可能不是一个好主意。想象一下，发生以下情况：在切换到 `Axios` 之后，您会发现有一个功能不适用于 [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)（ Axios 的获取资源方法的界面），但之前使用 Fetch 的新型浏览器 API 工作得很好。我们现在该干什么？
 
-Our tech lead says, let's use the old API implementation for this specific use-case, and keep using Axios everywhere else. What do you do? Find the old API module in your source control history. Revert. Add if statements here and there. Doesn't sound very good to me.
+我们的技术负责人说，让我们使用旧的 `API` 实现这个特定的用例，并继续在其他地方使用 `Axios` 。你该做什么？在源代码管理历史记录中找到旧的 `API` 模块。还原。在这里和那里添加 `if` 语句。这样听起来并不太友好。
 
-There must be an easier, more maintainable and scalable way to make changes! Well, there is.
+必须有一个更容易，更易于维护和可扩展的方式来进行更改！那么，下面的就是。
 
-### Approach 2: Refactor code. Write Adapters!
-There's an incoming change request! Let's start all over again and instead of deleting the code, let's move the Fetch's specific logic in another abstraction, which will serve as an adapter (or wrapper) of all the Fetch's specifics.
+### 方法二：重构代码。写适配器！
 
-> HEY!???For those of you familiar with the Adapter Pattern (also referred to as the Wrapper Pattern), yes, that's exactly where we're headed! See an excellent nerdy introduction here, if you're interested in all the details.
+有一个马上到来的变更请求！让我们重新开始，而不是删除代码，让我们在另一个抽象中移动 `Fetch` 的特定逻辑，这将作为所有 `Fetch` 特定的适配器（或包装器）。
 
-Here's the plan:
+> HEY!???对于那些熟悉适配器模式（也被称为包装模式）的人来说，是的，那正是我们前进的方向！如果您对所有的细节感兴趣，请参阅这里我的介绍。
+
+计划如下：
 ![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1509913814/adapters_iteb3k.png)
 
-#### Step 1
-Take all Fetch specific lines from the API module and refactor them to a new abstraction, FetchAdapter.
+#### 步骤1
+从 `API` 模块中获取所有提取特定行，并将它们重构为新的抽象 `FetchAdapter`。
 
 ```js
 class FetchAdapter {
   _handleError(_res) {
-      return _res.ok ? _res : Promise.reject(_res.statusText);
+    return _res.ok ? _res : Promise.reject(_res.statusText);
   }
 
   get(_endpoint) {
-      return window.fetch(_endpoint, { method: 'GET' })
-          .then(this._handleError)
-          .then( res => res.json());
+    return window.fetch(_endpoint, { method: 'GET' })
+      .then(this._handleError)
+      .then( res => res.json());
   }
 };
 ```
 #### Step 2
-Refactor the API module by removing the parts which are Fetch specific and keep everything else the same. Add FetchAdapter as a dependency (in some manner):
+通过删除特定于提取的部分来重构 `API`模块，并保持其他所有内容相同。添加 `FetchAdapter` 作为依赖（以某种方式）：
 
 ```js
 class API {
@@ -143,31 +146,32 @@ class API {
   }
 
   get(_endpoint) {
-      return this.adapter.get(_endpoint)
-          .catch( error => {
-              alert('So sad. There was an error.');
-              throw new Error(error);
-          });
+    return this.adapter.get(_endpoint)
+      .catch( error => {
+        alert('So sad. There was an error.');
+        throw new Error(error);
+      });
   }
 };
 ```
-That's a different story now! The architecture is changed in a way you are able to handle different mechanisms (adapters) for getting resources. Final step: You guessed it! Write an `AxiosAdapter`!
+
+现在这是一个不一样的情况了！该体系结构以您能够处理获取资源的不同机制（适配器）的方式进行更改。最后一步：你猜对了！写一个AxiosAdapter！
 
 ```js
 const AxiosAdapter = {
   _handleError(_res) {
-      return _res.statusText === 'OK' ? _res : Promise.reject(_res.statusText);
+    return _res.statusText === 'OK' ? _res : Promise.reject(_res.statusText);
   },
 
   get(_endpoint) {
-      return axios.get(_endpoint)
-          .then(this._handleError)
-          .then( res => res.data);
+    return axios.get(_endpoint)
+      then(this._handleError)
+      .then( res => res.data);
   }
 };
 ```
 
-And in the API module, switch the default `adapter` to the Axios one:
+在 `API` 模块中，将默认适配器切换到 `Axios`：
 
 ```js
 class API {
@@ -179,28 +183,28 @@ class API {
   /* ... */
 };
 ```
-Awesome! What do we do if we need to use the old API implementation for this specific use-case, and keep using Axios everywhere else? No problem!
-
+真棒！如果我们需要在这个特定的用例中使用旧的 `API` 实现，并且在其他地方继续使用Axios，我们该怎么做？没错，就是这样！
 ```js
 // Import your modules however you like, just an example.
+//不管你喜欢与否，将其导入你的模块，因为这只是一个例子。
 import API from './API';
 import FetchAdapter from './FetchAdapter';
 
-// Uses the AxiosAdapter (the default one)
+//使用 AxiosAdapter（默认的）
 const API = new API();
 API.get('user');
-```
 
-// Uses the FetchAdapter
+
+// 使用FetchAdapter
 const legacyAPI = new API(new FetchAdapter());
 legacyAPI.get('user');
-So next time you need to make changes to your project, evaluate which approach makes more sense:
+```
 
-* Delete code. Write code
-* Refactor Code. Write Adapters.
+所以下次你需要改变你的项目时，评估下面哪种方法更有意义：
 
-**Judge** carefully based on your specific use-case. Over-adapter-ifying your codebase and introducing too many abstractions could lead to increasing complexity which isn't good either.
+* 删除代码，编写代码。
+* 重构代码，写适配器。
 
-Happy adapter-ifying!
+**总结**根据你的具体使用情况仔细判断。如果你的代码库滥用适配器和引入太多的抽象可能会导致复杂性增加，这也是不好的。
 
-
+学会愉快的使用适配器！
