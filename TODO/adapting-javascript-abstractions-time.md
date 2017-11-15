@@ -23,12 +23,12 @@
 
 开发者做出的更改也许不是最理想的理由可能有无数种，我在这里想特别强调一个：
 
-### The Skill of Making Changes in Maintainable Manner
-Here's a way you can start making changes like a pro.
+### 以可维护的方式进行修改的技巧
+这是一种可以像专业人员一样进行修改的方法。
 
-Let's start with a code example: an API module. I choose this because communicating with an external API is one of the first fundamental abstractions I define when I start a project. The idea is to store all the API related configuration and settings (like the base URL, error handling logic, etc) in this module.
+从示例--一个API模块开始讲解。之所以选择这个示例，是因为与外部API通信是我在开始项目时定义的最基本的概念之一。这个方法是将所有与API相关的配置和设置（如基本URL，错误处理逻辑等）存储在这个模块中.
 
-Let's introduce only one setting, `API.url`, one private method, `API._handleError()`, and one public method, `API.get()`:
+我将介绍一个设置: `API.url`，一个私有方法 :`API._handleError（）`和一个公共方法: `API.get（）`:
 
 ```js
 class API {
@@ -59,21 +59,20 @@ class API {
   }
 };
 ```
-In this module, our only public method, API.get() returns a Promise. In all places where we need to get remote data, instead of directly calling the Fetch API via window.fetch(), we use our API module abstraction. For example to get user's info API.get('user') or the current weather forecast API.get('weather'). The important thing about this implementation is that **the Fetch API is not tightly coupled with our code**.
+在这个示例中，公共方法 `API.get（）`返回一个Promise。使用API模块，在所有需要获取远程数据的地方，直接调用Fetch API即可， 无需调用 `window.fetch（）`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。
 
-Now, let's say that a change request comes! Our tech lead asks us to switch to a different method of getting remote data. We need to switch to [Axios](https://github.com/axios/axios). How can we approach this challenge?
+现在，让我们说说修改的要求！当技术主管要求我们切换到另一种获取远程数据的方法时。我们需要切换到[Axios](https://github.com/axios/axios)。我们应当如何应对？
 
-Before we start discussing approaches, let's first summarize what stays the same and what changes:
+在我们开始讨论方法之前，我们先来总结一下什么是不变的，什么是需要修改的：
 
-1. **Change**: In our public `API.get()` method:
-  * We need to change the `window.fetch()` call with `axios()`. And we need to return a Promise again, to keep our implementation consistent. Axios is Promise based. Excellent!
-  * Our server's response is JSON. With the Fetch API chain a `.then( res => res.json())` statement to parse our response data. With Axios, the response that was provided by the server is under the `data` property and we don't need to parse it. Therefore, we need to change the .then statement to `.then( res => res.data )`.
-2. **Change**: In our private ```API._handleError``` method:
-  * The `ok` boolean flag is missing in the object response. However, there is `statusText` property. We can hook-up on it. If its value is `'OK'`, then it's all good.
-  Side note: yes, having `ok` equal to `true` in Fetch API is not the same as having 'OK' in Axios's `statusText`. But let's keep it simple and, for the sake of not being too broad, leave it as it is and not introduce any advanced error handling.
-3. **No change**: The `API.url` stays the same, along with the funky way we catch errors and `alert` them.
+1. 在公共 `API.get（）`方法中：
+  - 需要修改 `axios（）`的 `window.fetch（）`调用;需要再次返回一个Promise，来保持二者之间可以保持同步，Axios是Promise的基础。
+  - 服务器的响应是JSON。通过Fetch API链，用`（res => res.json（））`语句来解析响应数据。使用Axios，服务器的响应在`data`属性下，我们不需要解析它。因此，我们需要将`.then`语句改为`.then（res => res.data）`。
+2. 在私有 `API._handleError` 方法中：
+  - 对象响应中缺少 `ok` 布尔标志;但是，还有 `statusText` 属性。如果它的值是`OK`，我们可以将其连接起来。（附注：在 Fetch API 中 `OK` 等于 `true` 与在Axios中的 `statusText` 具有 `OK` 是不一样的。但为了便于理解，所以尽量保持简单，不再引入任何高级错误处理。）
+3. 不变之处：`API.url` 保持不变，我们会发现错误并以愉快的方式提醒他们。
 
-All clear! Now let's drill down to the actual approaches to apply these changes.
+讲解完毕！现在让我们深入应用这些修改的实际方法。
 
 ### Approach 1: Delete code. Write code.
 ```js
