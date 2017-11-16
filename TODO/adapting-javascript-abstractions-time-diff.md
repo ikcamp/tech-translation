@@ -1,5 +1,9 @@
 原文链接：[Adapting JavaScript Abstractions Over Time](https://css-tricks.com/adapting-javascript-abstractions-time/)
 
+- 译者：小溪里
+- 校对者：？？？
+
+
 Even if you haven't read my post [The Importance Of JavaScript Abstractions When Working With Remote Data](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/), chances are you're already convinced that maintainability and scalability are important for your project and the way toward that is introducing abstractions.
 
 For the purposes of this post, let's assume that an abstraction, in JavaScript, is a module.
