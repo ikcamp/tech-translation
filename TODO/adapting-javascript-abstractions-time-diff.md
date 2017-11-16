@@ -4,31 +4,32 @@
 - 校对者：？？？
 
 
-Even if you haven't read my post [The Importance Of JavaScript Abstractions When Working With Remote Data](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/), chances are you're already convinced that maintainability and scalability are important for your project and the way toward that is introducing abstractions.
+即使你还没有读过我的文章《[在处理网络数据的 JavaScript 抽象的重要性](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)》，很有可能你已经意识到在你的项目中可维护性和可扩展性很重要，这也是介绍 `JavaScript`抽象的目的。
 
-For the purposes of this post, let's assume that an abstraction, in JavaScript, is a module.
+为了介绍这篇文章，我们假设在 `JavaScript` 中抽象是一个模块。
 
-The initial implementation of a module is only the beginning of the long (and hopefully lasting) process of their life-being. I see 3 major events in the lifecycle of a module:
+一个模块的最初实现只是它们漫长（也许是持久的）的生命周期过程的开始。我将一个模块的生命周期分成 3 个事件。
 
-1. Introduction of the module. The initial implementation and the process of re-using it around the project.
-2. Changing the module. Adapting the module over time.
-3. Removing the module.
+1. 模块介绍。项目中重复使用它的最初实现和过程；
+2. 调整模块。随着时间推移随时调整模块；
+3. 移除模块。
 
-In my [previous post](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/) the emphasis was just on that first one. In this article, think more about that second one.
+在我先前的[文章](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)中，重心放在了第一点上。而在这篇文章中，我将在第二点上引入更多思考。
 
-Handling changes to a module is a pain point I see frequently. Compared to introducing the module, the way developers maintain or change it is equally or even more important for keeping the project maintainable and scalable. I've seen a well-written and abstracted module completely ruined over time by changes. I've sometimes been the one who has made those disastrous changes!
+处理对模块中的更改是我经常碰到的一个难题。与引入模块相比，开发者维护和更改模块的方式对保证项目的可维护性和可拓展性是同等重要甚至是更加重要。我看过一个写得很好、抽象得很好的模块随着时间推移历经多次更改后被彻底毁了。我自己也经常是造成那种毁灭性更改的其中一个。
 
-When I say disastrous, I mean disastrous from a maintainability and scalability perspective. I understand that from the perspective of approaching deadlines and releasing features which must work, slowing down to think about all the potential image of your change isn't always an option.
+当我说毁灭性，我意思是可维护性和可扩展性角度上的毁灭。我也明白，从接近工作的最后期限和必须释放资源的意义上，放慢对你所有可能性的变化的思考都不是一种优先方案。
 
-The reasons why a developer's changes might not be as optimal are countless. I'd like to stress one in particular:
 
-### The Skill of Making Changes in Maintainable Manner
+开发者做出的更改也许不是最理想的理由可能有无数种，我在这里想特别强调一个：
 
-Here's a way you can start making changes like a pro.
+### 以可维护的方式进行修改的技巧
 
-Let's start with a code example: an API module. I choose this because communicating with an external API is one of the first fundamental abstractions I define when I start a project. The idea is to store all the API related configuration and settings (like the base URL, error handling logic, etc) in this module.
+这是一种可以像专业人员一样进行修改的方法。
 
-Let's introduce only one setting, `API.url`, one private method, `API._handleError()`, and one public method, `API.get()`:
+从示例--一个API模块开始讲解。之所以选择这个示例，是因为与外部API通信是我在开始项目时定义的最基本的概念之一。这个方法是将所有与API相关的配置和设置（如基本URL，错误处理逻辑等）存储在这个模块中.
+
+我将介绍一个设置: `API.url`，一个私有方法 :`API._handleError()`和一个公共方法: `API.get()`:
 
 ```js
 class API {
@@ -39,13 +40,15 @@ class API {
   /**
    * Fetch API's specific way to check
    * whether an HTTP response's status code is in the successful range.
+   * API 数据获取的特有方法
+   * 检查一个 HTTP 返回的状态码是否在成功的范围内
    */
   _handleError(_res) {
       return _res.ok ? _res : Promise.reject(_res.statusText);
   }
 
   /**
-   * Get data abstraction
+   * 获取数据的抽象
    * @return {Promise}
    */
   get(_endpoint) {
@@ -59,27 +62,26 @@ class API {
   }
 };
 ```
-In this module, our only public method, API.get() returns a Promise. In all places where we need to get remote data, instead of directly calling the Fetch API via window.fetch(), we use our API module abstraction. For example to get user's info API.get('user') or the current weather forecast API.get('weather'). The important thing about this implementation is that **the Fetch API is not tightly coupled with our code**.
+在这个示例中，公共方法 `API.get()`返回一个 `Promise`。使用 `API` 模块，在所有需要获取远程数据的地方，直接调用 `Fetch API`即可， 无需调用 `window.fetch()`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。**
 
-Now, let's say that a change request comes! Our tech lead asks us to switch to a different method of getting remote data. We need to switch to [Axios](https://github.com/axios/axios). How can we approach this challenge?
+现在，让我们说说修改的要求！当技术主管要求我们切换到另一种获取远程数据的方法时。我们需要切换到[Axios](https://github.com/axios/axios)。我们应当如何应对？
 
-Before we start discussing approaches, let's first summarize what stays the same and what changes:
+在我们开始讨论方法之前，我们先来总结一下什么是不变的，什么是需要修改的：
 
-1. **Change**: In our public `API.get()` method:
-  * We need to change the `window.fetch()` call with `axios()`. And we need to return a Promise again, to keep our implementation consistent. Axios is Promise based. Excellent!
-  * Our server's response is JSON. With the Fetch API chain a `.then( res => res.json())` statement to parse our response data. With Axios, the response that was provided by the server is under the `data` property and we don't need to parse it. Therefore, we need to change the .then statement to `.then( res => res.data )`.
-2. **Change**: In our private ```API._handleError``` method:
-  * The `ok` boolean flag is missing in the object response. However, there is `statusText` property. We can hook-up on it. If its value is `'OK'`, then it's all good.
-  Side note: yes, having `ok` equal to `true` in Fetch API is not the same as having 'OK' in Axios's `statusText`. But let's keep it simple and, for the sake of not being too broad, leave it as it is and not introduce any advanced error handling.
-3. **No change**: The `API.url` stays the same, along with the funky way we catch errors and `alert` them.
+1. 在公共 `API.get()`方法中：
+  - 需要修改 `axios()`的 `window.fetch()`调用;需要再次返回一个Promise，来保持二者之间可以保持同步，Axios是Promise的基础。
+  - 服务器的响应是JSON。通过Fetch API链，用`（res => res.json()）`语句来解析响应数据。使用Axios，服务器的响应在`data`属性下，我们不需要解析它。因此，我们需要将`.then`语句改为`.then（res => res.data）`。
+2. 在私有 `API._handleError` 方法中：
+  - 对象响应中缺少 `ok` 布尔标志;但是，还有 `statusText` 属性。如果它的值是`OK`，我们可以将其连接起来。（附注：在 Fetch API 中 `OK` 等于 `true` 与在Axios中的 `statusText` 具有 `OK` 是不一样的。但为了便于理解，所以尽量保持简单，不再引入任何高级错误处理。）
+3. 不变之处：`API.url` 保持不变，我们会发现错误并以愉快的方式提醒他们。
 
-All clear! Now let's drill down to the actual approaches to apply these changes.
+讲解完毕！现在让我们深入应用这些修改的实际方法。
 
-### Approach 1: Delete code. Write code.
+### 方法一：删除代码。编写代码。
 ```js
 class API {
   constructor() {
-    this.url = 'http://whatever.api/v1/'; // says the same
+    this.url = 'http://whatever.api/v1/'; // 一模一样的
   }
 
   _handleError(_res) {
@@ -100,40 +102,41 @@ class API {
   }
 };
 ```
-Sounds reasonable enough. Commit. Push. Merge. Done.
+听起来很合理。 发布、上传、合并、完成。
 
-However, there are certain cases why this might not be a good idea. Imagine the following happens: after switching to Axios, you find out that there is a feature which doesn't work with [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) (the Axios's interface for getting resource method), but was previously working just fine with Fetch's fancy new browser API. What do we do now?
+不过，在某些情况下，这可能不是一个好主意。想象一下，发生以下情况：在切换到 `Axios` 之后，您会发现有一个功能不适用于 [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)（ Axios 的获取资源方法的界面），但之前使用 Fetch 的新型浏览器 API 工作得很好。我们现在该干什么？
 
-Our tech lead says, let's use the old API implementation for this specific use-case, and keep using Axios everywhere else. What do you do? Find the old API module in your source control history. Revert. Add if statements here and there. Doesn't sound very good to me.
+我们的技术负责人说，让我们使用旧的 `API` 实现这个特定的用例，并继续在其他地方使用 `Axios` 。你该做什么？在源代码管理历史记录中找到旧的 `API` 模块。还原。在这里和那里添加 `if` 语句。这样听起来并不太友好。
 
-There must be an easier, more maintainable and scalable way to make changes! Well, there is.
+必须有一个更容易，更易于维护和可扩展的方式来进行更改！那么，下面的就是。
 
-### Approach 2: Refactor code. Write Adapters!
-There's an incoming change request! Let's start all over again and instead of deleting the code, let's move the Fetch's specific logic in another abstraction, which will serve as an adapter (or wrapper) of all the Fetch's specifics.
+### 方法二：重构代码。写适配器！
 
-> HEY!???For those of you familiar with the Adapter Pattern (also referred to as the Wrapper Pattern), yes, that's exactly where we're headed! See an excellent nerdy introduction here, if you're interested in all the details.
+有一个马上到来的变更请求！让我们重新开始，而不是删除代码，让我们在另一个抽象中移动 `Fetch` 的特定逻辑，这将作为所有 `Fetch` 特定的适配器（或包装器）。
 
-Here's the plan:
+> HEY!???对于那些熟悉适配器模式（也被称为包装模式）的人来说，是的，那正是我们前进的方向！如果您对所有的细节感兴趣，请参阅这里我的介绍。
+
+计划如下：
 ![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1509913814/adapters_iteb3k.png)
 
-#### Step 1
-Take all Fetch specific lines from the API module and refactor them to a new abstraction, FetchAdapter.
+#### 步骤1
+从 `API` 模块中获取所有提取特定行，并将它们重构为新的抽象 `FetchAdapter`。
 
 ```js
 class FetchAdapter {
   _handleError(_res) {
-      return _res.ok ? _res : Promise.reject(_res.statusText);
+    return _res.ok ? _res : Promise.reject(_res.statusText);
   }
 
   get(_endpoint) {
-      return window.fetch(_endpoint, { method: 'GET' })
-          .then(this._handleError)
-          .then( res => res.json());
+    return window.fetch(_endpoint, { method: 'GET' })
+      .then(this._handleError)
+      .then( res => res.json());
   }
 };
 ```
 #### Step 2
-Refactor the API module by removing the parts which are Fetch specific and keep everything else the same. Add FetchAdapter as a dependency (in some manner):
+通过删除特定于提取的部分来重构 `API`模块，并保持其他所有内容相同。添加 `FetchAdapter` 作为依赖（以某种方式）：
 
 ```js
 class API {
@@ -144,31 +147,32 @@ class API {
   }
 
   get(_endpoint) {
-      return this.adapter.get(_endpoint)
-          .catch( error => {
-              alert('So sad. There was an error.');
-              throw new Error(error);
-          });
+    return this.adapter.get(_endpoint)
+      .catch( error => {
+        alert('So sad. There was an error.');
+        throw new Error(error);
+      });
   }
 };
 ```
-That's a different story now! The architecture is changed in a way you are able to handle different mechanisms (adapters) for getting resources. Final step: You guessed it! Write an `AxiosAdapter`!
+
+现在这是一个不一样的情况了！该体系结构以您能够处理获取资源的不同机制（适配器）的方式进行更改。最后一步：你猜对了！写一个AxiosAdapter！
 
 ```js
 const AxiosAdapter = {
   _handleError(_res) {
-      return _res.statusText === 'OK' ? _res : Promise.reject(_res.statusText);
+    return _res.statusText === 'OK' ? _res : Promise.reject(_res.statusText);
   },
 
   get(_endpoint) {
-      return axios.get(_endpoint)
-          .then(this._handleError)
-          .then( res => res.data);
+    return axios.get(_endpoint)
+      then(this._handleError)
+      .then( res => res.data);
   }
 };
 ```
 
-And in the API module, switch the default `adapter` to the Axios one:
+在 `API` 模块中，将默认适配器切换到 `Axios`：
 
 ```js
 class API {
@@ -180,28 +184,30 @@ class API {
   /* ... */
 };
 ```
-Awesome! What do we do if we need to use the old API implementation for this specific use-case, and keep using Axios everywhere else? No problem!
+
+真棒！如果我们需要在这个特定的用例中使用旧的 `API` 实现，并且在其他地方继续使用Axios，我们该怎么做？没错，就是这样！
 
 ```js
 // Import your modules however you like, just an example.
+//不管你喜欢与否，将其导入你的模块，因为这只是一个例子。
 import API from './API';
 import FetchAdapter from './FetchAdapter';
 
-// Uses the AxiosAdapter (the default one)
+//使用 AxiosAdapter（默认的）
 const API = new API();
 API.get('user');
-```
 
-// Uses the FetchAdapter
+
+// 使用FetchAdapter
 const legacyAPI = new API(new FetchAdapter());
 legacyAPI.get('user');
-So next time you need to make changes to your project, evaluate which approach makes more sense:
+```
 
-* Delete code. Write code
-* Refactor Code. Write Adapters.
+所以下次你需要改变你的项目时，评估下面哪种方法更有意义：
 
-**Judge** carefully based on your specific use-case. Over-adapter-ifying your codebase and introducing too many abstractions could lead to increasing complexity which isn't good either.
+* 删除代码，编写代码。
+* 重构代码，写适配器。
 
-Happy adapter-ifying!
+**总结**根据你的具体使用情况仔细判断。如果你的代码库滥用适配器和引入太多的抽象可能会导致复杂性增加，这也是不好的。
 
-
+学会愉快的使用适配器！
