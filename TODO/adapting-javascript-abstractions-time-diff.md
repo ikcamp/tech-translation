@@ -20,6 +20,7 @@ When I say disastrous, I mean disastrous from a maintainability and scalability 
 The reasons why a developer's changes might not be as optimal are countless. I'd like to stress one in particular:
 
 ### The Skill of Making Changes in Maintainable Manner
+
 Here's a way you can start making changes like a pro.
 
 Let's start with a code example: an API module. I choose this because communicating with an external API is one of the first fundamental abstractions I define when I start a project. The idea is to store all the API related configuration and settings (like the base URL, error handling logic, etc) in this module.
