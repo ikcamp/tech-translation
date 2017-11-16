@@ -4,7 +4,7 @@
 - 校对者：？？？
 
 
-即使你还没有读过我的文章《[在处理理网络数据的 JavaScript 抽象的重要性](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)》，很有可能你已经意识到在你的项目中可维护性和可扩展性很重要，这也是介绍 `JavaScript`抽象的目的。
+即使你还没有读过我的文章《[在处理网络数据的 JavaScript 抽象的重要性](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)》，很有可能你已经意识到在你的项目中可维护性和可扩展性很重要，这也是介绍 `JavaScript`抽象的目的。
 
 为了介绍这篇文章，我们假设在 `JavaScript` 中抽象是一个模块。
 
@@ -28,7 +28,7 @@
 
 从示例--一个API模块开始讲解。之所以选择这个示例，是因为与外部API通信是我在开始项目时定义的最基本的概念之一。这个方法是将所有与API相关的配置和设置（如基本URL，错误处理逻辑等）存储在这个模块中.
 
-我将介绍一个设置: `API.url`，一个私有方法 :`API._handleError（）`和一个公共方法: `API.get（）`:
+我将介绍一个设置: `API.url`，一个私有方法 :`API._handleError()`和一个公共方法: `API.get()`:
 
 ```js
 class API {
@@ -61,15 +61,15 @@ class API {
   }
 };
 ```
-在这个示例中，公共方法 `API.get（）`返回一个 `Promise`。使用 `API` 模块，在所有需要获取远程数据的地方，直接调用 `Fetch API`即可， 无需调用 `window.fetch（）`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。**
+在这个示例中，公共方法 `API.get()`返回一个 `Promise`。使用 `API` 模块，在所有需要获取远程数据的地方，直接调用 `Fetch API`即可， 无需调用 `window.fetch()`。例如获取用户信息 `API.get（'user'）`或当前天气预报  `API.get（'weather'）`。实现这个功能的重要之处在于**Fetch API与我们的代码没有紧密耦合。**
 
 现在，让我们说说修改的要求！当技术主管要求我们切换到另一种获取远程数据的方法时。我们需要切换到[Axios](https://github.com/axios/axios)。我们应当如何应对？
 
 在我们开始讨论方法之前，我们先来总结一下什么是不变的，什么是需要修改的：
 
-1. 在公共 `API.get（）`方法中：
-  - 需要修改 `axios（）`的 `window.fetch（）`调用;需要再次返回一个Promise，来保持二者之间可以保持同步，Axios是Promise的基础。
-  - 服务器的响应是JSON。通过Fetch API链，用`（res => res.json（））`语句来解析响应数据。使用Axios，服务器的响应在`data`属性下，我们不需要解析它。因此，我们需要将`.then`语句改为`.then（res => res.data）`。
+1. 在公共 `API.get()`方法中：
+  - 需要修改 `axios()`的 `window.fetch()`调用;需要再次返回一个Promise，来保持二者之间可以保持同步，Axios是Promise的基础。
+  - 服务器的响应是JSON。通过Fetch API链，用`（res => res.json()）`语句来解析响应数据。使用Axios，服务器的响应在`data`属性下，我们不需要解析它。因此，我们需要将`.then`语句改为`.then（res => res.data）`。
 2. 在私有 `API._handleError` 方法中：
   - 对象响应中缺少 `ok` 布尔标志;但是，还有 `statusText` 属性。如果它的值是`OK`，我们可以将其连接起来。（附注：在 Fetch API 中 `OK` 等于 `true` 与在Axios中的 `statusText` 具有 `OK` 是不一样的。但为了便于理解，所以尽量保持简单，不再引入任何高级错误处理。）
 3. 不变之处：`API.url` 保持不变，我们会发现错误并以愉快的方式提醒他们。
