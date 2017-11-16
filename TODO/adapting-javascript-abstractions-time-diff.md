@@ -8,7 +8,6 @@ Even if you haven't read my post [The Importance Of JavaScript Abstractions When
 
 For the purposes of this post, let's assume that an abstraction, in JavaScript, is a module.
 
-
 The initial implementation of a module is only the beginning of the long (and hopefully lasting) process of their life-being. I see 3 major events in the lifecycle of a module:
 
 1. Introduction of the module. The initial implementation and the process of re-using it around the project.
