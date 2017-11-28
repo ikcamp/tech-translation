@@ -3,6 +3,7 @@
 - 译者：小溪里
 - 校对者：郭华翔、苗冬青
 
+# 调整JavaScript抽象的迭代方案
 
 即使还没有读过我的文章《[在处理网络数据的 JavaScript 抽象的重要性](https://css-tricks.com/importance-javascript-abstractions-working-remote-data/)》，你也很有可能已经意识到代码的可维护性和可扩展性很重要，这也是介绍 `JavaScript` 抽象的目的。
 
